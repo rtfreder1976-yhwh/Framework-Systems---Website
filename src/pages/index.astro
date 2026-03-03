@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Home">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-secondary-900 to-secondary-800 text-white py-20 lg:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl lg:text-6xl font-bold mb-6">
+            Building the <span class="text-primary-400">Framework</span> for Your Success
+          </h1>
+          <p class="text-xl text-secondary-300 mb-8">
+            Professional systems architecture solutions for businesses in Tuscumbia, Alabama and the Shoals region. We design, implement, and maintain IT infrastructure that drives your business forward.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold text-center transition-colors">
+              Get Started
+            </a>
+            <a href="/services" class="border border-white hover:bg-white hover:text-secondary-900 px-8 py-3 rounded-lg font-semibold text-center transition-colors">
+              Our Services
+            </a>
+          </div>
+        </div>
+        <div class="hidden lg:block">
+          <svg class="w-full h-auto" viewBox="0 0 400 300" fill="none">
+            <rect x="50" y="50" width="100" height="80" rx="8" fill="#3b82f6" opacity="0.8"/>
+            <rect x="180" y="30" width="100" height="80" rx="8" fill="#3b82f6" opacity="0.6"/>
+            <rect x="250" y="140" width="100" height="80" rx="8" fill="#3b82f6" opacity="0.8"/>
+            <rect x="80" y="170" width="100" height="80" rx="8" fill="#3b82f6" opacity="0.6"/>
+            <line x1="150" y1="90" x2="180" y2="70" stroke="#60a5fa" stroke-width="3"/>
+            <line x1="280" y1="110" x2="300" y2="140" stroke="#60a5fa" stroke-width="3"/>
+            <line x1="180" y1="210" x2="250" y2="180" stroke="#60a5fa" stroke-width="3"/>
+            <line x1="100" y1="130" x2="130" y2="170" stroke="#60a5fa" stroke-width="3"/>
+            <circle cx="200" cy="150" r="30" fill="#1d4ed8"/>
+            <path d="M190 150l6 6 14-14" stroke="white" stroke-width="3" fill="none"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Overview -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-4">Our Core Services</h2>
+        <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
+          Comprehensive IT solutions tailored to meet the unique needs of businesses in the Shoals area.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="p-8 bg-secondary-50 rounded-xl hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Network Architecture</h3>
+          <p class="text-secondary-600">Custom network design and implementation for optimal performance, security, and scalability.</p>
+        </div>
+
+        <div class="p-8 bg-secondary-50 rounded-xl hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Cloud Solutions</h3>
+          <p class="text-secondary-600">Strategic cloud migration and management services to modernize your infrastructure.</p>
+        </div>
+
+        <div class="p-8 bg-secondary-50 rounded-xl hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Security Systems</h3>
+          <p class="text-secondary-600">Comprehensive cybersecurity solutions to protect your business from threats.</p>
+        </div>
+
+        <div class="p-8 bg-secondary-50 rounded-xl hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">IT Consulting</h3>
+          <p class="text-secondary-600">Expert guidance to align your technology strategy with business objectives.</p>
+        </div>
+
+        <div class="p-8 bg-secondary-50 rounded-xl hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Data Management</h3>
+          <p class="text-secondary-600">Robust data storage, backup, and recovery solutions for business continuity.</p>
+        </div>
+
+        <div class="p-8 bg-secondary-50 rounded-xl hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Technical Support</h3>
+          <p class="text-secondary-600">Responsive IT support and maintenance to keep your systems running smoothly.</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="/services" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold">
+          View All Services
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="py-20 bg-secondary-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-6">
+            Why Choose Framework Systems?
+          </h2>
+          <p class="text-lg text-secondary-600 mb-8">
+            As a locally-owned business in Tuscumbia, we understand the unique challenges and opportunities facing businesses in the Shoals region. Our commitment to excellence and personalized service sets us apart.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-lg font-semibold">Local Expertise</h3>
+                <p class="text-secondary-600">Deep understanding of regional business needs and infrastructure.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-lg font-semibold">Personalized Service</h3>
+                <p class="text-secondary-600">Custom solutions tailored to your specific business requirements.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-lg font-semibold">Proven Results</h3>
+                <p class="text-secondary-600">Track record of successful implementations and satisfied clients.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-xl">
+          <h3 class="text-2xl font-bold mb-6">Ready to Get Started?</h3>
+          <p class="text-secondary-600 mb-6">
+            Let's discuss how Framework Systems can help transform your IT infrastructure.
+          </p>
+          <a href="/contact" class="block w-full bg-primary-600 hover:bg-primary-700 text-white text-center py-3 rounded-lg font-semibold transition-colors">
+            Schedule a Consultation
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Highlight -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-4">
+        Proudly Serving the Shoals Region
+      </h2>
+      <p class="text-xl text-secondary-600 max-w-3xl mx-auto mb-8">
+        Based in Tuscumbia, Alabama, we provide systems architecture services throughout the Shoals area including Florence, Muscle Shoals, and Sheffield.
+      </p>
+      <a href="/locations" class="inline-flex items-center bg-secondary-900 hover:bg-secondary-800 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+        View Service Areas
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</Layout>
