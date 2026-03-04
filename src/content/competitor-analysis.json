@@ -1,0 +1,295 @@
+{
+  "title": "Competitor Analysis: Local Business Automation Services",
+  "company": "Framework Systems",
+  "location": "Tuscumbia, Alabama",
+  "lastUpdated": "March 2026",
+  "competitors": [
+    {
+      "rank": 1,
+      "name": "GoHighLevel",
+      "website": "gohighlevel.com",
+      "googleReviews": "4.5/5 on G2 (1,800+ reviews)",
+      "pricing": {
+        "starter": "$97/mo",
+        "unlimited": "$297/mo",
+        "saasPro": "$497/mo",
+        "hiddenCosts": "SMS, calls, email add $70-$150/mo extra"
+      },
+      "websiteWeaknesses": [
+        "Complex pricing page with hidden per-use fees",
+        "Overwhelming feature list confuses small business owners",
+        "No industry-specific landing pages",
+        "Steep learning curve mentioned repeatedly"
+      ],
+      "customerComplaints": [
+        "Email deliverability is a recurring nightmare - emails landing in spam",
+        "Nickle-and-dimed with sporadic fees for core functionality",
+        "Response times for tickets can stretch to 24-48 hours",
+        "Functional in 2-3 weeks, confident use takes 6-8 weeks",
+        "UI lag from being bloated with features",
+        "$12M class action settlement for billing issues"
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "Podium",
+      "website": "podium.com",
+      "googleReviews": "4.3/5 on G2, 2.8/5 on Trustpilot",
+      "pricing": {
+        "entryLevel": "~$400/mo (requires sales call)",
+        "hiddenCosts": "Extra phone seats, 10DLC compliance, bulk messages"
+      },
+      "websiteWeaknesses": [
+        "No transparent pricing displayed",
+        "Forces sales call for basic pricing information",
+        "No self-service signup option",
+        "Limited free trial visibility"
+      ],
+      "customerComplaints": [
+        "High and often opaque pricing prohibitive for smaller businesses",
+        "Difficult cancellation process and long-term contracts",
+        "Hidden wording or automatic renewals",
+        "Lacks integration with Yelp (major review platform)",
+        "Surprise billings for add-ons"
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "Birdeye",
+      "website": "birdeye.com",
+      "googleReviews": "4.7/5 on G2, 4.0/5 on Capterra",
+      "pricing": {
+        "starter": "$299/mo",
+        "growth": "$399/mo",
+        "dominate": "$499/mo",
+        "hiddenCosts": "Advanced features locked to higher tiers"
+      },
+      "websiteWeaknesses": [
+        "Requires company details before showing pricing",
+        "Complex feature matrix hard to understand",
+        "No simple get started path for small businesses",
+        "Enterprise-focused messaging"
+      ],
+      "customerComplaints": [
+        "Pricing is high or even overpriced for the features provided",
+        "Most useful advanced features only on higher-tier plans",
+        "Steep learning curve for new users",
+        "Reviews not syncing correctly",
+        "Ineffective integration with EMR systems",
+        "Limited third-party tool compatibility"
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "Emitrr",
+      "website": "emitrr.com",
+      "googleReviews": "4.8/5 on G2 (100+ reviews)",
+      "pricing": {
+        "starting": "$42/mo",
+        "model": "Usage-based scaling",
+        "hiddenCosts": "None reported - no setup fees, no contracts"
+      },
+      "websiteWeaknesses": [
+        "Less brand recognition than larger competitors",
+        "Limited enterprise features",
+        "Smaller integration ecosystem",
+        "Healthcare-focused positioning may alienate other industries"
+      ],
+      "customerComplaints": [
+        "Few complaints found - generally positive reception",
+        "Some users want more advanced automation features",
+        "Limited customization for complex workflows"
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "Weave",
+      "website": "getweave.com",
+      "googleReviews": "4.5/5 on Software Advice (605 reviews), mixed on Trustpilot",
+      "pricing": {
+        "display": "Not publicly disclosed - requires demo",
+        "hiddenCosts": "Features separated and upsold over time"
+      },
+      "websiteWeaknesses": [
+        "No pricing transparency",
+        "Healthcare/dental-focused (limits appeal)",
+        "Requires demo for basic information",
+        "Complex feature bundling"
+      ],
+      "customerComplaints": [
+        "Quite expensive when comparing with other platforms",
+        "Weave keeps separating things we need and bumps up the price",
+        "Long wait times, unresponsiveness reaching customer support",
+        "Faxes not working for extended periods",
+        "Payments not writing back to practice management software"
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "Smith.ai",
+      "website": "smith.ai",
+      "googleReviews": "4.8/5 on G2, 4.9/5 on Clutch",
+      "pricing": {
+        "ai": "$95/mo + $2.10-$2.40/call",
+        "human": "$300/mo for 20 calls",
+        "hiddenCosts": "Per-call charges add up quickly"
+      },
+      "websiteWeaknesses": [
+        "Complex pricing tiers (AI vs Human vs Hybrid)",
+        "Per-call pricing hard to budget",
+        "Premium positioning may scare small businesses",
+        "Law firm focus in marketing"
+      ],
+      "customerComplaints": [
+        "Inconsistent receptionists",
+        "Occasional missed calls",
+        "Confusing pricing structures",
+        "Some callers put off by AI receptionist",
+        "Expensive for high call volume businesses"
+      ]
+    },
+    {
+      "rank": 7,
+      "name": "Dialzara",
+      "website": "dialzara.com",
+      "googleReviews": "Limited reviews (newer company)",
+      "pricing": {
+        "businessLite": "$29/mo (60 min)",
+        "businessPro": "$99/mo (220 min)",
+        "hiddenCosts": "Overage at $0.48/min"
+      },
+      "websiteWeaknesses": [
+        "Lower brand awareness",
+        "Limited integrations compared to larger players",
+        "Newer company = less proven track record",
+        "Basic website design"
+      ],
+      "customerComplaints": [
+        "Limited complaints due to newer market presence",
+        "Some users report basic feature set",
+        "Want more customization options"
+      ]
+    },
+    {
+      "rank": 8,
+      "name": "Ruby Receptionists",
+      "website": "ruby.com",
+      "googleReviews": "4.0/5 on G2, 2.4/5 on ConsumerAffairs",
+      "pricing": {
+        "starting": "~$235-$300/mo for basic plans",
+        "hiddenCosts": "Per-minute charges, overage fees"
+      },
+      "websiteWeaknesses": [
+        "Premium pricing positioning",
+        "Per-minute model hard to predict costs",
+        "No AI option (human-only = expensive)",
+        "Complex plan structures"
+      ],
+      "customerComplaints": [
+        "Unbelievably overpriced - $650/mo for 200 minutes",
+        "$12 MILLION lawsuit for deceptive billing (2021)",
+        "Bogus call handling dispositions",
+        "Charged full price during promotional trials",
+        "Receptionists sounded bored, heard dogs barking",
+        "Sharp dive in quality since they first started"
+      ]
+    },
+    {
+      "rank": 9,
+      "name": "Nextiva",
+      "website": "nextiva.com",
+      "googleReviews": "4.6/5 on Software Advice, mixed on BBB",
+      "pricing": {
+        "core": "$15-$23/user/mo",
+        "engage": "$25-$50/user/mo",
+        "pro": "$36/user/mo",
+        "hiddenCosts": "Per-user pricing adds up for teams"
+      },
+      "websiteWeaknesses": [
+        "Confusing pricing with different plan names on different pages",
+        "Business phone focus (not automation-specific)",
+        "Enterprise-heavy messaging",
+        "Complex feature tiers"
+      ],
+      "customerComplaints": [
+        "Price increases led us to switch providers",
+        "Difficulties canceling accounts without speaking to a live person",
+        "Calls would be dropped",
+        "Extremely poor customer support",
+        "Issues passed between multiple people without resolution"
+      ]
+    },
+    {
+      "rank": 10,
+      "name": "Upfirst",
+      "website": "upfirst.ai",
+      "googleReviews": "4.5/5 (limited reviews - newer)",
+      "pricing": {
+        "starting": "$24.95/mo for basic answering",
+        "hiddenCosts": "Limited features at entry tier"
+      },
+      "websiteWeaknesses": [
+        "Newer company with less proven track record",
+        "Basic feature set compared to established players",
+        "Limited integrations",
+        "Less industry-specific positioning"
+      ],
+      "customerComplaints": [
+        "Limited complaints available (newer company)",
+        "Basic workflows only at entry tier",
+        "Some users want more customization"
+      ]
+    }
+  ],
+  "commonComplaintThemes": {
+    "pricingTransparency": {
+      "affectedCompetitors": "8/10",
+      "issues": ["Hidden fees", "Per-call/per-minute surprises", "Required sales calls for pricing", "Complex tier structures"]
+    },
+    "contractCancellation": {
+      "affectedCompetitors": "6/10",
+      "issues": ["Difficult to cancel", "Auto-renewals", "Long-term lock-ins", "Deceptive billing"]
+    },
+    "customerSupport": {
+      "affectedCompetitors": "7/10",
+      "issues": ["Long response times (24-48 hours)", "Passed between departments", "Unresponsive teams", "Knowledge gaps"]
+    },
+    "featureBloat": {
+      "affectedCompetitors": "5/10",
+      "issues": ["Too many features for small businesses", "Steep learning curves", "UI/UX issues", "Overwhelming onboarding"]
+    },
+    "integrationProblems": {
+      "affectedCompetitors": "4/10",
+      "issues": ["Limited third-party connections", "Syncing issues", "EMR/PMS compatibility"]
+    }
+  },
+  "frameworkSystemsAdvantages": [
+    {"theirProblem": "Hidden pricing", "yourSolution": "All prices on website, no surprises"},
+    {"theirProblem": "6-8 week learning curve", "yourSolution": "Working in 5-10 minutes"},
+    {"theirProblem": "Per-call/minute fees", "yourSolution": "Flat-rate options available"},
+    {"theirProblem": "Difficult cancellation", "yourSolution": "No contracts, easy exit"},
+    {"theirProblem": "24-48 hour support", "yourSolution": "Local, same-day response"},
+    {"theirProblem": "Generic platform", "yourSolution": "Industry-specific for HVAC, salons, medical"},
+    {"theirProblem": "Manual debugging", "yourSolution": "Self-healing Antigravity workflows"},
+    {"theirProblem": "Zapier/Make limitations", "yourSolution": "n8n + Claude + Antigravity stack"}
+  ],
+  "keywordOpportunities": {
+    "highValue": [
+      "missed call text back [city name]",
+      "GoHighLevel alternative no hidden fees",
+      "AI receptionist HVAC contractor",
+      "review automation salon",
+      "no-show recovery medical office",
+      "n8n automation agency",
+      "self-healing business automation",
+      "Antigravity workflow automation"
+    ],
+    "longTail": [
+      "missed call text back service Tuscumbia Alabama",
+      "AI receptionist for small business no monthly contract",
+      "review automation that actually works",
+      "GoHighLevel email deliverability problems alternative",
+      "Ruby Receptionists cheaper alternative"
+    ]
+  }
+}
