@@ -2,13 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contact" description="Contact Framework Systems for IT consulting, network architecture, and systems solutions in Tuscumbia, Alabama and the Shoals region.">
+<Layout title="Contact" description="Schedule a live demo with Framework Systems. We'll build your automation in front of you. Serving Tuscumbia, Florence, Muscle Shoals, and Sheffield, Alabama.">
   <!-- Hero Section -->
   <section class="bg-gradient-to-br from-secondary-900 to-secondary-800 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Contact Us</h1>
+      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Let's Fix Your Daily Headache</h1>
       <p class="text-xl text-secondary-300 max-w-3xl mx-auto">
-        Ready to transform your IT infrastructure? Let's start the conversation.
+        Tell us what's annoying you. We'll build the fix in front of you.
       </p>
     </div>
   </section>
@@ -19,7 +19,9 @@ import Layout from '../layouts/Layout.astro';
       <div class="grid lg:grid-cols-2 gap-12">
         <!-- Contact Form -->
         <div>
-          <h2 class="text-2xl font-bold text-secondary-900 mb-6">Send Us a Message</h2>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-2">Request a Live Demo</h2>
+          <p class="text-secondary-600 mb-6">We'll build your automation while you watch. Average time: 10 minutes.</p>
+
           <form class="space-y-6" id="contact-form">
             <div class="grid md:grid-cols-2 gap-6">
               <div>
@@ -54,7 +56,7 @@ import Layout from '../layouts/Layout.astro';
                 name="email"
                 required
                 class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-                placeholder="john@company.com"
+                placeholder="john@yourbusiness.com"
               />
             </div>
 
@@ -70,197 +72,157 @@ import Layout from '../layouts/Layout.astro';
             </div>
 
             <div>
-              <label for="company" class="block text-sm font-medium text-secondary-700 mb-2">Company Name</label>
+              <label for="business" class="block text-sm font-medium text-secondary-700 mb-2">Business Name & Type</label>
               <input
                 type="text"
-                id="company"
-                name="company"
+                id="business"
+                name="business"
                 class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-                placeholder="Your Company"
+                placeholder="e.g., Smith HVAC, Dental Office, Cleaning Company"
               />
             </div>
 
             <div>
-              <label for="service" class="block text-sm font-medium text-secondary-700 mb-2">Service Interest</label>
-              <select
-                id="service"
-                name="service"
-                class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-              >
-                <option value="">Select a service...</option>
-                <option value="network">Network Architecture</option>
-                <option value="cloud">Cloud Solutions</option>
-                <option value="security">Security Systems</option>
-                <option value="consulting">IT Consulting</option>
-                <option value="data">Data Management</option>
-                <option value="support">Technical Support</option>
-                <option value="other">Other</option>
-              </select>
+              <label for="problem" class="block text-sm font-medium text-secondary-700 mb-2">What's the most annoying part of your day? *</label>
+              <textarea
+                id="problem"
+                name="problem"
+                required
+                rows="4"
+                class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none"
+                placeholder="Tell us the task that frustrates you most. The thing that eats your time every single day. We'll build the fix live."
+              ></textarea>
             </div>
 
             <div>
-              <label for="message" class="block text-sm font-medium text-secondary-700 mb-2">Message *</label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows="5"
-                class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none"
-                placeholder="Tell us about your project or how we can help..."
-              ></textarea>
+              <label for="meeting" class="block text-sm font-medium text-secondary-700 mb-2">How would you like to meet?</label>
+              <select
+                id="meeting"
+                name="meeting"
+                class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+              >
+                <option value="">Select preference...</option>
+                <option value="in-person">In-person (Shoals area)</option>
+                <option value="video">Video call (Zoom/Google Meet)</option>
+                <option value="phone">Phone call first</option>
+              </select>
             </div>
 
             <button
               type="submit"
-              class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors flex items-center justify-center"
+              class="w-full bg-primary-600 hover:bg-primary-700 text-white py-4 px-6 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center"
             >
-              Send Message
+              Request Live Demo
               <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
             </button>
           </form>
         </div>
 
-        <!-- Contact Information -->
+        <!-- What to Expect -->
         <div>
-          <h2 class="text-2xl font-bold text-secondary-900 mb-6">Get in Touch</h2>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-6">What Happens Next</h2>
 
-          <div class="space-y-8">
-            <div class="flex items-start">
-              <div class="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-lg font-semibold text-secondary-900">Location</h3>
-                <p class="text-secondary-600">Tuscumbia, Alabama</p>
-                <p class="text-secondary-600">Serving the Shoals Region</p>
+          <div class="space-y-6 mb-12">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+              <div>
+                <h3 class="font-bold text-secondary-900 mb-1">We Respond Within 24 Hours</h3>
+                <p class="text-secondary-600">Usually much faster. We'll confirm a time for your live demo.</p>
               </div>
             </div>
 
-            <div class="flex items-start">
-              <div class="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-lg font-semibold text-secondary-900">Email</h3>
-                <p class="text-secondary-600">Contact us through the form</p>
-                <p class="text-secondary-500 text-sm">We typically respond within 24 hours</p>
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+              <div>
+                <h3 class="font-bold text-secondary-900 mb-1">We Ask One Question</h3>
+                <p class="text-secondary-600">"What's the most annoying part of your day?" That's where we start.</p>
               </div>
             </div>
 
-            <div class="flex items-start">
-              <div class="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+              <div>
+                <h3 class="font-bold text-secondary-900 mb-1">We Build It Live</h3>
+                <p class="text-secondary-600">Watch your automation get built in real-time. Average time: 5-10 minutes.</p>
               </div>
-              <div class="ml-4">
-                <h3 class="text-lg font-semibold text-secondary-900">Business Hours</h3>
-                <p class="text-secondary-600">Monday - Friday: 8:00 AM - 5:00 PM</p>
-                <p class="text-secondary-500 text-sm">Emergency support available for clients</p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
+              <div>
+                <h3 class="font-bold text-secondary-900 mb-1">We Test It Together</h3>
+                <p class="text-secondary-600">Trigger the automation. See your phone buzz. Watch it work.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">5</div>
+              <div>
+                <h3 class="font-bold text-secondary-900 mb-1">Turn It On</h3>
+                <p class="text-secondary-600">"Want me to leave it running?" It runs 24/7 from that moment.</p>
               </div>
             </div>
           </div>
 
-          <!-- Quick Response Box -->
-          <div class="mt-12 bg-secondary-50 rounded-xl p-8">
-            <h3 class="text-xl font-bold text-secondary-900 mb-4">What to Expect</h3>
-            <ul class="space-y-3 text-secondary-600">
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-primary-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                Response within 24 hours
-              </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-primary-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                Free initial consultation
-              </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-primary-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                No obligation assessment
-              </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-primary-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                Custom solutions for your needs
-              </li>
-            </ul>
+          <!-- Location Info -->
+          <div class="bg-secondary-50 rounded-xl p-6 mb-8">
+            <h3 class="font-bold text-secondary-900 mb-4">Location</h3>
+            <div class="flex items-start gap-3 text-secondary-600">
+              <svg class="w-5 h-5 text-primary-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <div>
+                <div class="font-semibold text-secondary-900">Tuscumbia, Alabama</div>
+                <div>Serving the Shoals Region</div>
+                <div class="mt-2 text-sm">Florence | Muscle Shoals | Sheffield</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ -->
+          <div class="space-y-4">
+            <h3 class="font-bold text-secondary-900">Common Questions</h3>
+
+            <div class="border border-secondary-200 rounded-lg p-4">
+              <h4 class="font-semibold text-secondary-900 mb-1">Is the demo really free?</h4>
+              <p class="text-secondary-600 text-sm">Yes. No obligation. We build your automation live to show you what's possible.</p>
+            </div>
+
+            <div class="border border-secondary-200 rounded-lg p-4">
+              <h4 class="font-semibold text-secondary-900 mb-1">How much does it cost?</h4>
+              <p class="text-secondary-600 text-sm">Most automations are $500-$4,000 setup + optional monthly retainer. We'll quote during the demo.</p>
+            </div>
+
+            <div class="border border-secondary-200 rounded-lg p-4">
+              <h4 class="font-semibold text-secondary-900 mb-1">Do I need technical skills?</h4>
+              <p class="text-secondary-600 text-sm">Zero. We build everything. It runs automatically. You never touch it.</p>
+            </div>
+
+            <div class="border border-secondary-200 rounded-lg p-4">
+              <h4 class="font-semibold text-secondary-900 mb-1">What if something breaks?</h4>
+              <p class="text-secondary-600 text-sm">The system self-heals. If a rare issue occurs, that's what the retainer covers - we fix it fast.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Service Area Map -->
-  <section class="py-20 bg-secondary-50">
+  <!-- Service Area -->
+  <section class="py-12 bg-secondary-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-secondary-900 mb-4">Serving the Shoals Region</h2>
-        <p class="text-xl text-secondary-600">
-          Proudly providing IT services throughout Northwest Alabama
-        </p>
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-secondary-900 mb-2">Serving the Shoals</h2>
+        <p class="text-secondary-600">In-person demos available throughout the region. Remote demos available anywhere.</p>
       </div>
-
-      <div class="grid md:grid-cols-4 gap-6 text-center">
-        <div class="bg-white p-6 rounded-xl">
-          <h3 class="font-bold text-lg text-secondary-900">Tuscumbia</h3>
-          <p class="text-secondary-500">Headquarters</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl">
-          <h3 class="font-bold text-lg text-secondary-900">Florence</h3>
-          <p class="text-secondary-500">Full Service Area</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl">
-          <h3 class="font-bold text-lg text-secondary-900">Muscle Shoals</h3>
-          <p class="text-secondary-500">Full Service Area</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl">
-          <h3 class="font-bold text-lg text-secondary-900">Sheffield</h3>
-          <p class="text-secondary-500">Full Service Area</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section class="py-20 bg-white">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-secondary-900 mb-4">Frequently Asked Questions</h2>
-      </div>
-
-      <div class="space-y-6">
-        <div class="border border-secondary-200 rounded-xl p-6">
-          <h3 class="text-lg font-semibold text-secondary-900 mb-2">Do you offer free consultations?</h3>
-          <p class="text-secondary-600">Yes, we offer a free initial consultation to understand your needs and discuss how we can help. There's no obligation.</p>
-        </div>
-
-        <div class="border border-secondary-200 rounded-xl p-6">
-          <h3 class="text-lg font-semibold text-secondary-900 mb-2">What areas do you serve?</h3>
-          <p class="text-secondary-600">We serve businesses throughout the Shoals region including Tuscumbia, Florence, Muscle Shoals, Sheffield, and surrounding areas in Northwest Alabama.</p>
-        </div>
-
-        <div class="border border-secondary-200 rounded-xl p-6">
-          <h3 class="text-lg font-semibold text-secondary-900 mb-2">How quickly can you respond to issues?</h3>
-          <p class="text-secondary-600">For clients with support agreements, we offer rapid response times - often within hours. For new inquiries, we typically respond within 24 hours.</p>
-        </div>
-
-        <div class="border border-secondary-200 rounded-xl p-6">
-          <h3 class="text-lg font-semibold text-secondary-900 mb-2">Do you work with small businesses?</h3>
-          <p class="text-secondary-600">Absolutely. We work with businesses of all sizes, from small offices to larger organizations. Our solutions are scaled to fit your needs and budget.</p>
-        </div>
+      <div class="flex flex-wrap justify-center gap-4">
+        <span class="bg-white px-6 py-3 rounded-full font-semibold text-secondary-900 shadow-sm">Tuscumbia</span>
+        <span class="bg-white px-6 py-3 rounded-full font-semibold text-secondary-900 shadow-sm">Florence</span>
+        <span class="bg-white px-6 py-3 rounded-full font-semibold text-secondary-900 shadow-sm">Muscle Shoals</span>
+        <span class="bg-white px-6 py-3 rounded-full font-semibold text-secondary-900 shadow-sm">Sheffield</span>
       </div>
     </div>
   </section>
@@ -270,8 +232,7 @@ import Layout from '../layouts/Layout.astro';
   const form = document.getElementById('contact-form');
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Form handling would be implemented here
-    alert('Thank you for your message! We will get back to you within 24 hours.');
+    alert('Thanks! We\'ll reach out within 24 hours to schedule your live demo.');
     form.reset();
   });
 </script>

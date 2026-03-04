@@ -4,7 +4,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Framework Systems - Professional Systems Architecture Solutions in Tuscumbia, Alabama. Network design, IT infrastructure, and technology consulting." } = Astro.props;
+const { title, description = "Framework Systems - AI-powered business automations for local businesses in Tuscumbia, Alabama. Missed call text-back, review automation, AI receptionists. Built in minutes, runs 24/7." } = Astro.props;
 ---
 
 <!doctype html>
@@ -28,12 +28,12 @@ const { title, description = "Framework Systems - Professional Systems Architect
             <span class="text-xl font-bold">Framework Systems</span>
           </a>
 
-          <div class="hidden md:flex space-x-8">
+          <div class="hidden md:flex items-center space-x-8">
             <a href="/" class="hover:text-primary-400 transition-colors">Home</a>
-            <a href="/services" class="hover:text-primary-400 transition-colors">Services</a>
+            <a href="/services" class="hover:text-primary-400 transition-colors">Automations</a>
             <a href="/locations" class="hover:text-primary-400 transition-colors">Locations</a>
             <a href="/about" class="hover:text-primary-400 transition-colors">About</a>
-            <a href="/contact" class="hover:text-primary-400 transition-colors">Contact</a>
+            <a href="/contact" class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-lg transition-colors">Get Demo</a>
           </div>
 
           <button id="mobile-menu-btn" class="md:hidden p-2">
@@ -46,10 +46,10 @@ const { title, description = "Framework Systems - Professional Systems Architect
         <div id="mobile-menu" class="hidden md:hidden pb-4">
           <div class="flex flex-col space-y-2">
             <a href="/" class="py-2 hover:text-primary-400 transition-colors">Home</a>
-            <a href="/services" class="py-2 hover:text-primary-400 transition-colors">Services</a>
+            <a href="/services" class="py-2 hover:text-primary-400 transition-colors">Automations</a>
             <a href="/locations" class="py-2 hover:text-primary-400 transition-colors">Locations</a>
             <a href="/about" class="py-2 hover:text-primary-400 transition-colors">About</a>
-            <a href="/contact" class="py-2 hover:text-primary-400 transition-colors">Contact</a>
+            <a href="/contact" class="py-2 text-primary-400 font-semibold">Get Demo</a>
           </div>
         </div>
       </nav>
@@ -64,32 +64,33 @@ const { title, description = "Framework Systems - Professional Systems Architect
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 class="text-lg font-bold mb-4">Framework Systems</h3>
-            <p class="text-secondary-400">Professional systems architecture solutions for businesses in the Shoals area and beyond.</p>
+            <p class="text-secondary-400">AI-powered automations for local businesses. Built in minutes. Runs 24/7.</p>
           </div>
           <div>
             <h4 class="font-semibold mb-4">Quick Links</h4>
             <ul class="space-y-2 text-secondary-400">
               <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
-              <li><a href="/services" class="hover:text-white transition-colors">Services</a></li>
+              <li><a href="/services" class="hover:text-white transition-colors">Automations</a></li>
               <li><a href="/about" class="hover:text-white transition-colors">About</a></li>
-              <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+              <li><a href="/contact" class="hover:text-white transition-colors">Get Demo</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="font-semibold mb-4">Services</h4>
+            <h4 class="font-semibold mb-4">Automations</h4>
             <ul class="space-y-2 text-secondary-400">
-              <li>Network Architecture</li>
-              <li>Cloud Solutions</li>
-              <li>IT Consulting</li>
-              <li>Security Systems</li>
+              <li>Missed Call Text-Back</li>
+              <li>Review Automation</li>
+              <li>AI Receptionist</li>
+              <li>No-Show Recovery</li>
             </ul>
           </div>
           <div>
-            <h4 class="font-semibold mb-4">Contact</h4>
+            <h4 class="font-semibold mb-4">Service Area</h4>
             <ul class="space-y-2 text-secondary-400">
-              <li>Tuscumbia, Alabama</li>
-              <li>The Shoals Region</li>
-              <li><a href="/contact" class="hover:text-white transition-colors">Get in Touch</a></li>
+              <li>Tuscumbia, AL (HQ)</li>
+              <li>Florence, AL</li>
+              <li>Muscle Shoals, AL</li>
+              <li>Sheffield, AL</li>
             </ul>
           </div>
         </div>
@@ -109,4 +110,3 @@ const { title, description = "Framework Systems - Professional Systems Architect
     </script>
   </body>
 </html>
-
