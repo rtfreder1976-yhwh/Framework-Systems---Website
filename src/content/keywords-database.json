@@ -2,9 +2,10 @@
   "metadata": {
     "business": "Framework Systems",
     "location": "Muscle Shoals, Alabama",
-    "serviceArea": ["Muscle Shoals", "Florence", "Tuscumbia", "Sheffield", "Shoals", "Decatur", "Huntsville", "Athens", "North Alabama"],
+    "serviceArea": ["Muscle Shoals", "Florence", "Tuscumbia", "Sheffield", "Killen", "Shoals", "Decatur", "Huntsville", "Athens", "North Alabama"],
     "lastUpdated": "March 2026",
-    "totalKeywords": 600
+    "totalKeywords": 1000,
+    "additionalCityKeywords": "See keywords-cities.json for 400 city-specific keywords"
   },
   "services": {
     "missedCallTextBack": {
