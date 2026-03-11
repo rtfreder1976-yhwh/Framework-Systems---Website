@@ -500,9 +500,11 @@
     // ─────────────────────────────────────────────────────────────────
 
     // Temporary: show success state until GHL is wired
+    // Read geometry BEFORE style changes to avoid forced reflow
+    const heroTop = document.getElementById('hero').offsetTop;
     form.style.display = 'none';
     document.getElementById('success-state').style.display = 'block';
-    window.scrollTo({ top: document.getElementById('hero').offsetTop, behavior: 'smooth' });
+    window.scrollTo({ top: heroTop, behavior: 'smooth' });
   }
 </script>
 </body>
