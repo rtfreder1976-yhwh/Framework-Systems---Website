@@ -1,26 +1,7 @@
-# build output
-dist/
-
-# dependencies
-node_modules/
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# environment variables
-.env
-.env.production
-.env.local
-
-# editor
-.vscode/
-.idea/
-
-# OS
 .DS_Store
 Thumbs.db
-
-# astro
-.astro/
+.env
+.env.local
+node_modules/
+.vercel/
+.claude/

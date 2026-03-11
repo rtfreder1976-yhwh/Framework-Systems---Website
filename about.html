@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About — Framework Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy:   #0D1B2A;
+    --navy2:  #132236;
+    --accent: #C4522A;
+    --gold:   #C9A84C;
+    --cream:  #E8E4DC;
+    --light:  #E2DDD5;
+    --white:  #FFFFFF;
+    --text:   #2A2A2A;
+    --muted:  #7A7670;
+    --body:   #555555;
+    --border: rgba(255,255,255,0.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 18px; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; }
+
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 40px; }
+
+  .btn-primary {
+    display: inline-block; background: var(--accent); color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 1.05rem;
+    letter-spacing: 0.04em; padding: 16px 36px; border: none; cursor: pointer;
+    text-decoration: none; transition: background 0.2s, transform 0.15s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-primary:hover { background: #A8421A; transform: translateY(-2px); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 40px; display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(15,30,53,0.98), transparent);
+    backdrop-filter: blur(4px);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 1rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+
+  /* ── PAGE HERO ── */
+  #page-hero {
+    padding: 180px 0 100px;
+    position: relative; overflow: hidden;
+    background: var(--navy);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.1) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 90% 70% at 30% 50%, black, transparent);
+  }
+  .hero-glow {
+    position: absolute; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(224,92,42,0.1), transparent 70%);
+    top: 0; right: -80px; pointer-events: none;
+  }
+  .page-hero-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .page-hero-copy { }
+  .page-label {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 20px;
+  }
+  .page-headline {
+    font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 900; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 24px;
+  }
+  .page-headline em { font-style: italic; color: var(--gold); }
+  .page-sub {
+    font-size: 1.1rem; font-weight: 300; color: rgba(255,255,255,0.65);
+    line-height: 1.8; max-width: 480px;
+  }
+
+  .founders-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 44px 40px; position: relative;
+  }
+  .founders-card::before {
+    content: '';
+    position: absolute; top: -6px; left: -6px; right: 6px; bottom: 6px;
+    border: 1px solid var(--accent); z-index: 0; opacity: 0.4;
+  }
+  .founders-card > * { position: relative; z-index: 1; }
+  .founders-names {
+    font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700;
+    color: var(--white); margin-bottom: 6px; line-height: 1.2;
+  }
+  .founders-title {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 28px;
+  }
+  .founders-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 5px 12px; border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.55);
+  }
+  .tag.accent-tag { border-color: var(--accent); color: var(--accent); }
+  .founders-verse {
+    border-left: 3px solid var(--gold);
+    padding-left: 18px;
+  }
+  .founders-verse blockquote {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.05rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 6px;
+  }
+  .founders-verse cite {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    color: var(--gold); letter-spacing: 0.08em;
+  }
+
+  /* ── FAITH SECTION ── */
+  #faith {
+    background: var(--cream); color: var(--text); padding: 112px 0;
+    position: relative;
+  }
+  #faith::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--accent), var(--gold));
+  }
+  .faith-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start;
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 16px;
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+    font-weight: 700; line-height: 1.15; color: var(--navy); margin-bottom: 20px;
+  }
+  .body-text {
+    font-size: 1rem; color: var(--body); line-height: 1.85; margin-bottom: 20px;
+  }
+  .faith-pull {
+    background: var(--navy); color: var(--white);
+    padding: 36px 40px; margin-top: 40px;
+    border-left: 4px solid var(--gold);
+  }
+  .faith-pull blockquote {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.15rem; line-height: 1.7; color: rgba(255,255,255,0.88);
+    margin-bottom: 12px;
+  }
+  .faith-pull cite {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    color: var(--gold); letter-spacing: 0.08em;
+  }
+  .values-list {
+    list-style: none; margin-top: 12px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .values-list li {
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .val-icon {
+    width: 40px; height: 40px; background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 1.1rem;
+  }
+  .val-content { }
+  .val-title {
+    font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 1.05rem;
+    color: var(--navy); margin-bottom: 4px;
+  }
+  .val-body { font-size: 1rem; color: var(--body); line-height: 1.65; }
+
+  /* ── STORY SECTION ── */
+  #story {
+    background: var(--navy2); padding: 112px 0;
+    position: relative; overflow: hidden;
+  }
+  .story-bg {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(-45deg, transparent, transparent 60px,
+      rgba(201,168,76,0.06) 60px, rgba(201,168,76,0.06) 61px);
+  }
+  .story-inner { position: relative; z-index: 2; }
+  .story-header { text-align: center; margin-bottom: 88px; }
+  .story-header .section-headline { color: var(--white); }
+  .story-header .section-label { color: var(--gold); }
+  .story-header p {
+    font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.8;
+    max-width: 520px; margin: 0 auto;
+  }
+
+  .timeline {
+    max-width: 800px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 28px; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--gold), transparent);
+  }
+  .timeline-item {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 32px; padding-bottom: 56px; position: relative;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .tl-dot {
+    width: 56px; height: 56px; border: 2px solid var(--accent);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: var(--navy2); position: relative; z-index: 2;
+    font-size: 1.2rem; flex-shrink: 0;
+    align-self: flex-start;
+  }
+  .tl-dot.gold { border-color: var(--gold); }
+  .tl-content { padding-top: 12px; }
+  .tl-era {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 8px; display: block;
+  }
+  .tl-era.gold-era { color: var(--gold); }
+  .tl-title {
+    font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700;
+    color: var(--white); margin-bottom: 12px; line-height: 1.2;
+  }
+  .tl-body {
+    font-size: 1.05rem; color: rgba(255,255,255,0.58); line-height: 1.8;
+  }
+  .tl-pull {
+    margin-top: 16px; padding: 16px 20px;
+    border-left: 3px solid var(--accent);
+    background: rgba(255,255,255,0.03);
+  }
+  .tl-pull p {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.05rem; color: rgba(255,255,255,0.75); line-height: 1.65;
+  }
+
+  /* ── PARTNERSHIP ── */
+  #partnership {
+    background: var(--cream); color: var(--text); padding: 112px 0;
+  }
+  .partnership-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .person-card {
+    background: var(--navy); padding: 48px 40px; position: relative;
+  }
+  .person-role {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block;
+  }
+  .person-name {
+    font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
+    color: var(--white); margin-bottom: 20px; line-height: 1.1;
+  }
+  .person-divider {
+    height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;
+  }
+  .person-body {
+    font-size: 1.05rem; color: rgba(255,255,255,0.62); line-height: 1.8; margin-bottom: 16px;
+  }
+  .person-skills {
+    margin-top: 24px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .skill-row {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 1rem; color: rgba(255,255,255,0.5);
+  }
+  .skill-dot { width: 6px; height: 6px; background: var(--accent); flex-shrink: 0; }
+  .skill-dot.gold { background: var(--gold); }
+
+  .partnership-copy .section-headline { color: var(--navy); }
+
+  /* ── CHARLOTTE ── */
+  #charlotte {
+    background: var(--navy); padding: 112px 0;
+    position: relative; overflow: hidden;
+  }
+  .charlotte-glow {
+    position: absolute; width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.08), transparent 70%);
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .charlotte-inner {
+    position: relative; z-index: 2;
+    max-width: 760px; margin: 0 auto; text-align: center;
+  }
+  .charlotte-inner .section-label { color: var(--gold); display: block; margin-bottom: 16px; }
+  .charlotte-inner .section-headline { color: var(--white); margin-bottom: 20px; }
+  .charlotte-body {
+    font-size: 1.05rem; color: rgba(255,255,255,0.6); line-height: 1.85;
+    margin-bottom: 24px;
+  }
+  .charlotte-quote {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    padding: 40px 48px; margin: 48px 0; text-align: left;
+    border-top: 3px solid var(--gold);
+  }
+  .charlotte-quote blockquote {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.2rem; color: rgba(255,255,255,0.88); line-height: 1.7; margin-bottom: 16px;
+  }
+  .charlotte-quote cite {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    color: var(--gold); letter-spacing: 0.08em;
+  }
+
+  /* ── CTA ── */
+  #about-cta {
+    background: var(--navy2); padding: 112px 0;
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .cta-glow {
+    position: absolute; width: 700px; height: 350px;
+    background: radial-gradient(ellipse, rgba(224,92,42,0.1), transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+  }
+  .cta-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.09) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .cta-content { position: relative; z-index: 2; max-width: 580px; margin: 0 auto; }
+  .cta-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 20px; display: block;
+  }
+  .cta-headline {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900; line-height: 1.1; color: var(--white); margin-bottom: 20px;
+  }
+  .cta-sub {
+    font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 44px;
+  }
+  .cta-fine {
+    margin-top: 16px; font-size: 0.78rem; color: rgba(255,255,255,0.28);
+    font-family: 'DM Mono', monospace; letter-spacing: 0.06em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); padding: 48px 0;
+  }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); text-decoration: none; }
+  .footer-logo span { color: var(--accent); }
+  .footer-meta {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.25); text-align: right; line-height: 1.8;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up:nth-child(2) { transition-delay: 0.1s; }
+  .fade-up:nth-child(3) { transition-delay: 0.2s; }
+
+  @media (max-width: 900px) {
+    .page-hero-inner, .faith-layout, .partnership-layout { grid-template-columns: 1fr; }
+    .container { padding: 0 24px; }
+    nav { padding: 16px 24px; }
+    .timeline::before { display: none; }
+    .timeline-item { grid-template-columns: 1fr; }
+    .tl-dot { display: none; }
+  }
+.nav-dropdown{position:relative;}.nav-dropdown>a{cursor:pointer;}.nav-dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:180px;background:rgba(13,27,42,0.98);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;margin-top:12px;z-index:200;}.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;}.nav-dropdown-menu a{display:block;padding:10px 20px;color:rgba(255,255,255,0.65);font-size:0.92rem;text-decoration:none;transition:color 0.15s,background 0.15s;}.nav-dropdown-menu a:hover{color:var(--white);background:rgba(255,255,255,0.04);}
+</style>
+
+  <!-- SEO: Meta -->
+  <meta name="description" content="Todd and Christen Frederickson built Framework Systems after building The Valley Clean Team from $5K to $250K in Year 1. They don't consult from a whiteboard — they run the same systems they sell."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://frameworksystems.co/about"/>
+
+  <!-- SEO: Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Framework Systems"/>
+  <meta property="og:title" content="About Framework Systems — We Built This in Our Own Business First"/>
+  <meta property="og:description" content="Veteran-owned. Faith-driven. Two operators who grew a cleaning company 200%+ using the exact systems we build for clients. Based in Tuscumbia, Alabama."/>
+  <meta property="og:url" content="https://frameworksystems.co/about"/>
+  <meta property="og:image" content="https://frameworksystems.co/og-image.jpg"/>
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="About Framework Systems — We Built This in Our Own Business First"/>
+  <meta name="twitter:description" content="Veteran-owned. Faith-driven. Two operators who grew a cleaning company 200%+ using the exact systems we build for clients. Based in Tuscumbia, Alabama."/>
+  <meta name="twitter:image" content="https://frameworksystems.co/og-image.jpg"/>
+
+  <!-- SEO: JSON-LD Schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Framework Systems",
+  "url": "https://frameworksystems.co/about",
+  "description": "Todd and Christen Frederickson founded Framework Systems after building their own service business using automation and systems thinking.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Framework Systems",
+    "founder": [
+      {
+        "@type": "Person",
+        "name": "Todd Frederickson",
+        "jobTitle": "Co-Founder",
+        "description": "Air Force veteran, operations specialist, and systems architect with experience in federal contracting and corporate turnarounds."
+      },
+      {
+        "@type": "Person",
+        "name": "Christen Frederickson",
+        "jobTitle": "Co-Founder",
+        "description": "Marketing and communications professional with 15 years of experience across corporate and small business environments."
+      }
+    ]
+  }
+}
+  </script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Framework<span>.</span></a>
+  <div class="nav-links">
+    <a href="index.html#services">Services</a>
+    <div class="nav-dropdown"><a>Industries</a><div class="nav-dropdown-menu"><a href="plumbing.html">Plumbing</a><a href="hvac.html">HVAC</a><a href="cleaning.html">Cleaning</a><a href="roofing.html">Roofing</a><a href="electrical.html">Electrical</a></div></div>
+    <a href="case-study.html">Case Study</a>
+    <a href="index.html#process">How It Works</a>
+    <a href="about.html" style="color:var(--white);">About</a>
+    <a href="index.html#cta" class="btn-primary" style="padding:10px 22px;font-size:1.05rem;">Get Your Map</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section id="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="page-hero-copy">
+        <span class="page-label">About Framework Systems</span>
+        <h1 class="page-headline">
+          We build on<br>
+          <em>faith, family,</em><br>
+          and proof.
+        </h1>
+        <p class="page-sub">
+          We didn't start Framework Systems because we saw a market opportunity. We started it because we needed it. We built the system for our own service business first — and it worked so well that every local service company owner we talked to said the same thing: "Can you build that for me?"
+        </p>
+      </div>
+      <div class="founders-card fade-up">
+        <h2 class="founders-names">Todd &amp; Christen<br>Frederickson</h2>
+        <p class="founders-title">Founders · Framework Systems &amp; The Valley Clean Team</p>
+        <div class="founders-tags">
+          <span class="tag accent-tag">Veteran-Owned</span>
+          <span class="tag accent-tag">Faith-Driven</span>
+          <span class="tag">Tuscumbia, Alabama</span>
+          <span class="tag">Southeast USA</span>
+          <span class="tag">Framework CRM Certified</span>
+          <span class="tag">Framework Engine Automation</span>
+        </div>
+        <div class="founders-verse">
+          <blockquote>"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters."</blockquote>
+          <cite>— Colossians 3:23</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAITH -->
+<section id="faith">
+  <div class="container">
+    <div class="faith-layout">
+      <div class="faith-copy fade-up">
+        <span class="section-label">Where we start</span>
+        <h2 class="section-headline">Faith isn't a footnote here. It's the foundation.</h2>
+        <p class="body-text">
+          We are Christians. That's not a marketing angle — it's the truth about who we are and why we work the way we do.
+        </p>
+        <p class="body-text">
+          It means we won't sell you something you don't need to pad an invoice. It means when we make a mistake — and every business does — we own it, fix it, and tell you directly. It means we care about the people who work with us, the clients we serve, and the communities we're part of. Not because it's good for business. Because it's right.
+        </p>
+        <p class="body-text">
+          We believe running a business well — with discipline, with honest systems, with real care for people — is a form of service. That's what Framework Systems is built to help you do.
+        </p>
+        <div class="faith-pull">
+          <blockquote>"We really took all the things we didn't like about the corporate world and said — when we did this, we were going to do it in a way where we could put our heads on the pillow at night and say we did our best and were as helpful and transparent and honest as we could be."</blockquote>
+          <cite>— Christen Frederickson</cite>
+        </div>
+      </div>
+      <div class="faith-values fade-up">
+        <span class="section-label" style="color:var(--gold);">How faith shapes the work</span>
+        <ul class="values-list">
+          <li>
+            <div class="val-icon">✦</div>
+            <div class="val-content">
+              <p class="val-title">Honesty over optics</p>
+              <p class="val-body">We tell you what something actually costs, what it actually does, and when it didn't work the way it should have. No spin.</p>
+            </div>
+          </li>
+          <li>
+            <div class="val-icon">✦</div>
+            <div class="val-content">
+              <p class="val-title">Service over transaction</p>
+              <p class="val-body">We're not trying to extract the most from each engagement. We're trying to build something that genuinely improves how your business runs — and make the relationship worth keeping.</p>
+            </div>
+          </li>
+          <li>
+            <div class="val-icon">✦</div>
+            <div class="val-content">
+              <p class="val-title">Stewardship over shortcuts</p>
+              <p class="val-body">Building the right system takes more than the fastest approach. We build things that hold — systems that don't collapse when something unexpected happens.</p>
+            </div>
+          </li>
+          <li>
+            <div class="val-icon">✦</div>
+            <div class="val-content">
+              <p class="val-title">People over numbers</p>
+              <p class="val-body">We've made decisions that cost us revenue because it was the right thing for the people involved. We'd make those decisions again.</p>
+            </div>
+          </li>
+          <li>
+            <div class="val-icon">✦</div>
+            <div class="val-content">
+              <p class="val-title">Gratitude over entitlement</p>
+              <p class="val-body">We've been through enough to know that every client, every functioning system, every good day is a gift. We don't take it for granted.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY TIMELINE -->
+<section id="story">
+  <div class="story-bg"></div>
+  <div class="container story-inner">
+    <div class="story-header fade-up">
+      <span class="section-label">The story behind it</span>
+      <h2 class="section-headline" style="color:var(--white);">We didn't plan this.<br>God had other ideas.</h2>
+      <p>The path to Framework Systems wasn't a business plan. It was a broken leg, a surprise layoff, a newborn daughter, and the quiet confidence that comes from having no other option but to build something real.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item fade-up">
+        <div class="tl-dot">✈</div>
+        <div class="tl-content">
+          <span class="tl-era">The Foundation Years</span>
+          <h3 class="tl-title">Ten years of service. A lifetime of discipline.</h3>
+          <p class="tl-body">Todd enlisted in the United States Air Force — a decision that shaped everything that came after. A decade of service built the discipline, the process orientation, and the operational instincts that now form the backbone of how Framework Systems works. The military doesn't teach you to wait for perfect conditions. It teaches you to build the airplane while you fly it.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="tl-dot">📈</div>
+        <div class="tl-content">
+          <span class="tl-era">The Corporate Years</span>
+          <h3 class="tl-title">Building for other people's businesses. $400K loss to profitable.</h3>
+          <p class="tl-body">Over the years that followed, Todd built systems and led operations for companies that needed turning around — including stepping into a CEO role at a consulting firm that had posted a $400,000 loss the prior year. He identified the broken processes, built the framework, and turned it profitable. He did this again and again, in different industries, for businesses he didn't own. Meanwhile, Christen spent 15 years in corporate marketing and project management, learning how to position a business, run complex projects, and communicate with clarity across every level of an organization.</p>
+          <div class="tl-pull">
+            <p>"I've always built businesses for other people. I've always been the one brought in to grow and scale an operation. I just finally decided to do it for us."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="tl-dot" style="font-size:1rem;">2021</div>
+        <div class="tl-content">
+          <span class="tl-era">The Year Everything Changed</span>
+          <h3 class="tl-title">Charlotte arrived. Then everything else did too.</h3>
+          <p class="tl-body">In 2021, Todd and Christen welcomed their daughter Charlotte — the clearest picture of what they were building toward. The same year, Todd's father passed away. Grief, joy, and the weight of new responsibility arrived together. The family sold their home, moved to family land in Tuscumbia, Alabama, and began what they didn't yet know would become the most important year of their lives.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="tl-dot gold">⚡</div>
+        <div class="tl-content">
+          <span class="tl-era gold-era">August 2022</span>
+          <h3 class="tl-title">The accident. Five months. No weight bearing.</h3>
+          <p class="tl-body">Two weeks after moving into their new home — boxes still unpacked — Todd slipped on a ramp and broke his leg. He was airlifted out. The doctors said no weight bearing for five months. Christen was working full-time, caring for a 10-month-old, and managing everything alone. Todd, immobile and out of options, started watching YouTube. He found an entrepreneur named Cody Sanchez talking about buying boring businesses. He couldn't walk. But he could think. And he had nothing but time.</p>
+          <div class="tl-pull" style="border-color:var(--gold);">
+            <p>"I genuinely believe God put Todd on that couch — because we just would not have done it otherwise. We needed to be forced to stop and build something for ourselves."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="tl-dot gold" style="font-size:1rem;">Oct</div>
+        <div class="tl-content">
+          <span class="tl-era gold-era">October 2022</span>
+          <h3 class="tl-title">Christen came home with a severance package and no plan.</h3>
+          <p class="tl-body">One day in October, Christen came home from a job she loved — a job she was thriving in — and told Todd she'd been laid off. A restructuring. No warning. A severance package and a suddenly open calendar. Todd had been building toward this moment for months. Christen had been too exhausted to listen. Now they had no choice but to build it together.</p>
+          <div class="tl-pull">
+            <p>"I literally came home that day with a severance package and time on my hands. And he had been telling me about this idea. So I said — well, I guess I'm yours full-time now."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="tl-dot" style="font-size:1rem;">Now</div>
+        <div class="tl-content">
+          <span class="tl-era">November 2022 — Present</span>
+          <h3 class="tl-title">The Valley Clean Team. And then Framework Systems.</h3>
+          <p class="tl-body">They incorporated The Valley Clean Team in November 2022 with less than $5,000, no cleaning industry experience, and a daughter who was just learning to walk. They built the systems as they needed them — the quote generator when quoting was slow, the CRM pipeline when leads were falling through, the review automation when their reputation needed building. Within twelve months: five markets, 100+ Google reviews, and 200%+ revenue growth. Framework Systems exists because the system worked — and because every service business in the Southeast deserves access to the same framework.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERSHIP -->
+<section id="partnership">
+  <div class="container">
+    <div class="partnership-layout">
+      <div class="fade-up">
+        <span class="section-label">The people behind the work</span>
+        <h2 class="section-headline">Different strengths. One framework.</h2>
+        <p class="body-text">Todd and Christen don't run Framework Systems as a founder and a supporter. They run it as a partnership — each bringing a distinct set of skills that the other doesn't have, and neither trying to pretend otherwise.</p>
+        <p class="body-text" style="margin-bottom:40px;">That combination — operational systems thinking plus marketing and communications expertise — is exactly what most local service businesses are missing. And it's exactly what Framework Systems brings.</p>
+        <div class="person-card">
+          <span class="person-role">Operations &amp; Systems Architecture</span>
+          <h3 class="person-name">Todd Frederickson</h3>
+          <div class="person-divider"></div>
+          <p class="person-body">Todd is the systems thinker. His background spans a decade of military service, federal contracting at the Lockheed Martin / NASA level, executive leadership at multiple companies, and hands-on operations across industries. He doesn't just know how automation should work in theory — he's built it in production, measured it, and iterated on it at TVCT. He's the one who walks into your business, identifies where it's breaking, and builds the framework that fixes it.</p>
+          <div class="person-skills">
+            <div class="skill-row"><div class="skill-dot"></div>Framework CRM implementation &amp; CRM architecture</div>
+            <div class="skill-row"><div class="skill-dot"></div>Framework Engine workflow automation (self-hosted)</div>
+            <div class="skill-row"><div class="skill-dot"></div>Operations leadership · $2.6M+ in documented improvements</div>
+            <div class="skill-row"><div class="skill-dot"></div>US Air Force · 10 years · National Guard</div>
+            <div class="skill-row"><div class="skill-dot"></div>Federal contracting · Top Secret clearance history</div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up">
+        <div class="person-card" style="margin-bottom:32px;">
+          <span class="person-role">Marketing &amp; Communications Strategy</span>
+          <h3 class="person-name">Christen Frederickson</h3>
+          <div class="person-divider"></div>
+          <p class="person-body">Christen is the communicator. Fifteen years in corporate marketing and project management — including leading campaigns for a regional financial institution and managing complex multi-stakeholder projects — gave her a precise understanding of how businesses talk to their customers, and how rarely they do it well. She's the voice behind TVCT's brand, the strategy behind its market expansion, and the reason Framework Systems' work lands with the people it's meant to reach.</p>
+          <div class="person-skills">
+            <div class="skill-row"><div class="skill-dot gold"></div>Corporate marketing &amp; brand strategy · 15 years</div>
+            <div class="skill-row"><div class="skill-dot gold"></div>Project management · multi-market campaigns</div>
+            <div class="skill-row"><div class="skill-dot gold"></div>Content strategy &amp; direct response copywriting</div>
+            <div class="skill-row"><div class="skill-dot gold"></div>University of North Alabama · Liberty University</div>
+          </div>
+        </div>
+        <div style="background:var(--light);padding:36px 32px;border-top:3px solid var(--accent);">
+          <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--navy);line-height:1.75;margin-bottom:12px;">"There's a book called Multipliers. The idea is you get more people in the room and multiply the intelligence. That's what we do. I bring the systems. She brings the strategy. Together we see things neither of us sees alone."</p>
+          <span style="font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--muted);letter-spacing:0.08em;">— Todd Frederickson</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARLOTTE -->
+<section id="charlotte">
+  <div class="charlotte-glow"></div>
+  <div class="container">
+    <div class="charlotte-inner fade-up">
+      <span class="section-label">Why it matters</span>
+      <h2 class="section-headline">We're building this for Charlotte too.</h2>
+      <p class="charlotte-body">Our daughter Charlotte was ten months old when Todd had his accident. She was one when we started The Valley Clean Team. She was two when we realized that what we'd built was bigger than a cleaning company — it was a framework that could change how service businesses across the Southeast operate.</p>
+      <p class="charlotte-body">Everything we've chosen to build, and how we've chosen to build it, has been shaped by the question: what kind of work do we want to model for her? Work that's honest. Work that serves people. Work that's worth doing well.</p>
+      <div class="charlotte-quote">
+        <blockquote>"After Charlotte came along, I realized real quickly that you can do a lot of things and you can be very strong — but you only have so much bandwidth and you have to have priorities. Willpower can be infinite. Time is not."</blockquote>
+        <cite>— Christen Frederickson</cite>
+      </div>
+      <p class="charlotte-body">That's also why we believe in the work we do for clients. When a cleaning company owner can stop answering every notification at 9pm and actually be present at the dinner table — when a contractor can see the week's numbers in one email instead of six tabs — that's not just a business outcome. That's time. And time is the thing nobody gets back.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="about-cta">
+  <div class="cta-grid"></div>
+  <div class="cta-glow"></div>
+  <div class="container">
+    <div class="cta-content">
+      <span class="cta-eyebrow">Let's talk</span>
+      <h2 class="cta-headline">If this sounds like the right fit, let's find out.</h2>
+      <p class="cta-sub">One conversation. No pitch deck. We'll ask what's most frustrating about your day, and go from there. If we can help, we'll show you how. If we can't, we'll tell you that too.</p>
+      <a href="index.html#cta" class="btn-primary" style="font-size:1rem;padding:18px 44px;">Get Your Free Operations Map</a>
+      <p class="cta-fine">No commitment required · Serving service businesses across the Southeast</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Framework<span>.</span></a>
+      <div class="footer-meta">
+        <div>Framework Systems · Tuscumbia, Alabama</div>
+        <div>Veteran-Owned · Faith-Driven · frameworksystems.co</div>
+        <div style="margin-top:4px;">© 2025 Framework Systems LLC. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

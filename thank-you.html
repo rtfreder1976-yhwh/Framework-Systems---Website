@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>You're In — Book Your Call · Framework Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#0D1B2A;--navy2:#132236;--accent:#C4522A;--gold:#C9A84C;--cream:#E8E4DC;--white:#FFFFFF;--body:#555555;--muted:#7A7670;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;min-height:100vh;}
+  .container{max-width:1160px;margin:0 auto;padding:0 40px;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(15,30,53,0.98);backdrop-filter:blur(4px);border-bottom:1px solid rgba(255,255,255,0.05);}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);text-decoration:none;}
+  .nav-logo span{color:var(--accent);}
+
+  /* ── HERO STRIP ── */
+  #hero{padding:120px 0 0;position:relative;overflow:hidden;}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.1) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black,transparent);}
+  .hero-glow{position:absolute;width:500px;height:300px;background:radial-gradient(ellipse,rgba(224,92,42,0.1),transparent 70%);top:0;left:50%;transform:translateX(-50%);pointer-events:none;}
+  .hero-inner{position:relative;z-index:2;text-align:center;max-width:640px;margin:0 auto;padding-bottom:56px;}
+
+  .confirm-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);padding:8px 18px;margin-bottom:28px;}
+  .confirm-dot{width:8px;height:8px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.85);}}
+  .confirm-text{font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);}
+
+  .hero-headline{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:900;line-height:1.07;letter-spacing:-0.02em;margin-bottom:16px;}
+  .hero-headline em{font-style:italic;color:var(--gold);}
+  .hero-sub{font-size:1rem;color:rgba(255,255,255,0.55);line-height:1.8;}
+
+  /* ── CALENDAR SECTION ── */
+  #calendar{background:var(--cream);padding:0;}
+  .calendar-wrap{position:relative;}
+
+  /* Embed container */
+  .cal-embed-container{
+    width:100%;
+    min-height:700px;
+    background:var(--cream);
+    position:relative;
+  }
+
+  /* GHL iframe */
+  .cal-embed-container iframe{
+    width:100%;
+    min-height:700px;
+    border:none;
+    display:block;
+  }
+
+  /* Loading state — shown until iframe fires load event */
+  .cal-loading{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    background:var(--cream);
+    z-index:2;
+    pointer-events:none;
+    transition:opacity 0.4s;
+  }
+  .cal-loading.hidden{opacity:0;}
+  .cal-spinner{width:36px;height:36px;border:3px solid rgba(15,30,53,0.12);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .cal-loading p{font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+
+  /* Fallback — shown only if iframe fails */
+  .cal-fallback{
+    display:none;
+    text-align:center;
+    padding:80px 40px;
+    background:var(--cream);
+  }
+  .cal-fallback.visible{display:block;}
+  .cal-fallback p{font-size:1rem;color:var(--body);margin-bottom:28px;line-height:1.7;}
+  .btn-primary{display:inline-block;background:var(--accent);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:600;font-size:1rem;letter-spacing:0.04em;padding:18px 44px;text-decoration:none;transition:background 0.2s,transform 0.15s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+  .btn-primary:hover{background:#A8421A;transform:translateY(-2px);}
+
+  /* ── WHAT'S NEXT STRIP ── */
+  #whats-next{background:var(--navy2);padding:64px 0;}
+  .next-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);}
+  .next-card{background:var(--navy);padding:36px 28px;display:flex;gap:18px;align-items:flex-start;}
+  .next-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:rgba(224,92,42,0.2);line-height:1;flex-shrink:0;}
+  .next-title{font-weight:600;font-size:1.02rem;color:var(--white);margin-bottom:6px;}
+  .next-body{font-size:1.05rem;color:rgba(255,255,255,0.45);line-height:1.7;}
+
+  footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.06);padding:48px 0;}
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;}
+  .footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white);text-decoration:none;}
+  .footer-logo span{color:var(--accent);}
+  .footer-meta{font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.1em;color:rgba(255,255,255,0.25);text-align:right;line-height:1.8;}
+
+  .fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .fade-up.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .next-strip{grid-template-columns:1fr;}
+    .container{padding:0 24px;}
+    nav{padding:16px 24px;}
+    .cal-embed-container,.cal-embed-container iframe{min-height:800px;}
+  }
+.nav-dropdown{position:relative;}.nav-dropdown>a{cursor:pointer;}.nav-dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:180px;background:rgba(13,27,42,0.98);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;margin-top:12px;z-index:200;}.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;}.nav-dropdown-menu a{display:block;padding:10px 20px;color:rgba(255,255,255,0.65);font-size:0.92rem;text-decoration:none;transition:color 0.15s,background 0.15s;}.nav-dropdown-menu a:hover{color:var(--white);background:rgba(255,255,255,0.04);}
+</style>
+
+  <!-- SEO: Meta -->
+  <meta name="description" content="Your discovery call request was received. Choose a time below and we'll come prepared with your answers from the form."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://frameworksystems.co/thank-you"/>
+
+  <!-- SEO: Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Framework Systems"/>
+  <meta property="og:title" content="Book Your Discovery Call — Framework Systems"/>
+  <meta property="og:description" content="Request received. Pick a time that works for you — the call is 30 minutes and we'll be prepared with everything you shared."/>
+  <meta property="og:url" content="https://frameworksystems.co/thank-you"/>
+  <meta property="og:image" content="https://frameworksystems.co/og-image.jpg"/>
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Book Your Discovery Call — Framework Systems"/>
+  <meta name="twitter:description" content="Request received. Pick a time that works for you — the call is 30 minutes and we'll be prepared with everything you shared."/>
+  <meta name="twitter:image" content="https://frameworksystems.co/og-image.jpg"/>
+
+  <!-- SEO: JSON-LD Schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Book Your Discovery Call",
+  "url": "https://frameworksystems.co/thank-you",
+  "description": "Schedule your free discovery call with Framework Systems after submitting a contact request."
+}
+  </script>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Framework<span>.</span></a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner fade-up">
+      <div class="confirm-badge">
+        <span class="confirm-dot"></span>
+        <span class="confirm-text">Request received</span>
+      </div>
+      <h1 class="hero-headline">We got it.<br><em>Pick your time.</em></h1>
+      <p class="hero-sub">Choose a time below that works for you. The call is 30 minutes. We'll come prepared with your answers from the form.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar">
+  <div class="calendar-wrap">
+    <div class="cal-embed-container">
+
+      <!-- Loading indicator -->
+      <div class="cal-loading" id="cal-loading">
+        <div class="cal-spinner"></div>
+        <p>Loading calendar…</p>
+      </div>
+
+      <!-- GHL calendar iframe                                          -->
+      <!-- ANTIGRAVITY: Replace YOUR_GHL_CALENDAR_EMBED_URL with your  -->
+      <!-- GoHighLevel calendar embed URL. Find it in GHL under         -->
+      <!-- Calendars > [Your Calendar] > Embed > iFrame URL.           -->
+      <iframe
+        id="cal-iframe"
+        src="YOUR_GHL_CALENDAR_EMBED_URL"
+        title="Book your discovery call"
+        loading="lazy"
+        allow="camera; microphone"
+      ></iframe>
+
+      <!-- Fallback — shown if iframe fails to load -->
+      <div class="cal-fallback" id="cal-fallback">
+        <p>Having trouble loading the calendar?<br>Click below to open it directly in a new tab.</p>
+        <!-- ANTIGRAVITY: Replace YOUR_GHL_CALENDAR_LINK with your direct GHL booking URL -->
+        <a href="YOUR_GHL_CALENDAR_LINK" target="_blank" class="btn-primary">Open Calendar →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT HAPPENS NEXT -->
+<section id="whats-next">
+  <div class="container">
+    <div class="next-strip fade-up">
+      <div class="next-card">
+        <span class="next-num">01</span>
+        <div>
+          <p class="next-title">We read your answers</p>
+          <p class="next-body">Before the call, we review what you wrote — especially the most annoying part of your day. We come prepared, not cold.</p>
+        </div>
+      </div>
+      <div class="next-card">
+        <span class="next-num">02</span>
+        <div>
+          <p class="next-title">30 minutes on the call</p>
+          <p class="next-body">We map your operation, identify the gaps, and tell you exactly what we'd build — tier, scope, cost, and timeline. No follow-up proposal needed.</p>
+        </div>
+      </div>
+      <div class="next-card">
+        <span class="next-num">03</span>
+        <div>
+          <p class="next-title">You decide</p>
+          <p class="next-body">If it's the right fit, we move forward. If it's not, we'll tell you that too. No pressure. No pitch deck. Just an honest conversation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Framework<span>.</span></a>
+      <div class="footer-meta">
+        <div>Framework Systems · Tuscumbia, Alabama</div>
+        <div>Veteran-Owned · Faith-Driven · frameworksystems.co</div>
+        <div style="margin-top:4px;">© 2025 Framework Systems LLC. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.08});
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // Calendar load handling
+  const iframe  = document.getElementById('cal-iframe');
+  const loading = document.getElementById('cal-loading');
+  const fallback = document.getElementById('cal-fallback');
+
+  // Hide loader once iframe fires load
+  iframe.addEventListener('load', () => {
+    loading.classList.add('hidden');
+  });
+
+  // If iframe hasn't loaded within 8 seconds, show fallback link
+  const failTimer = setTimeout(() => {
+    try {
+      // If src is still a placeholder or cross-origin check fails, show fallback
+      if (!iframe.src || iframe.src.includes('YOUR_GHL')) {
+        loading.classList.add('hidden');
+        iframe.style.display = 'none';
+        fallback.classList.add('visible');
+      }
+    } catch(e) {
+      // Cross-origin error means iframe loaded an external page — it's working
+      loading.classList.add('hidden');
+    }
+  }, 8000);
+
+  iframe.addEventListener('load', () => clearTimeout(failTimer));
+</script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Business Automation for HVAC Companies — Framework Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#0D1B2A;--navy2:#132236;--accent:#C4522A;--gold:#C9A84C;--cream:#E8E4DC;--light:#E2DDD5;--white:#FFFFFF;--text:#2A2A2A;--body:#555555;--muted:#7A7670;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;font-size:18px;}
+  body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+  .container{max-width:1160px;margin:0 auto;padding:0 40px;}
+  .btn-primary{display:inline-block;background:var(--accent);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:0.04em;padding:16px 36px;text-decoration:none;transition:background 0.2s,transform 0.15s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+  .btn-primary:hover{background:#A8421A;transform:translateY(-2px);}
+  .btn-ghost{display:inline-block;color:var(--white);font-family:'DM Sans',sans-serif;font-weight:500;font-size:1rem;padding:14px 28px;border:1px solid rgba(255,255,255,0.3);text-decoration:none;transition:border-color 0.2s,color 0.2s;}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+  .mono{font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(13,27,42,0.98),transparent);backdrop-filter:blur(4px);}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);text-decoration:none;}
+  .nav-logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:36px;align-items:center;}
+  .nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:1rem;font-weight:500;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--white);}
+  #page-hero{padding:180px 0 100px;position:relative;overflow:hidden;}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.1) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,black,transparent);}
+  .hero-glow{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(224,92,42,0.1),transparent 70%);top:0;right:-80px;pointer-events:none;}
+  .hero-inner{position:relative;z-index:2;max-width:720px;}
+  .page-label{font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:12px;margin-bottom:24px;}
+  .page-label::before{content:'';display:inline-block;width:32px;height:1px;background:var(--accent);}
+  .page-headline{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:900;line-height:1.07;letter-spacing:-0.02em;margin-bottom:24px;}
+  .page-headline em{font-style:italic;color:var(--gold);}
+  .page-sub{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:36px;}
+  .hero-stats{display:flex;gap:48px;margin-top:44px;padding-top:36px;border-top:1px solid rgba(255,255,255,0.08);}
+  .hero-stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);display:block;}
+  .hero-stat-label{font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.5;margin-top:4px;}
+  #pain{background:linear-gradient(to bottom,var(--navy),var(--navy2));padding:112px 0;position:relative;}
+  .pain-header{max-width:640px;margin-bottom:64px;}
+  .section-label{font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.18em;text-transform:uppercase;display:block;margin-bottom:16px;}
+  .sl-accent{color:var(--accent);}
+  .sl-gold{color:var(--gold);}
+  .section-hl{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;line-height:1.12;margin-bottom:20px;}
+  .hl-white{color:var(--white);}
+  .hl-navy{color:var(--navy);}
+  .body-muted{font-size:1.05rem;color:rgba(255,255,255,0.5);line-height:1.8;}
+  .pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:rgba(255,255,255,0.04);}
+  .pain-card{background:var(--navy);padding:44px 36px;position:relative;transition:background 0.25s;}
+  .pain-card:hover{background:rgba(255,255,255,0.02);}
+  
+  .pain-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:12px;line-height:1.3;}
+  .pain-body{font-size:0.95rem;color:rgba(255,255,255,0.45);line-height:1.8;}
+  #systems{background:var(--cream);color:var(--text);padding:112px 0;position:relative;}
+  #systems::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));}
+  .systems-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:72px;}
+  .systems-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(0,0,0,0.08);}
+  .sys-card{background:var(--white);padding:40px 28px;position:relative;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;}
+  .sys-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.1);z-index:2;}
+  .sys-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+  .sys-card:hover::after{transform:scaleX(1);}
+  .sys-tag{font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:14px;}
+  .sys-tag-gold{font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:14px;}
+  .sys-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:12px;line-height:1.3;}
+  .sys-body{font-size:0.95rem;color:var(--body);line-height:1.75;margin-bottom:16px;}
+  .sys-link{font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;transition:color 0.2s;}
+  .sys-link:hover{color:#A8421A;}
+  #how{background:var(--navy2);padding:112px 0;position:relative;overflow:hidden;}
+  .how-bg{position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 60px,rgba(201,168,76,0.04) 60px,rgba(201,168,76,0.04) 61px);}
+  .how-header{text-align:center;max-width:600px;margin:0 auto 72px;}
+  .steps-layout{display:flex;flex-direction:column;gap:2px;position:relative;z-index:2;}
+  .step-row{display:grid;grid-template-columns:120px 1fr;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:border-color 0.25s;}
+  .step-row:hover{border-color:rgba(196,82,42,0.4);}
+  .step-num-col{padding:36px;display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(255,255,255,0.06);}
+  .step-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:rgba(196,82,42,0.25);}
+  .step-content{padding:36px 40px;}
+  .step-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--white);margin-bottom:8px;}
+  .step-body{font-size:0.95rem;color:rgba(255,255,255,0.45);line-height:1.8;}
+  #cta{background:var(--cream);padding:100px 0;position:relative;}
+  .cta-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .cta-headline{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;line-height:1.1;color:var(--navy);margin-bottom:20px;}
+  .cta-headline em{font-style:italic;color:var(--accent);}
+  .cta-body{font-size:1.05rem;color:var(--body);line-height:1.8;margin-bottom:32px;}
+  .cta-box{background:var(--navy);padding:48px 40px;position:relative;}
+  .cta-box::before{content:'';position:absolute;top:-1px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));}
+  .cta-box-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:16px;}
+  .cta-box-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+  .cta-box-list li{font-size:0.95rem;color:rgba(255,255,255,0.55);display:flex;align-items:flex-start;gap:10px;line-height:1.6;}
+  .cta-box-list li::before{content:'→';color:var(--accent);flex-shrink:0;}
+  footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.06);padding:48px 0;}
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;}
+  .footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white);text-decoration:none;}
+  .footer-logo span{color:var(--accent);}
+  .footer-meta{font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.1em;color:rgba(255,255,255,0.25);text-align:right;line-height:1.8;}
+  .fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .fade-up.visible{opacity:1;transform:translateY(0);}
+  @media(max-width:900px){
+    .container{padding:0 24px;}nav{padding:16px 24px;}.nav-links{display:none;}
+    .hero-inner{max-width:100%;}.hero-stats{flex-direction:column;gap:24px;}
+    .pain-grid{grid-template-columns:1fr;}.systems-header{grid-template-columns:1fr;}
+    .systems-grid{grid-template-columns:1fr;}.cta-inner{grid-template-columns:1fr;}
+    .steps-layout .step-row{grid-template-columns:80px 1fr;}
+  }
+.nav-dropdown{position:relative;}.nav-dropdown>a{cursor:pointer;}.nav-dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:180px;background:rgba(13,27,42,0.98);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;margin-top:12px;z-index:200;}.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;}.nav-dropdown-menu a{display:block;padding:10px 20px;color:rgba(255,255,255,0.65);font-size:0.92rem;text-decoration:none;transition:color 0.15s,background 0.15s;}.nav-dropdown-menu a:hover{color:var(--white);background:rgba(255,255,255,0.04);}
+</style>
+<meta name="description" content="Business automation and CRM systems built for HVAC companies. Missed call text-back, lead follow-up, review automation, and reporting — installed and managed by Framework Systems."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://frameworksystems.co/hvac"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Framework Systems"/>
+<meta property="og:title" content="Business Automation for HVAC Companies — Framework Systems"/>
+<meta property="og:description" content="Stop losing emergency calls to voicemail. Framework Systems builds the CRM, automation, and reporting systems that help HVAC companies capture every lead and grow."/>
+<meta property="og:url" content="https://frameworksystems.co/hvac"/>
+<meta property="og:image" content="https://frameworksystems.co/og-image.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Business Automation for HVAC Companies — Framework Systems"/>
+<meta name="twitter:description" content="CRM and automation systems built for HVAC companies. Capture every lead, automate follow-up, and grow your reviews on autopilot."/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Service","name":"Business Automation for HVAC Companies","provider":{"@type":"LocalBusiness","name":"Framework Systems","url":"https://frameworksystems.co","address":{"@type":"PostalAddress","addressLocality":"Tuscumbia","addressRegion":"AL","addressCountry":"US"}},"description":"CRM setup, lead follow-up automation, missed call text-back, review automation, and business reporting for HVAC companies.","areaServed":"Southeast United States","url":"https://frameworksystems.co/hvac"}
+</script>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Framework<span>.</span></a>
+  <div class="nav-links">
+    <a href="services.html">Services</a>
+    <div class="nav-dropdown"><a>Industries</a><div class="nav-dropdown-menu"><a href="plumbing.html">Plumbing</a><a href="hvac.html">HVAC</a><a href="cleaning.html">Cleaning</a><a href="roofing.html">Roofing</a><a href="electrical.html">Electrical</a></div></div>
+    <a href="case-study.html">Case Study</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="btn-primary" style="padding:10px 22px;font-size:1.05rem;">Get Your Map</a>
+  </div>
+</nav>
+
+<section id="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner fade-up">
+      <span class="page-label">HVAC Companies</span>
+      <h1 class="page-headline">It's July. 98 degrees.<br><em>Somebody's AC just died.</em></h1>
+      <p class="page-sub">The homeowner grabbed their phone, Googled "AC repair near me," and called the first three companies. You were in an attic. Couldn't answer. No text-back. No acknowledgment. By the time you climbed down, that $900 emergency call belongs to someone else.</p>
+      <p class="page-sub" style="margin-top:-20px;">Now multiply that by two per week during a heat wave. That's $46,000 a year — gone before you even knew the calls came in.</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-primary">Get Your Free Operations Map</a>
+        <a href="#systems" class="btn-ghost">See What We'd Build →</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="hero-stat-num">30%</span>
+          <span class="hero-stat-label">of after-hours HVAC calls go unanswered</span>
+        </div>
+        <div>
+          <span class="hero-stat-num">$900+</span>
+          <span class="hero-stat-label">average emergency service call value</span>
+        </div>
+        <div>
+          <span class="hero-stat-num">$46K+</span>
+          <span class="hero-stat-label">lost yearly from just 2 missed emergencies per week</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pain">
+  <div class="container">
+    <div class="pain-header fade-up">
+      <span class="section-label sl-accent">Sound familiar?</span>
+      <h2 class="section-hl hl-white">You don't have a lead problem.<br>You have a leaking bucket.</h2>
+      <p class="body-muted">Leads are coming in. They're just falling out the bottom. Here are the four holes.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card fade-up">
+        <h3 class="pain-title">The call that came in while you were in an attic.</h3>
+        <p class="pain-body">It's 95 degrees. Somebody's AC quit. They call three companies. You're up in an attic running ductwork — phone's in the truck. Voicemail picks up. They don't leave a message. They never do. The company that picks up books a $900 emergency repair before you even climb down the ladder. You check your phone at lunch. One missed call. No voicemail. So you move on. But that was a $900 job. And it happened twice this week.</p>
+      </div>
+      <div class="pain-card fade-up">
+        <h3 class="pain-title">Heat wave hits. Five calls in one hour. You caught two.</h3>
+        <p class="pain-body">First triple-digit week of the summer. Every AC unit that's been limping along finally gives out. Your phone lights up. Office handles two calls. The other three go to voicemail. Those homeowners — sitting in a 90-degree house with kids — are already dialing your competitor. Heat waves should be your biggest revenue weeks. Without a system, they're your biggest leak. Three missed calls at $450 each is $1,350 gone in sixty minutes.</p>
+      </div>
+      <div class="pain-card fade-up">
+        <h3 class="pain-title">The maintenance agreement that quietly expired.</h3>
+        <p class="pain-body">You installed the new unit. Homeowner was thrilled — first cool night in a week. You set them up on a maintenance plan. A year passes. No reminder goes out. No "it's time for your spring tune-up" text. They forget about the agreement. Or worse — another HVAC company knocks on their door with a $79 tune-up special and signs them up. That's recurring revenue you already earned, walking out the door because nobody followed up.</p>
+      </div>
+      <div class="pain-card fade-up">
+        <h3 class="pain-title">150 installs this year. 14 reviews.</h3>
+        <p class="pain-body">You replaced the unit. Cleaned up the attic. Left the homeowner with cold air and a handshake. They meant to leave a review. They just didn't. Because nobody asked. The HVAC company across town — the one you know cuts corners — has 180 Google reviews. You have 14. Guess who gets the next call when someone's AC dies on the hottest day of the year?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="systems">
+  <div class="container">
+    <div class="systems-header fade-up">
+      <div>
+        <span class="section-label sl-accent">What we install</span>
+        <h2 class="section-hl hl-navy">Six systems. One framework.<br>Built for how HVAC companies actually run.</h2>
+      </div>
+      <div>
+        <p style="font-size:1.05rem;color:var(--body);line-height:1.8;">These are the same systems we run in our own service company. We configure them to your dispatch flow, your seasonal patterns, and how your techs actually work in the field.</p>
+      </div>
+    </div>
+    <div class="systems-grid">
+      <div class="sys-card fade-up">
+        <span class="sys-tag">Automation</span>
+        <h3 class="sys-name">Missed Call Text-Back</h3>
+        <p class="sys-body">Call goes unanswered — middle of an install, up in an attic, doesn't matter. A text fires in under 60 seconds. "Hey, we're on a call — how can we help?" That homeowner was about to dial the next company. Now they're texting you back.</p>
+        <a href="services/missed-call-recovery.html" class="sys-link">Learn more →</a>
+      </div>
+      <div class="sys-card fade-up">
+        <span class="sys-tag">Automation</span>
+        <h3 class="sys-name">Lead Follow-Up Sequence</h3>
+        <p class="sys-body">New lead from Google? Website form? Referral? A 3-touch sequence fires — text, email, second text — before your dispatcher even sees the notification. In HVAC, the first company to respond wins. This makes sure it's you.</p>
+        <a href="services/lead-capture-follow-up.html" class="sys-link">Learn more →</a>
+      </div>
+      <div class="sys-card fade-up">
+        <span class="sys-tag">Automation</span>
+        <h3 class="sys-name">Review Request Automation</h3>
+        <p class="sys-body">Job complete? A text goes out with your Google review link. One tap. No awkward ask on the porch. No hoping they remember. Your review count climbs every single week — on autopilot.</p>
+        <a href="services/review-automation.html" class="sys-link">Learn more →</a>
+      </div>
+      <div class="sys-card fade-up">
+        <span class="sys-tag">Automation</span>
+        <h3 class="sys-name">Booking &amp; No-Show Recovery</h3>
+        <p class="sys-body">Confirmation. Day-before reminder. Day-of text. All automatic. No-show? A recovery sequence rebooks them. Your techs stop showing up to empty houses. Your schedule stays full.</p>
+        <a href="services/booking-no-show-recovery.html" class="sys-link">Learn more →</a>
+      </div>
+      <div class="sys-card fade-up">
+        <span class="sys-tag">Platform</span>
+        <h3 class="sys-name">Framework CRM</h3>
+        <p class="sys-body">One place for everything. Every lead. Every customer. Every service call. Equipment types logged. Service history tracked. Pipeline stages that match how your dispatcher and techs actually work — not some generic sales funnel.</p>
+        <a href="services.html#included" class="sys-link">Learn more →</a>
+      </div>
+      <div class="sys-card fade-up">
+        <span class="sys-tag-gold">Reporting</span>
+        <h3 class="sys-name">Framework Clarity</h3>
+        <p class="sys-body">Monday morning. One dashboard. Missed call recovery rate. Quotes sent vs. closed. Maintenance renewals due. The numbers that tell you what's coming before the next seasonal surge — not just what already happened.</p>
+        <a href="services.html#included" class="sys-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="how-bg"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="how-header fade-up">
+      <span class="section-label sl-gold">How it works</span>
+      <h2 class="section-hl hl-white">30 days from "let's go"<br>to systems running.</h2>
+      <p class="body-muted">No software tutorials. No "here's your login, figure it out." We build the whole thing, configure it for HVAC, and make sure it works before we hand you the keys.</p>
+    </div>
+    <div class="steps-layout">
+      <div class="step-row fade-up">
+        <div class="step-num-col"><span class="step-num">01</span></div>
+        <div class="step-content">
+          <h3 class="step-title">We map your operation. 30 minutes.</h3>
+          <p class="step-body">How do calls come in? How does dispatch work? Where do seasonal surges hit hardest? What falls through the cracks? We ask the questions most agencies skip — because we've run a service company ourselves. This call is free.</p>
+        </div>
+      </div>
+      <div class="step-row fade-up">
+        <div class="step-num-col"><span class="step-num">02</span></div>
+        <div class="step-content">
+          <h3 class="step-title">We tell you exactly what we'd build.</h3>
+          <p class="step-body">Not a vague proposal. A specific list of systems, in order of impact. Blueprint for the basics. Build for end-to-end automation. Architect for multi-crew operators scaling fast. No guessing.</p>
+        </div>
+      </div>
+      <div class="step-row fade-up">
+        <div class="step-num-col"><span class="step-num">03</span></div>
+        <div class="step-content">
+          <h3 class="step-title">We build it. You don't touch a thing.</h3>
+          <p class="step-body">CRM configured for HVAC dispatch. Automations built for emergency calls during heat waves, routine maintenance reminders, and tune-up season follow-ups. Templates written in your voice. Pipeline stages that match how your team actually works. Live in 2–4 weeks.</p>
+        </div>
+      </div>
+      <div class="step-row fade-up">
+        <div class="step-num-col"><span class="step-num">04</span></div>
+        <div class="step-content">
+          <h3 class="step-title">It runs. We watch. You work.</h3>
+          <p class="step-body">Clarity dashboard starts tracking results from day one. We monitor the automations, review performance weekly, and make sure you're dialed in before summer hits. You focus on HVAC. We focus on the framework around it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="fade-up">
+        <h2 class="cta-headline">You're not losing to better HVAC techs.<br>You're losing to <em>faster systems.</em></h2>
+        <p class="cta-body">The last five emergency calls you lost — was it because the other company was better? Or because they picked up the phone when you were in an attic? Had more reviews? Followed up when you didn't?</p>
+        <p class="cta-body" style="margin-top:-16px;">That's not a skill gap. It's a systems gap. And it's the easiest thing to fix.</p>
+        <p style="font-size:0.92rem;color:var(--muted);line-height:1.7;">30 minutes. Free. We'll walk through your operation and hand you a map of exactly what we'd build, in what order, and what it would cost. No pitch deck. No pressure.</p>
+      </div>
+      <div class="cta-box fade-up">
+        <h3 class="cta-box-title">Here's what most HVAC companies walk away with:</h3>
+        <ul class="cta-box-list">
+          <li>Missed call text-back — including after-hours, recovering jobs from night one</li>
+          <li>3-touch lead follow-up — speed to lead automated for every source</li>
+          <li>Review requests after every job — your Google rating starts climbing immediately</li>
+          <li>CRM with pipeline built for HVAC dispatch and summer surge patterns</li>
+          <li>Framework Clarity — one dashboard, every Monday morning</li>
+          <li>We monitor it. We optimize it. You don't think about it.</li>
+        </ul>
+        <a href="contact.html" class="btn-primary" style="width:100%;text-align:center;display:block;">Get Your Free Operations Map →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Framework<span>.</span></a>
+      <div class="footer-meta">
+        <div>Framework Systems · Tuscumbia, Alabama</div>
+        <div>Veteran-Owned · Faith-Driven · frameworksystems.co</div>
+        <div style="margin-top:4px;">© 2025 Framework Systems LLC. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

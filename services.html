@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Services — Framework Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#0D1B2A;--navy2:#132236;--accent:#C4522A;--gold:#C9A84C;--cream:#E8E4DC;--light:#E2DDD5;--white:#FFFFFF;--text:#2A2A2A;--body:#555555;--muted:#7A7670;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+  .container{max-width:1160px;margin:0 auto;padding:0 40px;}
+  .btn-primary{display:inline-block;background:var(--accent);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:0.04em;padding:16px 36px;text-decoration:none;transition:background 0.2s,transform 0.15s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+  .btn-primary:hover{background:#A8421A;transform:translateY(-2px);}
+  .btn-ghost{display:inline-block;color:var(--white);font-family:'DM Sans',sans-serif;font-weight:500;font-size:1rem;padding:14px 28px;border:1px solid rgba(255,255,255,0.3);text-decoration:none;transition:border-color 0.2s,color 0.2s;}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(15,30,53,0.98),transparent);backdrop-filter:blur(4px);}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);text-decoration:none;}
+  .nav-logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:36px;align-items:center;}
+  .nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:1rem;font-weight:500;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--white);}
+
+  /* HERO */
+  #page-hero{padding:180px 0 100px;position:relative;overflow:hidden;}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.1) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,black,transparent);}
+  .hero-glow{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(224,92,42,0.1),transparent 70%);top:0;right:-80px;pointer-events:none;}
+  .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .page-label{font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:20px;}
+  .page-headline{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4rem);font-weight:900;line-height:1.06;letter-spacing:-0.02em;margin-bottom:24px;}
+  .page-headline em{font-style:italic;color:var(--gold);}
+  .page-sub{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,0.65);line-height:1.8;}
+  .os-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:40px 36px;position:relative;}
+  .os-card::before{content:'';position:absolute;top:-1px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));}
+  .os-name{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--white);margin-bottom:8px;}
+  .os-sub{font-size:1rem;color:rgba(255,255,255,0.45);margin-bottom:28px;font-family:'DM Mono',monospace;letter-spacing:0.06em;}
+  .os-components{display:flex;flex-direction:column;gap:12px;}
+  .os-row{display:flex;align-items:center;gap:14px;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);}
+  .os-icon{font-size:1.2rem;flex-shrink:0;}
+  .os-row-name{font-weight:600;font-size:1rem;color:var(--white);display:block;}
+  .os-row-desc{font-size:1.05rem;color:rgba(255,255,255,0.45);}
+
+  /* WHAT'S INCLUDED */
+  #included{background:var(--cream);color:var(--text);padding:112px 0;position:relative;}
+  #included::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));}
+  .section-label{font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:0.18em;text-transform:uppercase;display:block;margin-bottom:16px;}
+  .sl-accent{color:var(--accent);}
+  .sl-gold{color:var(--gold);}
+  .section-hl{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;line-height:1.12;margin-bottom:20px;}
+  .hl-navy{color:var(--navy);}
+  .hl-white{color:var(--white);}
+  .body-text{font-size:1rem;color:var(--body);line-height:1.85;margin-bottom:20px;}
+
+  .components-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(0,0,0,0.08);margin-top:64px;}
+  .comp-card{background:var(--white);padding:44px 32px;position:relative;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;}
+  .comp-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.1);z-index:2;}
+  .comp-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+  .comp-card:hover::after{transform:scaleX(1);}
+  .comp-tag{font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:14px;}
+  .comp-tag-gold{font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:14px;}
+  .comp-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:12px;}
+  .comp-body{font-size:1rem;color:var(--body);line-height:1.75;margin-bottom:20px;}
+  .comp-features{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .comp-features li{font-size:1.05rem;color:#666;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+  .comp-features li::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:1px;}
+
+  /* TIERS */
+  #tiers{background:var(--navy2);padding:120px 0;position:relative;overflow:hidden;}
+  .tiers-bg{position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 60px,rgba(201,168,76,0.06) 60px,rgba(201,168,76,0.06) 61px);}
+  .tiers-header{text-align:center;margin-bottom:80px;}
+  .tiers-header p{font-size:1rem;color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto;}
+
+  .tiers-layout{display:flex;flex-direction:column;gap:2px;}
+  .tier{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);display:grid;grid-template-columns:280px 1fr 280px;align-items:start;transition:border-color 0.25s,background 0.25s;}
+  .tier:hover,.tier.featured{border-color:rgba(224,92,42,0.5);background:rgba(224,92,42,0.04);}
+  .tier-left{padding:44px 36px;border-right:1px solid rgba(255,255,255,0.06);}
+  .tier-badge{display:inline-block;background:var(--accent);color:var(--white);font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;padding:4px 10px;text-transform:uppercase;margin-bottom:12px;}
+  .tier-num{font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px;}
+  .tier-name{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.2;}
+  .tier-tagline{font-size:1.05rem;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:24px;}
+  .tier-best{font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-transform:uppercase;line-height:1.7;}
+
+  .tier-middle{padding:44px 40px;}
+  .tier-desc{font-size:1.02rem;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:28px;}
+  .tier-features{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;}
+  .tier-features li{font-size:1.05rem;color:rgba(255,255,255,0.65);display:flex;align-items:flex-start;gap:8px;padding:5px 0;line-height:1.5;}
+  .tier-features li::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:1px;}
+  .tier-features li.gold-feat::before{color:var(--gold);}
+  .tier-lead-lag{margin-top:24px;padding:16px 20px;background:rgba(255,255,255,0.03);border-left:3px solid var(--gold);}
+  .tier-lead-lag p{font-size:1.05rem;color:rgba(255,255,255,0.5);line-height:1.65;}
+  .tier-lead-lag strong{color:var(--gold);}
+
+  .tier-right{padding:44px 36px;border-left:1px solid rgba(255,255,255,0.06);}
+  .price-label{font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);display:block;margin-bottom:6px;}
+  .price-setup{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--white);line-height:1;margin-bottom:4px;}
+  .price-setup span{font-size:1rem;color:rgba(255,255,255,0.35);font-family:'DM Sans',sans-serif;font-weight:400;}
+  .price-retainer{font-size:1rem;color:rgba(255,255,255,0.45);margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .price-includes{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
+  .price-includes li{font-size:1.05rem;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:8px;}
+  .price-includes li::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0;}
+
+  /* CLARITY SECTION */
+  #clarity{background:var(--cream);color:var(--text);padding:112px 0;}
+  .clarity-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+  .lead-lag-table{background:var(--navy);overflow:hidden;}
+  .llt-header{display:grid;grid-template-columns:1fr auto 1fr;gap:0;background:rgba(255,255,255,0.04);padding:16px 24px;}
+  .llt-col-head{font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .llt-row{display:grid;grid-template-columns:1fr auto 1fr;gap:0;padding:0;border-top:1px solid rgba(255,255,255,0.05);}
+  .llt-lead{padding:18px 24px;background:rgba(224,92,42,0.05);}
+  .llt-arrow{display:flex;align-items:center;justify-content:center;width:40px;color:var(--gold);font-size:1rem;border-left:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);}
+  .llt-lag{padding:18px 24px;background:rgba(201,168,76,0.05);}
+  .llt-label{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;display:block;}
+  .llt-label-a{color:var(--accent);}
+  .llt-label-g{color:var(--gold);}
+  .llt-val{font-size:1.05rem;color:rgba(255,255,255,0.8);line-height:1.4;}
+
+  /* NOT INCLUDED */
+  #not-included{background:var(--navy);padding:80px 0;}
+  .ni-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .ni-copy .section-hl{color:var(--white);}
+  .ni-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:8px;}
+  .ni-list li{font-size:1.02rem;color:rgba(255,255,255,0.6);display:flex;align-items:flex-start;gap:12px;line-height:1.6;}
+  .ni-list li::before{content:'✕';color:rgba(224,92,42,0.5);flex-shrink:0;font-size:1.05rem;margin-top:2px;}
+  .ni-quote{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:40px 36px;border-top:3px solid var(--accent);}
+  .ni-quote blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:rgba(255,255,255,0.85);line-height:1.75;margin-bottom:16px;}
+  .ni-quote cite{font-family:'DM Mono',monospace;font-size:0.74rem;color:var(--gold);letter-spacing:0.08em;}
+
+  /* CTA */
+  #page-cta{background:var(--navy2);padding:120px 0;text-align:center;position:relative;overflow:hidden;}
+  .cta-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.09) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.09) 1px,transparent 1px);background-size:60px 60px;}
+  .cta-glow{position:absolute;width:700px;height:350px;background:radial-gradient(ellipse,rgba(224,92,42,0.1),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+  .cta-content{position:relative;z-index:2;max-width:580px;margin:0 auto;}
+  .cta-eyebrow{font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:20px;}
+  .cta-hl{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:20px;}
+  .cta-sub{font-size:1rem;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:44px;}
+  .cta-fine{margin-top:16px;font-size:0.78rem;color:rgba(255,255,255,0.28);font-family:'DM Mono',monospace;letter-spacing:0.06em;}
+
+  footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.06);padding:48px 0;}
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;}
+  .footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white);text-decoration:none;}
+  .footer-logo span{color:var(--accent);}
+  .footer-meta{font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.1em;color:rgba(255,255,255,0.25);text-align:right;line-height:1.8;}
+
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .fade-up.visible{opacity:1;transform:translateY(0);}
+  .fade-up:nth-child(2){transition-delay:0.1s;}
+  .fade-up:nth-child(3){transition-delay:0.2s;}
+
+  @media(max-width:900px){
+    .hero-inner,.clarity-layout,.ni-inner{grid-template-columns:1fr;}
+    .tier{grid-template-columns:1fr;}
+    .tier-left,.tier-right{border:none;border-top:1px solid rgba(255,255,255,0.06);}
+    .tier-features{grid-template-columns:1fr;}
+    .components-grid{grid-template-columns:1fr;}
+    .container{padding:0 24px;}
+    nav{padding:16px 24px;}
+  }
+.nav-dropdown{position:relative;}.nav-dropdown>a{cursor:pointer;}.nav-dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:180px;background:rgba(13,27,42,0.98);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;margin-top:12px;z-index:200;}.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;}.nav-dropdown-menu a{display:block;padding:10px 20px;color:rgba(255,255,255,0.65);font-size:0.92rem;text-decoration:none;transition:color 0.15s,background 0.15s;}.nav-dropdown-menu a:hover{color:var(--white);background:rgba(255,255,255,0.04);}
+</style>
+
+  <!-- SEO: Meta -->
+  <meta name="description" content="Three tiers built on one platform: CRM, automation, and Clarity. The Blueprint, The Build, and The Architect. Pricing discussed on your discovery call."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://frameworksystems.co/services"/>
+
+  <!-- SEO: Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Framework Systems"/>
+  <meta property="og:title" content="Framework Systems Services — CRM, Automation & Reporting for Service Businesses"/>
+  <meta property="og:description" content="The Blueprint, The Build, or The Architect. All three run on the same platform — CRM, automation, and Clarity. Pick your scope."/>
+  <meta property="og:url" content="https://frameworksystems.co/services"/>
+  <meta property="og:image" content="https://frameworksystems.co/og-image.jpg"/>
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Framework Systems Services — CRM, Automation & Reporting for Service Businesses"/>
+  <meta name="twitter:description" content="The Blueprint, The Build, or The Architect. All three run on the same platform — CRM, automation, and Clarity. Pick your scope."/>
+  <meta name="twitter:image" content="https://frameworksystems.co/og-image.jpg"/>
+
+  <!-- SEO: JSON-LD Schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Your Framework",
+  "provider": {
+    "@type": "ProfessionalService",
+    "name": "Framework Systems"
+  },
+  "description": "Business automation, CRM setup, and reporting systems for local service companies. Three tiers available based on business size and scope.",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Framework Tiers",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "The Blueprint",
+        "description": "Essential automation systems \u2014 missed call text-back, review automation, CRM setup, and Clarity dashboard."
+      },
+      {
+        "@type": "Offer",
+        "name": "The Build",
+        "description": "Full operational backbone \u2014 instant quotes, no-show recovery, invoice follow-up, recurring client conversion, and full lead/lag dashboard."
+      },
+      {
+        "@type": "Offer",
+        "name": "The Architect",
+        "description": "Complete systems architecture \u2014 AI receptionist, client onboarding, lead scoring, custom KPI tracking, and strategic Clarity dashboard."
+      }
+    ]
+  }
+}
+  </script>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Framework<span>.</span></a>
+  <div class="nav-links">
+    <a href="services.html" style="color:var(--white);">Services</a>
+    <div class="nav-dropdown"><a>Industries</a><div class="nav-dropdown-menu"><a href="plumbing.html">Plumbing</a><a href="hvac.html">HVAC</a><a href="cleaning.html">Cleaning</a><a href="roofing.html">Roofing</a><a href="electrical.html">Electrical</a></div></div>
+    <a href="case-study.html">Case Study</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="btn-primary" style="padding:10px 22px;font-size:1.05rem;">Get Your Framework</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="fade-up">
+        <span class="page-label">What we build</span>
+        <h1 class="page-headline">One platform.<br><em>Configured for your operation.</em></h1>
+        <p class="page-sub">Every engagement runs on your framework — CRM, automation, and reporting. The tier determines how deep we go. But the platform is the same whether you're a solo contractor or running five crews. We don't give you less software. We scope the right amount of build.</p>
+      </div>
+      <div class="os-card fade-up">
+        <h2 class="os-name">Your Framework</h2>
+        <p class="os-sub">What runs under every engagement</p>
+        <div class="os-components">
+          <div class="os-row">
+            <span class="os-icon">⚙️</span>
+            <div>
+              <span class="os-row-name">CRM</span>
+              <span class="os-row-desc">Pipeline management, lead routing, client communications</span>
+            </div>
+          </div>
+          <div class="os-row">
+            <span class="os-icon">🔄</span>
+            <div>
+              <span class="os-row-name">Automation Engine</span>
+              <span class="os-row-desc">Automation workflows — the logic layer that runs 24/7</span>
+            </div>
+          </div>
+          <div class="os-row">
+            <span class="os-icon">📊</span>
+            <div>
+              <span class="os-row-name">Clarity</span>
+              <span class="os-row-desc">Weekly dashboard — lead &amp; lag measures in one view</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section id="included">
+  <div class="container">
+    <div style="max-width:640px;" class="fade-up">
+      <span class="section-label sl-accent">The platform</span>
+      <h2 class="section-hl hl-navy">Three tools. One operating system. Built for service businesses.</h2>
+      <p class="body-text">Most service business owners are running three to five disconnected tools that don't talk to each other. Your Framework replaces that fragmentation with one integrated platform — custom-built for your operation and monitored by us on an ongoing basis.</p>
+    </div>
+    <div class="components-grid">
+      <div class="comp-card fade-up">
+        <span class="comp-tag">CRM</span>
+        <h3 class="comp-name">Your pipeline. Your clients. Your communications. Organized.</h3>
+        <p class="comp-body">Your CRM is where every lead, every client, and every job lives. We configure it around your specific operation — stages, routing logic, follow-up triggers, and communication templates all built to match how your business actually works.</p>
+        <ul class="comp-features">
+          <li>Custom pipeline stages for your sales process</li>
+          <li>Lead routing from every source — form, call, ad, referral</li>
+          <li>Branded communication templates in your voice</li>
+          <li>Contact management and client history</li>
+          <li>Appointment and job tracking</li>
+          <li>Integration with your booking software</li>
+        </ul>
+      </div>
+      <div class="comp-card fade-up">
+        <span class="comp-tag">Automation Engine</span>
+        <h3 class="comp-name">The logic layer that runs your business when you're not watching.</h3>
+        <p class="comp-body">the automation layer is the automation backbone — the workflows that fire when a call is missed, a quote is requested, a job is completed, or an invoice goes unpaid. It connects your tools, triggers your sequences, and handles the follow-up you used to do manually.</p>
+        <ul class="comp-features">
+          <li>Missed call text-back — fires within 60 seconds</li>
+          <li>3-touch lead follow-up sequence</li>
+          <li>Instant quote generation and delivery</li>
+          <li>Review request automation post-job</li>
+          <li>Invoice follow-up and payment recovery</li>
+          <li>No-show recovery and rescheduling</li>
+        </ul>
+      </div>
+      <div class="comp-card fade-up">
+        <span class="comp-tag-gold">Clarity</span>
+        <h3 class="comp-name">Know what's coming. Not just what already happened.</h3>
+        <p class="comp-body">Clarity is your weekly owner dashboard — delivered every Monday morning before you start your day. But it's built differently than most reporting tools. Most dashboards only show lag measures — outcomes you can't change anymore. Clarity shows both.</p>
+        <ul class="comp-features">
+          <li>Lead measures — the actions driving your results</li>
+          <li>Lag measures — revenue, reviews, clients won</li>
+          <li>Quotes sent vs. quotes closed this week</li>
+          <li>Missed call recovery rate</li>
+          <li>Review requests sent and Google rating trend</li>
+          <li>Follow-up completion rate per lead source</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section id="tiers">
+  <div class="tiers-bg"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="tiers-header fade-up">
+      <span class="section-label sl-gold" style="display:block;margin-bottom:12px;">Choose your scope</span>
+      <h2 class="section-hl hl-white" style="margin-bottom:16px;">Pick the tier that fits where you are.</h2>
+      <p>Every tier includes the full Framework. The difference is depth — how many workflows we build, how much of your operation we automate, and how closely we partner on strategy.</p>
+    </div>
+
+    <!-- TIER 1 -->
+    <div class="tiers-layout">
+    <div class="tier fade-up">
+      <div class="tier-left">
+        <span class="tier-num">Tier 01</span>
+        <h3 class="tier-name">The Blueprint</h3>
+        <p class="tier-tagline">The essential systems every service business needs running before anything else.</p>
+        <p class="tier-best">Best for:<br>Cleaning companies · Salons · Solo contractors · New service businesses under $200K</p>
+      </div>
+      <div class="tier-middle">
+        <p class="tier-desc">The Blueprint gets the most critical gaps closed fast. Missed leads stop falling through the cracks. Reviews start building automatically. Your CRM is organized and your pipeline is visible. Most clients see measurable change in the first 30 days.</p>
+        <ul class="tier-features">
+          <li>CRM setup and pipeline configuration</li>
+          <li>Missed call text-back automation</li>
+          <li>3-touch lead follow-up sequence</li>
+          <li>Review request automation (post-job)</li>
+          <li>Branded communication templates</li>
+          <li>Clarity — weekly dashboard</li>
+          <li>Lead source tracking</li>
+          <li>30-day post-launch check-in</li>
+        </ul>
+        <div class="tier-lead-lag">
+          <p><strong>Clarity tracks:</strong> Missed call recovery rate (lead) → new clients won (lag) · Review requests sent (lead) → Google rating (lag)</p>
+        </div>
+      </div>
+      <div class="tier-right">
+        <span class="price-label">What's included</span>
+        <ul class="price-includes" style="margin-bottom:28px;">
+          <li>Full framework deployment</li>
+          <li>Clarity dashboard</li>
+          <li>Ongoing monitoring</li>
+          <li>Priority support</li>
+          <li>Updates as your business changes</li>
+        </ul>
+        <p style="font-size:1.05rem;color:rgba(255,255,255,0.35);margin-bottom:20px;line-height:1.6;">Pricing discussed on your discovery call based on your operation's scope.</p>
+        <a href="contact.html" class="btn-ghost" style="width:100%;text-align:center;display:block;">Get Your Framework →</a>
+      </div>
+    </div>
+
+    <!-- TIER 2 -->
+    <div class="tier featured fade-up">
+      <div class="tier-left">
+        <div class="tier-badge">Most Popular</div>
+        <span class="tier-num">Tier 02</span>
+        <h3 class="tier-name">The Build</h3>
+        <p class="tier-tagline">A full operational backbone — from lead in to invoice paid, automated end-to-end.</p>
+        <p class="tier-best">Best for:<br>HVAC · Pest control · Landscaping · Multi-crew cleaning · Service businesses $200K–$600K</p>
+      </div>
+      <div class="tier-middle">
+        <p class="tier-desc">The Build is everything in Foundation plus the workflows that turn a functioning business into a self-managing one. Quotes go out in under two hours. No-shows get recovered automatically. Overdue invoices get followed up without you. And your Clarity dashboard now includes the lead measures that predict your numbers before the week is over.</p>
+        <ul class="tier-features">
+          <li>Everything in The Blueprint</li>
+          <li>Instant quote generator (under 2 hours)</li>
+          <li>Appointment no-show recovery sequence</li>
+          <li>Invoice follow-up and payment recovery</li>
+          <li>Recurring client conversion sequence</li>
+          <li class="gold-feat">Clarity — lead &amp; lag dashboard</li>
+          <li class="gold-feat">Quotes sent within 10 minutes → close rate tracking</li>
+          <li class="gold-feat">Follow-up completion rate → revenue per lead</li>
+        </ul>
+        <div class="tier-lead-lag">
+          <p><strong>Clarity tracks:</strong> Quotes sent within 10 minutes (lead) → close rate (lag) · Follow-ups completed (lead) → revenue per lead (lag) · All Foundation measures included</p>
+        </div>
+      </div>
+      <div class="tier-right">
+        <span class="price-label">What's included</span>
+        <ul class="price-includes" style="margin-bottom:28px;">
+          <li>Full framework deployment</li>
+          <li>Clarity — lead &amp; lag view</li>
+          <li>Ongoing monitoring and updates</li>
+          <li>Priority support</li>
+          <li>Quarterly strategy review</li>
+        </ul>
+        <p style="font-size:1.05rem;color:rgba(255,255,255,0.35);margin-bottom:20px;line-height:1.6;">Pricing discussed on your discovery call based on your operation's scope.</p>
+        <a href="contact.html" class="btn-primary" style="width:100%;text-align:center;display:block;">Get Your Framework →</a>
+      </div>
+    </div>
+
+    <!-- TIER 3 -->
+    <div class="tier fade-up">
+      <div class="tier-left">
+        <span class="tier-num">Tier 03</span>
+        <h3 class="tier-name">The Architect</h3>
+        <p class="tier-tagline">Complete systems architecture for operators scaling toward multiple locations or exit.</p>
+        <p class="tier-best">Best for:<br>Multi-location operators · $500K+ service businesses · Owners building toward scale or exit</p>
+      </div>
+      <div class="tier-middle">
+        <p class="tier-desc">The Architect is a complete operational build — every system, every touchpoint, every data feed automated and connected. AI receptionist and call routing. Client onboarding sequences. Lead scoring. Custom KPI tracking built around your specific growth targets. Clarity at this tier becomes a full strategic intelligence tool, showing not just where you are but where you're headed.</p>
+        <ul class="tier-features">
+          <li>Everything in The Build</li>
+          <li>AI receptionist and call routing</li>
+          <li>Client onboarding automation sequence</li>
+          <li>Lead scoring and priority routing</li>
+          <li>Hiring pipeline automation</li>
+          <li class="gold-feat">Clarity — full strategic dashboard</li>
+          <li class="gold-feat">Custom KPI tracking by market/location</li>
+          <li class="gold-feat">Predictive lead measure scorecard</li>
+        </ul>
+        <div class="tier-lead-lag">
+          <p><strong>Clarity tracks:</strong> All four lead/lag pairs · Custom measures by location or market · Weekly scorecard with forward-looking projections</p>
+        </div>
+      </div>
+      <div class="tier-right">
+        <span class="price-label">What's included</span>
+        <ul class="price-includes" style="margin-bottom:28px;">
+          <li>Full framework deployment</li>
+          <li>Clarity — strategic view</li>
+          <li>Dedicated ongoing support</li>
+          <li>Quarterly strategy reviews</li>
+          <li>Custom reporting build-out</li>
+        </ul>
+        <p style="font-size:1.05rem;color:rgba(255,255,255,0.35);margin-bottom:20px;line-height:1.6;">Pricing discussed on your discovery call based on your operation's scope.</p>
+        <a href="contact.html" class="btn-ghost" style="width:100%;text-align:center;display:block;">Get Your Framework →</a>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLARITY DEEP DIVE -->
+<section id="clarity">
+  <div class="container">
+    <div class="clarity-layout">
+      <div class="fade-up">
+        <span class="section-label sl-gold">Clarity — explained</span>
+        <h2 class="section-hl hl-navy">Most dashboards tell you what already happened. Yours will tell you what's coming.</h2>
+        <p class="body-text">There are two kinds of numbers in every business. <strong>Lag measures</strong> are outcomes — revenue earned, reviews received, clients won. They tell you the final score. You can track them, but by the time you see a problem, the week is already over.</p>
+        <p class="body-text"><strong>Lead measures</strong> are the actions that drive those outcomes — quotes sent within two hours, missed calls recovered the same day, follow-ups completed per lead. These you control right now. When you move a lead measure, the lag measure follows.</p>
+        <p class="body-text">Clarity is built around both. Every Monday morning, you see not just what happened — but whether you're on track to hit your targets before the month ends. That's the difference between managing your business and reacting to it.</p>
+        <div style="margin-top:28px;padding:20px 24px;background:var(--navy);border-left:3px solid var(--gold);">
+          <p style="font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Rooted in</p>
+          <p style="font-size:1rem;color:rgba(255,255,255,0.65);line-height:1.65;">The lead and lag measure philosophy comes from <em>Traction</em> by Gino Wickman and the 4 Disciplines of Execution — the same operating framework we run The Valley Clean Team on today.</p>
+        </div>
+      </div>
+      <div class="fade-up">
+        <span style="font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:20px;">Your weekly scorecard — what it tracks</span>
+        <div class="lead-lag-table">
+          <div class="llt-header">
+            <span class="llt-col-head">Lead measure (you control this)</span>
+            <span></span>
+            <span class="llt-col-head">Lag measure (it drives this)</span>
+          </div>
+          <div class="llt-row">
+            <div class="llt-lead"><span class="llt-label llt-label-a">Lead</span><span class="llt-val">Quotes sent within 2 hours</span></div>
+            <div class="llt-arrow">→</div>
+            <div class="llt-lag"><span class="llt-label llt-label-g">Lag</span><span class="llt-val">Close rate this week</span></div>
+          </div>
+          <div class="llt-row">
+            <div class="llt-lead"><span class="llt-label llt-label-a">Lead</span><span class="llt-val">Missed calls recovered same day</span></div>
+            <div class="llt-arrow">→</div>
+            <div class="llt-lag"><span class="llt-label llt-label-g">Lag</span><span class="llt-val">New clients won</span></div>
+          </div>
+          <div class="llt-row">
+            <div class="llt-lead"><span class="llt-label llt-label-a">Lead</span><span class="llt-val">Review requests sent post-job</span></div>
+            <div class="llt-arrow">→</div>
+            <div class="llt-lag"><span class="llt-label llt-label-g">Lag</span><span class="llt-val">Google rating trend</span></div>
+          </div>
+          <div class="llt-row">
+            <div class="llt-lead"><span class="llt-label llt-label-a">Lead</span><span class="llt-val">Follow-ups completed per lead</span></div>
+            <div class="llt-arrow">→</div>
+            <div class="llt-lag"><span class="llt-label llt-label-g">Lag</span><span class="llt-val">Revenue per lead this month</span></div>
+          </div>
+        </div>
+        <p style="font-size:1.05rem;color:var(--muted);margin-top:12px;font-style:italic;">Available in Tier 2 and Tier 3. Blueprint tier includes Google rating and missed call recovery tracking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DON'T DO -->
+<section id="not-included">
+  <div class="container">
+    <div class="ni-inner">
+      <div class="ni-copy fade-up">
+        <span class="section-label sl-accent">No surprises</span>
+        <h2 class="section-hl" style="color:var(--white);">What's not included — and why we say that upfront.</h2>
+        <p style="font-size:1rem;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:28px;">We believe in telling you exactly what we build and what we don't. If something below is critical to your business, we'll tell you who can help — or whether it's something we can scope separately.</p>
+        <ul class="ni-list">
+          <li>Paid advertising management (Google, Meta, etc.)</li>
+          <li>Website design or development</li>
+          <li>Content creation or social media management</li>
+          <li>Bookkeeping or financial reporting</li>
+          <li>HR or payroll systems</li>
+          <li>Custom software development outside your framework</li>
+        </ul>
+      </div>
+      <div class="ni-quote fade-up">
+        <blockquote>"We don't sell you things you don't need to justify an invoice. If the Blueprint tier is right for where you are, that's what we'll recommend — even if the Build tier is more revenue for us. The framework has to work for your business first."</blockquote>
+        <cite>— Todd Frederickson, Framework Systems</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL AUTOMATION LIBRARY -->
+<section style="background:var(--cream);padding:100px 0;border-top:1px solid rgba(0,0,0,0.06);">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:20px;">
+      <span class="section-label sl-accent">The complete automation library</span>
+      <h2 class="section-hl hl-navy">Every workflow we build. All of them.</h2>
+      <p style="font-size:1rem;color:var(--body);line-height:1.8;max-width:600px;margin:0 auto 16px;">These are the exact automations we deploy for service businesses. Not theoretical. Not coming soon. Running in live operations today — organized by what they do for your business.</p>
+    </div>
+
+    <!-- CATEGORY FILTER TABS -->
+    <div class="fade-up" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:56px;" id="auto-filters">
+      <button onclick="filterAutos('all')" class="auto-filter-btn active" data-cat="all">All Workflows</button>
+      <button onclick="filterAutos('lead-gen')" class="auto-filter-btn" data-cat="lead-gen">Lead Generation</button>
+      <button onclick="filterAutos('ops')" class="auto-filter-btn" data-cat="ops">Operations</button>
+      <button onclick="filterAutos('client')" class="auto-filter-btn" data-cat="client">Client Success</button>
+      <button onclick="filterAutos('revenue')" class="auto-filter-btn" data-cat="revenue">Revenue Recovery</button>
+      <button onclick="filterAutos('reporting')" class="auto-filter-btn" data-cat="reporting">Reporting</button>
+    </div>
+
+    <style>
+      .auto-filter-btn{font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 20px;border:1px solid rgba(0,0,0,0.15);background:transparent;color:var(--body);cursor:pointer;transition:all 0.2s;}
+      .auto-filter-btn:hover,.auto-filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
+      .auto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(0,0,0,0.07);}
+      .auto-card{background:var(--white);padding:28px 26px;position:relative;transition:transform 0.2s,box-shadow 0.2s;cursor:default;}
+      .auto-card:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,0.1);z-index:2;}
+      .auto-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+      .auto-card:hover::after{transform:scaleX(1);}
+      .auto-card.is-link{cursor:pointer;}
+      .auto-card-tag{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:10px;}
+      .auto-card-tag.tag-gold{color:#a07c28;}
+      .auto-card-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);display:block;margin-bottom:8px;line-height:1.3;}
+      .auto-card-desc{font-size:0.88rem;color:var(--body);line-height:1.65;display:block;margin-bottom:14px;}
+      .auto-card-tier{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,0,0,0.28);display:block;}
+      .auto-card-link{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);display:inline-block;margin-top:4px;text-decoration:none;}
+      .auto-cat-header{grid-column:1/-1;background:var(--navy);padding:18px 26px;display:flex;align-items:center;gap:14px;}
+      .auto-cat-label{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--white);}
+      .auto-cat-count{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;}
+      .auto-card.hidden{display:none;}
+      @media(max-width:900px){.auto-grid{grid-template-columns:1fr 1fr;}.auto-cat-header{grid-column:1/-1;}}
+      @media(max-width:600px){.auto-grid{grid-template-columns:1fr;}}
+    </style>
+
+    <div class="auto-grid fade-up" id="auto-grid">
+
+      <!-- ── LEAD GENERATION ── -->
+      <div class="auto-cat-header" data-cat="lead-gen">
+        <span class="auto-cat-label">Lead Generation</span>
+        <span class="auto-cat-count">6 workflows</span>
+      </div>
+
+      <div class="auto-card is-link" data-cat="lead-gen" onclick="location.href='services/missed-call-recovery.html'">
+        <span class="auto-card-tag">Lead Gen</span>
+        <span class="auto-card-name">Missed Call Text-Back</span>
+        <span class="auto-card-desc">Sub-60-second response to every unanswered call. 68% of callers who go to voicemail never call back — this recovers them automatically.</span>
+        <span class="auto-card-tier">Blueprint · Build · Architect</span>
+        <a class="auto-card-link" href="services/missed-call-recovery.html">Deep dive →</a>
+      </div>
+
+      <div class="auto-card is-link" data-cat="lead-gen" onclick="location.href='services/lead-capture-follow-up.html'">
+        <span class="auto-card-tag">Lead Gen</span>
+        <span class="auto-card-name">Lead Follow-Up Sequence</span>
+        <span class="auto-card-desc">3-touch multi-channel sequence that fires the moment a lead comes in — before your competitor even picks up the phone.</span>
+        <span class="auto-card-tier">Blueprint · Build · Architect</span>
+        <a class="auto-card-link" href="services/lead-capture-follow-up.html">Deep dive →</a>
+      </div>
+
+      <div class="auto-card" data-cat="lead-gen">
+        <span class="auto-card-tag">Lead Gen</span>
+        <span class="auto-card-name">Instant Quote Generator</span>
+        <span class="auto-card-desc">Lead submits a form, quote lands in their inbox inside 2 hours — calculated from your rate card, branded, with a booking link attached. "We'll get back to you" is why you're losing jobs.</span>
+        <span class="auto-card-tier">Build · Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="lead-gen">
+        <span class="auto-card-tag">Lead Gen</span>
+        <span class="auto-card-name">Lead Scoring &amp; Priority Routing</span>
+        <span class="auto-card-desc">Every new lead scored 1–100 based on budget signals, urgency keywords, and job size. Hot leads hit your phone instantly. Warm leads enter a nurture sequence. Cold leads get educational content.</span>
+        <span class="auto-card-tier">Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="lead-gen">
+        <span class="auto-card-tag">Lead Gen</span>
+        <span class="auto-card-name">Cancellation Recovery</span>
+        <span class="auto-card-desc">When a customer cancels, a personalized text goes out 10 minutes later with 3 open slots. If no response in 24 hours, a follow-up with a discount offer fires automatically. Recovers 30–40% of lost bookings.</span>
+        <span class="auto-card-tier">Build · Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="lead-gen">
+        <span class="auto-card-tag">Lead Gen</span>
+        <span class="auto-card-name">Cold Outreach Sequencer</span>
+        <span class="auto-card-desc">Add a prospect to a sheet, the system takes it from there — personalized first email, Day 3 follow-up, Day 8 value drop, Day 14 breakup message. Stops the moment they reply.</span>
+        <span class="auto-card-tier">Build · Architect</span>
+      </div>
+
+      <!-- ── OPERATIONS ── -->
+      <div class="auto-cat-header" data-cat="ops">
+        <span class="auto-cat-label">Operations</span>
+        <span class="auto-cat-count">6 workflows</span>
+      </div>
+
+      <div class="auto-card is-link" data-cat="ops" onclick="location.href='services/booking-no-show-recovery.html'">
+        <span class="auto-card-tag">Operations</span>
+        <span class="auto-card-name">Booking &amp; No-Show Recovery</span>
+        <span class="auto-card-desc">Confirmation, 24-hour reminder, day-of reminder. If they no-show, an empathetic rebooking message with 3 open slots fires automatically within 10 minutes.</span>
+        <span class="auto-card-tier">Blueprint · Build · Architect</span>
+        <a class="auto-card-link" href="services/booking-no-show-recovery.html">Deep dive →</a>
+      </div>
+
+      <div class="auto-card" data-cat="ops">
+        <span class="auto-card-tag">Operations</span>
+        <span class="auto-card-name">Client Onboarding Sequence</span>
+        <span class="auto-card-desc">Contract signed → welcome email, document collection, kickoff call scheduled, invoice sent, team notified — all automatic. First impressions determine retention.</span>
+        <span class="auto-card-tier">Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="ops">
+        <span class="auto-card-tag">Operations</span>
+        <span class="auto-card-name">AI Receptionist &amp; Call Routing</span>
+        <span class="auto-card-desc">Answers calls 24/7, handles pricing and hours questions from your knowledge base, books appointments directly into your calendar, and routes urgent calls to your cell. Every call logged.</span>
+        <span class="auto-card-tier">Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="ops">
+        <span class="auto-card-tag">Operations</span>
+        <span class="auto-card-name">Contract Expiration Tracker</span>
+        <span class="auto-card-desc">Scans your contracts folder weekly for agreements expiring in 60 days. Monday morning digest sorted by urgency. Renewal outreach sequence fires automatically at the 30-day mark.</span>
+        <span class="auto-card-tier">Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="ops">
+        <span class="auto-card-tag">Operations</span>
+        <span class="auto-card-name">Recurring Client Conversion</span>
+        <span class="auto-card-desc">One-time job customers automatically entered into a re-engagement sequence — seasonal offers, service anniversaries, and loyalty incentives timed to your business cycle.</span>
+        <span class="auto-card-tier">Build · Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="ops">
+        <span class="auto-card-tag">Operations</span>
+        <span class="auto-card-name">Hiring Pipeline Automation</span>
+        <span class="auto-card-desc">Application received → screener questions sent → interview scheduled → team notified. Keeps your hiring moving without manual coordination at every step.</span>
+        <span class="auto-card-tier">Architect</span>
+      </div>
+
+      <!-- ── CLIENT SUCCESS ── -->
+      <div class="auto-cat-header" data-cat="client">
+        <span class="auto-cat-label">Client Success</span>
+        <span class="auto-cat-count">5 workflows</span>
+      </div>
+
+      <div class="auto-card is-link" data-cat="client" onclick="location.href='services/review-automation.html'">
+        <span class="auto-card-tag">Client Success</span>
+        <span class="auto-card-name">Review Request Automation</span>
+        <span class="auto-card-desc">Job complete → 2-hour delay → direct Google review link via text. 5-star reviews get a referral offer. Under 4 stars alerts you within the hour to respond personally.</span>
+        <span class="auto-card-tier">Blueprint · Build · Architect</span>
+        <a class="auto-card-link" href="services/review-automation.html">Deep dive →</a>
+      </div>
+
+      <div class="auto-card" data-cat="client">
+        <span class="auto-card-tag">Client Success</span>
+        <span class="auto-card-name">Social Proof Collector</span>
+        <span class="auto-card-desc">After a positive interaction, a text asks for a one-sentence testimonial. Reply comes in, gets formatted with name and date, added to your testimonial library, and queued for posting. Builds automatically over time.</span>
+        <span class="auto-card-tier">Build · Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="client">
+        <span class="auto-card-tag">Client Success</span>
+        <span class="auto-card-name">Churn Risk Detector</span>
+        <span class="auto-card-desc">Daily scan for accounts with declining activity or no contact in 7+ days. Churn risk score 1–10. High-risk clients hit your CS team in Slack with a suggested save play before they leave quietly.</span>
+        <span class="auto-card-tier">Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="client">
+        <span class="auto-card-tag">Client Success</span>
+        <span class="auto-card-name">NPS Survey Automator</span>
+        <span class="auto-card-desc">Survey fires at 60 days. Score 9–10 gets a review request. Score 7–8 gets a feedback ask. Score 0–6 triggers your save playbook and immediate team alert. All tracked with trends over time.</span>
+        <span class="auto-card-tier">Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="client">
+        <span class="auto-card-tag">Client Success</span>
+        <span class="auto-card-name">Renewal Reminder Sequence</span>
+        <span class="auto-card-desc">90-day heads up, 60-day benefits reminder, 30-day final notice with early renewal offer. Every touchpoint tracked. Renewal conversations start before the client even thinks about shopping around.</span>
+        <span class="auto-card-tier">Build · Architect</span>
+      </div>
+
+      <!-- ── REVENUE RECOVERY ── -->
+      <div class="auto-cat-header" data-cat="revenue">
+        <span class="auto-cat-label">Revenue Recovery</span>
+        <span class="auto-cat-count">4 workflows</span>
+      </div>
+
+      <div class="auto-card" data-cat="revenue">
+        <span class="auto-card-tag">Revenue Recovery</span>
+        <span class="auto-card-name">Invoice Follow-Up &amp; Payment Recovery</span>
+        <span class="auto-card-desc">3 days overdue → friendly reminder. 7 days → firm follow-up with payment link. 14 days → owner alert for personal outreach. No awkward emails you have to write. Reduces late payments by 60%.</span>
+        <span class="auto-card-tier">Build · Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="revenue">
+        <span class="auto-card-tag">Revenue Recovery</span>
+        <span class="auto-card-name">Proposal Follow-Up Sequence</span>
+        <span class="auto-card-desc">Proposal sent → Day 3 check-in → Day 7 value reminder with case study → Day 14 breakup email with an open door. Closes the gap between quote sent and job booked.</span>
+        <span class="auto-card-tier">Build · Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="revenue">
+        <span class="auto-card-tag">Revenue Recovery</span>
+        <span class="auto-card-name">Repeat Business Engine</span>
+        <span class="auto-card-desc">30 days after completed service, a check-in goes out asking if the issue returned. Yes or a click → new job created and technician notified. No response → seasonal prevention offer at 60 days.</span>
+        <span class="auto-card-tier">Build · Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="revenue">
+        <span class="auto-card-tag">Revenue Recovery</span>
+        <span class="auto-card-name">Win/Loss Analyzer</span>
+        <span class="auto-card-desc">Every closed deal prompts a reason capture. Monthly analysis of close rate, deal size, and sales cycle. Tells you what's actually working and what's quietly costing you jobs. Posted to your team automatically.</span>
+        <span class="auto-card-tier">Architect</span>
+      </div>
+
+      <!-- ── REPORTING ── -->
+      <div class="auto-cat-header" data-cat="reporting">
+        <span class="auto-cat-label">Reporting &amp; Intelligence</span>
+        <span class="auto-cat-count">4 workflows</span>
+      </div>
+
+      <div class="auto-card" data-cat="reporting">
+        <span class="auto-card-tag tag-gold">Reporting</span>
+        <span class="auto-card-name">Weekly Owner Dashboard (Clarity)</span>
+        <span class="auto-card-desc">Every Monday at 7am — revenue from Stripe, reviews from Google, leads from your CRM, appointments from your calendar. One clean email with week-over-week trends and 3 AI-generated action items. Full picture before your day starts.</span>
+        <span class="auto-card-tier">Blueprint · Build · Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="reporting">
+        <span class="auto-card-tag tag-gold">Reporting</span>
+        <span class="auto-card-name">Lead &amp; Lag Scorecard</span>
+        <span class="auto-card-desc">Tracks the numbers that predict your results before the week ends — quotes sent, missed call recovery rate, follow-up completion — alongside the outcomes they drive. Know what's coming, not just what happened.</span>
+        <span class="auto-card-tier">Build · Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="reporting">
+        <span class="auto-card-tag tag-gold">Reporting</span>
+        <span class="auto-card-name">Competitor Price Monitor</span>
+        <span class="auto-card-desc">Checks competitor pricing pages every morning. Compares against your rates in a live sheet. Alerts you in Slack the moment anyone drops below your price — with a screenshot. Never get undercut without knowing.</span>
+        <span class="auto-card-tier">Architect</span>
+      </div>
+
+      <div class="auto-card" data-cat="reporting">
+        <span class="auto-card-tag tag-gold">Reporting</span>
+        <span class="auto-card-name">Anomaly Detection Alert</span>
+        <span class="auto-card-desc">Monitors key metrics hourly — revenue, leads, error rates. If anything deviates more than 2 standard deviations from the 30-day average, you get an immediate Slack alert with the anomaly and likely causes.</span>
+        <span class="auto-card-tier">Architect</span>
+      </div>
+
+    </div><!-- /auto-grid -->
+
+    <div class="fade-up" style="text-align:center;margin-top:56px;padding-top:48px;border-top:1px solid rgba(0,0,0,0.08);">
+      <p style="font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--body);margin-bottom:8px;">25 workflows across 5 categories</p>
+      <p style="font-size:1rem;color:var(--body);line-height:1.8;max-width:540px;margin:0 auto 28px;">Not every business needs all of them. On your discovery call, we identify the highest-impact gaps first and build from there.</p>
+      <a href="contact.html" class="btn-primary" style="font-size:0.95rem;">See which ones fit your operation →</a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function filterAutos(cat) {
+  const cards = document.querySelectorAll('#auto-grid .auto-card, #auto-grid .auto-cat-header');
+  const btns = document.querySelectorAll('.auto-filter-btn');
+  btns.forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+  cards.forEach(el => {
+    if (cat === 'all') {
+      el.classList.remove('hidden');
+    } else {
+      const elCat = el.dataset.cat;
+      el.classList.toggle('hidden', elCat !== cat);
+    }
+  });
+}
+</script>
+
+<!-- INDUSTRIES -->
+<section style="background:var(--navy2);padding:80px 0;">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:48px;">
+      <span class="section-label sl-gold">Built for your trade</span>
+      <h2 class="section-hl hl-white" style="font-size:clamp(1.6rem,3vw,2.2rem);">We configure the framework for how your industry actually works.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:rgba(255,255,255,0.04);" class="fade-up">
+      <a href="plumbing.html" style="background:var(--navy);padding:36px 20px;text-align:center;text-decoration:none;display:block;transition:background 0.25s;" onmouseover="this.style.background='rgba(196,82,42,0.08)'" onmouseout="this.style.background='var(--navy)'">
+        <span style="font-size:1.6rem;display:block;margin-bottom:10px;">🔧</span>
+        <span style="font-weight:600;font-size:0.95rem;color:var(--white);display:block;margin-bottom:4px;">Plumbing</span>
+        <span style="font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;">View →</span>
+      </a>
+      <a href="hvac.html" style="background:var(--navy);padding:36px 20px;text-align:center;text-decoration:none;display:block;transition:background 0.25s;" onmouseover="this.style.background='rgba(196,82,42,0.08)'" onmouseout="this.style.background='var(--navy)'">
+        <span style="font-size:1.6rem;display:block;margin-bottom:10px;">❄️</span>
+        <span style="font-weight:600;font-size:0.95rem;color:var(--white);display:block;margin-bottom:4px;">HVAC</span>
+        <span style="font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;">View →</span>
+      </a>
+      <a href="cleaning.html" style="background:var(--navy);padding:36px 20px;text-align:center;text-decoration:none;display:block;transition:background 0.25s;" onmouseover="this.style.background='rgba(196,82,42,0.08)'" onmouseout="this.style.background='var(--navy)'">
+        <span style="font-size:1.6rem;display:block;margin-bottom:10px;">🧹</span>
+        <span style="font-weight:600;font-size:0.95rem;color:var(--white);display:block;margin-bottom:4px;">Cleaning</span>
+        <span style="font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;">View →</span>
+      </a>
+      <a href="roofing.html" style="background:var(--navy);padding:36px 20px;text-align:center;text-decoration:none;display:block;transition:background 0.25s;" onmouseover="this.style.background='rgba(196,82,42,0.08)'" onmouseout="this.style.background='var(--navy)'">
+        <span style="font-size:1.6rem;display:block;margin-bottom:10px;">🏠</span>
+        <span style="font-weight:600;font-size:0.95rem;color:var(--white);display:block;margin-bottom:4px;">Roofing</span>
+        <span style="font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;">View →</span>
+      </a>
+      <a href="electrical.html" style="background:var(--navy);padding:36px 20px;text-align:center;text-decoration:none;display:block;transition:background 0.25s;" onmouseover="this.style.background='rgba(196,82,42,0.08)'" onmouseout="this.style.background='var(--navy)'">
+        <span style="font-size:1.6rem;display:block;margin-bottom:10px;">⚡</span>
+        <span style="font-weight:600;font-size:0.95rem;color:var(--white);display:block;margin-bottom:4px;">Electrical</span>
+        <span style="font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;">View →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="page-cta">
+  <div class="cta-grid"></div>
+  <div class="cta-glow"></div>
+  <div class="container">
+    <div class="cta-content fade-up">
+      <span class="cta-eyebrow">Not sure which tier fits?</span>
+      <h2 class="cta-hl">That's exactly what the operations map is for.</h2>
+      <p class="cta-sub">30 minutes. We'll walk through your operation, identify the highest-impact gaps, and hand you a map of exactly what we'd build — and which tier addresses it. No commitment. No pressure. If it's not the right fit, we'll tell you.</p>
+      <a href="contact.html" class="btn-primary" style="font-size:1rem;padding:18px 44px;">Get Your Framework</a>
+      <p class="cta-fine">Most clients are live within 2 weeks · Serving service businesses across the Southeast</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Framework<span>.</span></a>
+      <div class="footer-meta">
+        <div>Framework Systems · Tuscumbia, Alabama</div>
+        <div>Veteran-Owned · Faith-Driven · frameworksystems.co</div>
+        <div style="margin-top:4px;">© 2025 Framework Systems LLC. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.08});
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block thank-you page from indexing — no SEO value, conversion page only
+Disallow: /thank-you
+
+Sitemap: https://frameworksystems.co/sitemap.xml

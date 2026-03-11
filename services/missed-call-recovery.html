@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Missed Call Text-Back Automation — Framework Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#0D1B2A;--navy2:#132236;--accent:#C4522A;--gold:#C9A84C;--cream:#E8E4DC;--light:#E2DDD5;--white:#FFFFFF;--text:#2A2A2A;--body:#555555;--muted:#7A7670;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;font-size:18px;}
+  body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+  .container{max-width:1160px;margin:0 auto;padding:0 40px;}
+  .btn-primary{display:inline-block;background:var(--accent);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:0.04em;padding:16px 36px;text-decoration:none;transition:background 0.2s,transform 0.15s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+  .btn-primary:hover{background:#A8421A;transform:translateY(-2px);}
+  .btn-ghost{display:inline-block;color:var(--white);font-family:'DM Sans',sans-serif;font-weight:500;font-size:1rem;padding:14px 28px;border:1px solid rgba(255,255,255,0.3);text-decoration:none;transition:border-color 0.2s,color 0.2s;}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+  .mono{font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(13,27,42,0.98),transparent);backdrop-filter:blur(4px);}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);text-decoration:none;}
+  .nav-logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:36px;align-items:center;}
+  .nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:1rem;font-weight:500;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--white);}
+
+  /* HERO */
+  #page-hero{padding:180px 0 100px;position:relative;overflow:hidden;}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.1) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,black,transparent);}
+  .hero-glow{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(224,92,42,0.1),transparent 70%);top:0;right:-80px;pointer-events:none;}
+  .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .page-label{font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:12px;margin-bottom:24px;}
+  .page-label::before{content:'';display:inline-block;width:32px;height:1px;background:var(--accent);}
+  .page-headline{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.5vw,3.6rem);font-weight:900;line-height:1.07;letter-spacing:-0.02em;margin-bottom:24px;}
+  .page-headline em{font-style:italic;color:var(--gold);}
+  .page-sub{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:36px;}
+
+  /* DEMO PHONE */
+  .phone-demo{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:36px 28px;max-width:340px;margin:0 auto;}
+  .phone-header{display:flex;align-items:center;gap:10px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+  .phone-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+  .phone-carrier{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-transform:uppercase;}
+  .phone-time{font-family:'DM Mono',monospace;font-size:0.7rem;color:rgba(255,255,255,0.3);margin-left:auto;}
+  .msg-row{display:flex;flex-direction:column;gap:12px;margin-bottom:16px;}
+  .msg-missed{background:rgba(196,82,42,0.15);border:1px solid rgba(196,82,42,0.3);padding:14px 18px;border-radius:12px;}
+  .msg-missed-label{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;}
+  .msg-missed-text{font-size:0.88rem;color:rgba(255,255,255,0.6);}
+  .msg-timer{text-align:center;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;color:var(--gold);padding:8px 0;}
+  .msg-reply{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);padding:14px 18px;border-radius:12px;}
+  .msg-reply-label{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+  .msg-reply-text{font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.6;}
+
+  /* PROBLEM / SOLUTION SPLIT */
+  #problem{background:var(--cream);color:var(--text);padding:112px 0;position:relative;}
+  #problem::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));}
+  .section-label{font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.18em;text-transform:uppercase;display:block;margin-bottom:16px;}
+  .sl-accent{color:var(--accent);}
+  .sl-gold{color:var(--gold);}
+  .section-hl{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;line-height:1.12;margin-bottom:20px;}
+  .hl-navy{color:var(--navy);}
+  .hl-white{color:var(--white);}
+  .body-text{font-size:1.05rem;color:var(--body);line-height:1.85;}
+
+  .split-layout{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(0,0,0,0.08);margin-top:64px;}
+  .split-card{background:var(--white);padding:48px 40px;}
+  .split-tag{font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.14em;text-transform:uppercase;display:block;margin-bottom:16px;}
+  .split-tag-red{color:var(--accent);}
+  .split-tag-green{color:#3D7A4A;}
+  .split-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:16px;line-height:1.3;}
+  .split-body{font-size:0.95rem;color:var(--body);line-height:1.8;margin-bottom:20px;}
+  .split-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .split-list li{font-size:0.92rem;color:#666;display:flex;align-items:flex-start;gap:8px;line-height:1.6;}
+  .split-list.red li::before{content:'✕';color:var(--accent);flex-shrink:0;font-weight:600;}
+  .split-list.green li::before{content:'→';color:#3D7A4A;flex-shrink:0;}
+
+  /* HOW IT WORKS (for this automation) */
+  #how-it-works{background:var(--navy2);padding:112px 0;position:relative;overflow:hidden;}
+  .how-bg{position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 60px,rgba(201,168,76,0.04) 60px,rgba(201,168,76,0.04) 61px);}
+  .how-header{text-align:center;max-width:600px;margin:0 auto 72px;}
+  .body-muted{font-size:1.05rem;color:rgba(255,255,255,0.5);line-height:1.8;}
+
+  .flow-layout{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,0.04);}
+  .flow-card{background:var(--navy);padding:36px 24px;position:relative;text-align:center;}
+  .flow-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+  .flow-card:hover::after{transform:scaleX(1);}
+  .flow-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:rgba(196,82,42,0.2);margin-bottom:16px;}
+  .flow-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.3;}
+  .flow-body{font-size:0.88rem;color:rgba(255,255,255,0.4);line-height:1.7;}
+  .flow-time{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-top:14px;display:block;}
+
+  /* INDUSTRIES STRIP */
+  #industries{background:var(--navy);padding:80px 0;border-top:1px solid rgba(255,255,255,0.06);}
+  .ind-header{text-align:center;margin-bottom:48px;}
+  .ind-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:rgba(255,255,255,0.04);}
+  .ind-card{background:var(--navy2);padding:32px 20px;text-align:center;text-decoration:none;transition:background 0.25s;}
+  .ind-card:hover{background:rgba(196,82,42,0.08);}
+  .ind-icon{font-size:1.6rem;margin-bottom:10px;display:block;}
+  .ind-name{font-weight:600;font-size:0.92rem;color:var(--white);display:block;margin-bottom:4px;}
+  .ind-link{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;}
+
+  /* CTA SECTION */
+  #cta{background:var(--cream);padding:100px 0;}
+  .cta-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .cta-headline{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;line-height:1.1;color:var(--navy);margin-bottom:20px;}
+  .cta-headline em{font-style:italic;color:var(--accent);}
+  .cta-body{font-size:1.05rem;color:var(--body);line-height:1.8;margin-bottom:32px;}
+  .cta-box{background:var(--navy);padding:48px 40px;position:relative;}
+  .cta-box::before{content:'';position:absolute;top:-1px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));}
+  .cta-box-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:16px;}
+  .cta-box-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+  .cta-box-list li{font-size:0.95rem;color:rgba(255,255,255,0.55);display:flex;align-items:flex-start;gap:10px;line-height:1.6;}
+  .cta-box-list li::before{content:'→';color:var(--accent);flex-shrink:0;}
+
+  /* FOOTER */
+  footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.06);padding:48px 0;}
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;}
+  .footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white);text-decoration:none;}
+  .footer-logo span{color:var(--accent);}
+  .footer-meta{font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.1em;color:rgba(255,255,255,0.25);text-align:right;line-height:1.8;}
+
+  .fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .fade-up.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .container{padding:0 24px;}
+    nav{padding:16px 24px;}
+    .nav-links{display:none;}
+    .hero-inner{grid-template-columns:1fr;}
+    .phone-demo{max-width:100%;}
+    .split-layout{grid-template-columns:1fr;}
+    .flow-layout{grid-template-columns:repeat(2,1fr);}
+    .ind-grid{grid-template-columns:repeat(2,1fr);}
+    .cta-inner{grid-template-columns:1fr;}
+  }
+.nav-dropdown{position:relative;}.nav-dropdown>a{cursor:pointer;}.nav-dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:180px;background:rgba(13,27,42,0.98);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;margin-top:12px;z-index:200;}.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;}.nav-dropdown-menu a{display:block;padding:10px 20px;color:rgba(255,255,255,0.65);font-size:0.92rem;text-decoration:none;transition:color 0.15s,background 0.15s;}.nav-dropdown-menu a:hover{color:var(--white);background:rgba(255,255,255,0.04);}
+</style>
+
+<!-- SEO: Meta -->
+<meta name="description" content="Never lose a lead to voicemail again. Framework Systems builds missed call text-back automation that responds within 60 seconds — keeping your leads warm while your team is in the field."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://frameworksystems.co/services/missed-call-recovery"/>
+
+<!-- SEO: Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Framework Systems"/>
+<meta property="og:title" content="Missed Call Text-Back Automation — Framework Systems"/>
+<meta property="og:description" content="When you can't answer the phone, your automation should. Missed call text-back fires within 60 seconds, keeping leads in your pipeline instead of your competitor's."/>
+<meta property="og:url" content="https://frameworksystems.co/services/missed-call-recovery"/>
+<meta property="og:image" content="https://frameworksystems.co/og-image.jpg"/>
+
+<!-- SEO: Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Missed Call Text-Back Automation — Framework Systems"/>
+<meta name="twitter:description" content="When you can't answer the phone, your automation should. Responds within 60 seconds."/>
+<meta name="twitter:image" content="https://frameworksystems.co/og-image.jpg"/>
+
+<!-- SEO: JSON-LD Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Missed Call Text-Back Automation",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Framework Systems",
+    "url": "https://frameworksystems.co",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tuscumbia",
+      "addressRegion": "AL",
+      "addressCountry": "US"
+    }
+  },
+  "description": "Automated text-back system that responds to missed calls within 60 seconds, keeping leads warm while service teams are in the field.",
+  "areaServed": "Southeast United States",
+  "url": "https://frameworksystems.co/services/missed-call-recovery"
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Framework<span>.</span></a>
+  <div class="nav-links">
+    <a href="../services.html">Services</a>
+    <div class="nav-dropdown"><a>Industries</a><div class="nav-dropdown-menu"><a href="../plumbing.html">Plumbing</a><a href="../hvac.html">HVAC</a><a href="../cleaning.html">Cleaning</a><a href="../roofing.html">Roofing</a><a href="../electrical.html">Electrical</a></div></div>
+    <a href="../case-study.html">Case Study</a>
+    <a href="../how-it-works.html">How It Works</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html" class="btn-primary" style="padding:10px 22px;font-size:1.05rem;">Get Your Map</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="fade-up">
+        <span class="page-label">Automation</span>
+        <h1 class="page-headline">Your phone rang.<br>Nobody picked up.<br><em>That job is gone.</em></h1>
+        <p class="page-sub">But it didn't have to be. When your team can't answer, a text fires in under 60 seconds — in your voice, not a robot's. "Hey, sorry we missed you. We're on a job. How can we help?" The caller was about to dial the next company. Now they're texting you back.</p>
+        <p class="page-sub" style="margin-top:-20px;">No app to check. No follow-up to remember. The system handles it before your competitor even picks up.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="../contact.html" class="btn-primary">Get Your Free Operations Map</a>
+          <a href="#how-it-works" class="btn-ghost">See How It Works →</a>
+        </div>
+      </div>
+
+      <!-- PHONE DEMO -->
+      <div class="phone-demo fade-up">
+        <div class="phone-header">
+          <span class="phone-dot"></span>
+          <span class="phone-carrier">Your Business</span>
+          <span class="phone-time">2:47 PM</span>
+        </div>
+        <div class="msg-row">
+          <div class="msg-missed">
+            <span class="msg-missed-label">📞 Missed call</span>
+            <span class="msg-missed-text">From (256) 555-0147 · No voicemail left</span>
+          </div>
+          <div class="msg-timer">⚡ 47 seconds later</div>
+          <div class="msg-reply">
+            <span class="msg-reply-label">💬 Auto-reply sent</span>
+            <span class="msg-reply-text">"Hey! Sorry we missed your call — we're on a job right now. How can we help? We'll get back to you within the hour."</span>
+          </div>
+          <div class="msg-timer" style="color:rgba(255,255,255,0.25);">Lead stays in your pipeline →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM / THE FIX -->
+<section id="problem">
+  <div class="container">
+    <div style="max-width:640px;" class="fade-up">
+      <span class="section-label sl-accent">The math</span>
+      <h2 class="section-hl hl-navy">Let's do the math on what voicemail<br>is actually costing you.</h2>
+      <p class="body-text">Say you get 40 calls a week. Miss 27% of them — that's industry average. That's 11 missed calls. 85% of those callers won't try again. At $450 per average job, that's $4,207 a week walking out the door. Over a year? $218,000. Not because you lost a marketing battle. Because nobody texted back.</p>
+    </div>
+    <div class="split-layout fade-up">
+      <div class="split-card">
+        <span class="split-tag split-tag-red">Without the system</span>
+        <h3 class="split-title">Here's what happens right now</h3>
+        <p class="split-body">Phone rings. You can't answer. Voicemail picks up. They hang up. They call the next company. You never know the call happened.</p>
+        <ul class="split-list red">
+          <li>85% of missed callers don't leave a voicemail — they just call someone else</li>
+          <li>At $450/job, every missed call costs you real money</li>
+          <li>No notification. No follow-up. No second chance.</li>
+          <li>Your competitor's only advantage? They answered.</li>
+        </ul>
+      </div>
+      <div class="split-card">
+        <span class="split-tag split-tag-green">With Framework</span>
+        <h3 class="split-title">Here's what happens instead</h3>
+        <p class="split-body">Phone rings. You can't answer. 47 seconds later, a text goes out. In your voice. The caller responds. Lead captured. Follow-up begins. You call them back when you're off the job.</p>
+        <ul class="split-list green">
+          <li>Text fires in under 60 seconds — completely automatic</li>
+          <li>Written in your voice, not a canned template</li>
+          <li>Caller feels acknowledged — not ignored</li>
+          <li>Lead captured in your CRM with full context</li>
+          <li>Follow-up sequence kicks in if they don't respond</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="how-bg"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="how-header fade-up">
+      <span class="section-label sl-gold">How it works</span>
+      <h2 class="section-hl hl-white">Four steps. Zero manual effort.</h2>
+      <p class="body-muted">Once the system is live, it runs every time a call goes unanswered. You don't need to check anything, click anything, or remember anything.</p>
+    </div>
+    <div class="flow-layout fade-up">
+      <div class="flow-card">
+        <span class="flow-num">01</span>
+        <h3 class="flow-title">Call goes unanswered</h3>
+        <p class="flow-body">Your phone rings while your team is on a job, in a crawl space, or on another call. It goes to voicemail.</p>
+        <span class="flow-time">Trigger</span>
+      </div>
+      <div class="flow-card">
+        <span class="flow-num">02</span>
+        <h3 class="flow-title">Text fires automatically</h3>
+        <p class="flow-body">Within 60 seconds, the caller receives a text message — written in your company's voice — acknowledging the missed call.</p>
+        <span class="flow-time">&lt; 60 seconds</span>
+      </div>
+      <div class="flow-card">
+        <span class="flow-num">03</span>
+        <h3 class="flow-title">Lead captured in CRM</h3>
+        <p class="flow-body">The caller's number, the time, and any reply they send back are logged in your Framework CRM as a new lead with full context.</p>
+        <span class="flow-time">Instant</span>
+      </div>
+      <div class="flow-card">
+        <span class="flow-num">04</span>
+        <h3 class="flow-title">Follow-up sequence begins</h3>
+        <p class="flow-body">If no response, a second touchpoint follows at a scheduled interval. Your team gets notified. Nothing falls through the cracks.</p>
+        <span class="flow-time">Automated</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES THIS APPLIES TO -->
+<section id="industries">
+  <div class="container">
+    <div class="ind-header fade-up">
+      <span class="section-label sl-gold">Who this is for</span>
+      <h2 class="section-hl hl-white" style="font-size:clamp(1.6rem,3vw,2.2rem);">Missed call text-back works for any service business<br>where the phone is your lifeline.</h2>
+    </div>
+    <div class="ind-grid fade-up">
+      <a href="../plumbing.html" class="ind-card">
+        <span class="ind-icon">🔧</span>
+        <span class="ind-name">Plumbing</span>
+        <span class="ind-link">View →</span>
+      </a>
+      <a href="../hvac.html" class="ind-card">
+        <span class="ind-icon">❄️</span>
+        <span class="ind-name">HVAC</span>
+        <span class="ind-link">View →</span>
+      </a>
+      <a href="../cleaning.html" class="ind-card">
+        <span class="ind-icon">🧹</span>
+        <span class="ind-name">Cleaning</span>
+        <span class="ind-link">View →</span>
+      </a>
+      <a href="../roofing.html" class="ind-card">
+        <span class="ind-icon">🏠</span>
+        <span class="ind-name">Roofing</span>
+        <span class="ind-link">View →</span>
+      </a>
+      <a href="../electrical.html" class="ind-card">
+        <span class="ind-icon">⚡</span>
+        <span class="ind-name">Electrical</span>
+        <span class="ind-link">View →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="fade-up">
+        <h2 class="cta-headline">The simplest system we install.<br>The <em>biggest payoff.</em></h2>
+        <p class="cta-body">Missed call text-back is usually the first thing we turn on for new clients. Takes 48 hours to set up. Starts recovering jobs the same day it goes live. ROI is obvious within the first week.</p>
+        <p style="font-size:0.92rem;color:var(--muted);line-height:1.7;">Included in every tier — Blueprint, Build, and Architect.</p>
+      </div>
+      <div class="cta-box fade-up">
+        <h3 class="cta-box-title">Included in every engagement:</h3>
+        <ul class="cta-box-list">
+          <li>Custom text message written in your company's voice</li>
+          <li>Sub-60-second response time</li>
+          <li>Lead captured and logged in Framework CRM</li>
+          <li>Follow-up sequence if caller doesn't respond</li>
+          <li>Team notification for hot leads</li>
+          <li>Tracked in Framework Clarity — missed call recovery rate</li>
+        </ul>
+        <a href="../contact.html" class="btn-primary" style="width:100%;text-align:center;display:block;">Get Your Free Operations Map →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="../index.html" class="footer-logo">Framework<span>.</span></a>
+      <div class="footer-meta">
+        <div>Framework Systems · Tuscumbia, Alabama</div>
+        <div>Veteran-Owned · Faith-Driven · frameworksystems.co</div>
+        <div style="margin-top:4px;">© 2025 Framework Systems LLC. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
