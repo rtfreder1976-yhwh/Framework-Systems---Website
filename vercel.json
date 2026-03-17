@@ -39,11 +39,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://api.singingriverai.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://api.singingriverai.com https://*.singingriverai.com; connect-src 'self' https://api.singingriverai.com https:;"
-        },
-        {
-          "key": "X-Antigravity-Test",
-          "value": "12345"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.singingriverai.com https://*.leadconnectorhq.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https: https://api.singingriverai.com https://*.singingriverai.com https://*.leadconnectorhq.com; connect-src 'self' https://api.singingriverai.com https://*.leadconnectorhq.com https:;"
         }
       ]
     },
