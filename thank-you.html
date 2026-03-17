@@ -403,28 +403,9 @@
         <div class="hero-glow"></div>
         <div class="container">
             <div class="hero-inner fade-up">
-                <div class="confirm-badge"> <span class="confirm-dot"></span> <span class="confirm-text">Request
-                        received</span> </div>
-                <h1 class="hero-headline">We got it.<br><em>Pick your time.</em></h1>
-                <p class="hero-sub">Choose a time below that works for you. The call is 30 minutes. We'll come prepared
-                    with your answers from the form.</p>
-            </div>
-        </div>
-    </section> <!-- CALENDAR -->
-    <section id="calendar">
-        <div class="calendar-wrap">
-            <div class="cal-embed-container">
-                <!-- GHL calendar iframe -->
-                <iframe src="https://api.singingriverai.com/widget/booking/2hbIk4Z0B7cVKMrbKKVV" 
-                    style="width: 100%; border:none; overflow: hidden; min-height: 800px;" 
-                    scrolling="no" id="qIxm3vkfjceAd9UvAvYX_1773768941708" 
-                    title="Book your discovery call"></iframe>
-                <script src="https://api.singingriverai.com/js/form_embed.js" type="text/javascript"></script>
-                <!-- Fallback — shown if iframe fails to load -->
-                <div class="cal-fallback" id="cal-fallback">
-                    <p>Having trouble loading the calendar?<br>Click below to open it directly in a new tab.</p>
-                    <a href="https://api.singingriverai.com/widget/booking/2hbIk4Z0B7cVKMrbKKVV" target="_blank" class="btn-primary">Open Calendar →</a>
-                </div>
+                <div class="confirm-badge"> <span class="confirm-dot"></span> <span class="confirm-text">Booking confirmed</span> </div>
+                <h1 class="hero-headline">You're booked.<br><em>We'll see you soon.</em></h1>
+                <p class="hero-sub">Check your email for the meeting link. The call is 30 minutes. We'll be prepared with the operation map we'll build together.</p>
             </div>
         </div>
     </section> <!-- WHAT HAPPENS NEXT -->
@@ -473,81 +454,6 @@
         }, { threshold: 0.08 });
         document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
     </script>
-    <style>
-        #calendar {
-            background: var(--cream);
-            padding: 0
-        }
-
-        .calendar-wrap {
-            position: relative
-        }
-
-        .cal-embed-container {
-            width: 100%;
-            min-height: 700px;
-            background: var(--cream);
-            position: relative
-        }
-
-        .cal-embed-container iframe {
-            width: 100%;
-            min-height: 800px;
-            border: none;
-            display: block !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-
-        .cal-loading {
-            display: none !important;
-        }
-
-        .cal-loading.hidden {
-            opacity: 0
-        }
-
-        .cal-spinner {
-            width: 36px;
-            height: 36px;
-            border: 3px solid rgba(15, 30, 53, 0.12);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg)
-            }
-        }
-
-        .cal-loading p {
-            font-family: 'DM Mono', monospace;
-            font-size: 1rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--muted)
-        }
-
-        .cal-fallback {
-            display: none;
-            text-align: center;
-            padding: 80px 40px;
-            background: var(--cream)
-        }
-
-        .cal-fallback.visible {
-            display: block
-        }
-
-        .cal-fallback p {
-            font-size: 1rem;
-            color: var(--body);
-            margin-bottom: 28px;
-            line-height: 1.7
-        }
-
         #whats-next {
             background: var(--navy2);
             padding: 64px 0
