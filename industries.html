@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preload" href="/fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin/>
+  <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin/>
+  <title>Industry-Specific Business Automation — Framework Systems</title>
+  <style>
+    @font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-mono-400.woff2) format('woff2')}
+    @font-face{font-family:'DM Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-mono-500.woff2) format('woff2')}
+    @font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:swap;src:url(/fonts/dm-sans-latin.woff2) format('woff2')}
+    @font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-sans-latin.woff2) format('woff2')}
+    @font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-sans-latin.woff2) format('woff2')}
+    @font-face{font-family:'DM Sans';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/dm-sans-latin.woff2) format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/playfair-display-latin.woff2) format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:normal;font-weight:900;font-display:swap;src:url(/fonts/playfair-display-latin.woff2) format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:swap;src:url(/fonts/playfair-display-italic-latin.woff2) format('woff2')}
+
+    :root{--navy:#0D1B2A;--navy2:#132236;--accent:#C4522A;--gold:#C9A84C;--cream:#E8E4DC;--light:#E2DDD5;--white:#FFFFFF;--text:#2A2A2A;--body:#555555;--muted:#7A7670}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:18px}
+    body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden}
+    .container{max-width:1160px;margin:0 auto;padding:0 40px}
+    .btn-primary{display:inline-block;background:var(--accent);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:0.04em;padding:16px 36px;text-decoration:none;transition:background 0.2s,transform 0.15s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+    .btn-primary:hover{background:#A8421A;transform:translateY(-2px)}
+    .btn-ghost{display:inline-block;color:var(--white);font-family:'DM Sans',sans-serif;font-weight:500;font-size:1rem;padding:14px 28px;border:1px solid rgba(255,255,255,0.3);text-decoration:none;transition:border-color 0.2s,color 0.2s}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+    .mono{font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(13,27,42,0.98),transparent);backdrop-filter:blur(4px)}
+    .nav-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);text-decoration:none}
+    .nav-logo span{color:var(--accent)}
+    .nav-links{display:flex;gap:36px;align-items:center}
+    .nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:1rem;font-weight:500;transition:color 0.2s}
+    .nav-links a:hover{color:var(--white)}
+    #page-hero{padding:180px 0 100px;position:relative;overflow:hidden}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.1) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,black,transparent)}
+    .hero-glow{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(224,92,42,0.1),transparent 70%);top:0;right:-80px;pointer-events:none}
+    .hero-inner{position:relative;z-index:2;max-width:720px}
+    .page-label{font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:12px;margin-bottom:24px}
+    .page-label::before{content:'';display:inline-block;width:32px;height:1px;background:var(--accent)}
+    .page-headline{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:900;line-height:1.07;letter-spacing:-0.02em;margin-bottom:24px}
+    .page-headline em{font-style:italic;color:var(--gold)}
+    .page-sub{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:36px}
+    .nav-dropdown{position:relative}
+    .nav-dropdown>a{cursor:pointer}
+    .nav-dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:180px;background:rgba(13,27,42,0.98);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;margin-top:12px;z-index:200}
+    .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible}
+    .nav-dropdown-menu a{display:block;padding:10px 20px;color:rgba(255,255,255,0.65);font-size:0.92rem;text-decoration:none;transition:color 0.15s,background 0.15s}
+    .nav-dropdown-menu a:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+    .menu-toggle{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;z-index:1000;padding:10px}
+    .menu-toggle span{display:block;width:25px;height:2px;background:var(--white);transition:0.3s}
+    @media(max-width:900px){
+      .menu-toggle{display:flex}
+      .nav-links{position:fixed;top:0;right:-100%;width:80%;height:100vh;background:var(--navy);flex-direction:column;justify-content:center;gap:40px;transition:0.4s;z-index:900;box-shadow:-10px 0 30px rgba(0,0,0,0.5)}
+      .nav-links.active{right:0}
+      .menu-toggle.active span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+      .menu-toggle.active span:nth-child(2){opacity:0}
+      .menu-toggle.active span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+      .container{padding:0 24px}
+      nav{padding:16px 24px}
+      .nav-links{display:none}
+      .hero-inner{max-width:100%}
+      .industries-grid{grid-template-columns:1fr}
+      .feature-highlight{flex-direction:column}
+      .stats-grid{grid-template-columns:1fr}
+    }
+    .hl-navy{color:var(--navy)}
+  </style>
+  <meta name="description" content="Industry-specific CRM and automation systems. Built for HVAC, Plumbing, Electrical, and Cleaning companies. Software designed for your specific trade — installed and managed by Framework Systems."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://www.frameworksystems.co/industries"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Framework Systems"/>
+  <meta property="og:title" content="Industry-Specific Business Automation — Framework Systems"/>
+  <meta property="og:description" content="Stop losing leads to generic software. Framework Systems builds CRM and automation systems specifically for your trade. HVAC, Plumbing, Electrical, and Cleaning."/>
+  <meta property="og:url" content="https://www.frameworksystems.co/industries"/>
+  <meta property="og:image" content="https://www.frameworksystems.co/og-image.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Industry-Specific Business Automation — Framework Systems"/>
+  <meta name="twitter:description" content="CRM and automation systems built for your specific trade. HVAC, Plumbing, Electrical, and Cleaning companies trust Framework Systems."/>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Service","name":"Industry-Specific Business Automation","provider":{"@type":"LocalBusiness","name":"Framework Systems","url":"https://www.frameworksystems.co","address":{"@type":"PostalAddress","addressLocality":"Tuscumbia","addressRegion":"AL","addressCountry":"US"}},"description":"CRM setup, lead follow-up automation, and business reporting for HVAC, Plumbing, Electrical, and Cleaning companies.","areaServed":"Southeast United States","url":"https://www.frameworksystems.co/industries"}
+  </script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">Framework<span>.</span></a>
+    <button class="menu-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="/services">Services</a>
+      <div class="nav-dropdown">
+        <a>Industries</a>
+        <div class="nav-dropdown-menu">
+          <a href="/plumbing">Plumbing</a>
+          <a href="/hvac">HVAC</a>
+          <a href="/cleaning">Cleaning</a>
+          <a href="/roofing">Roofing</a>
+          <a href="/electrical">Electrical</a>
+        </div>
+      </div>
+      <a href="/case-study">Case Study</a>
+      <a href="/how-it-works">How It Works</a>
+      <a href="/about">About</a>
+      <a href="/contact" class="btn-primary" style="padding:10px 22px;font-size:1.05rem;">Get Your Map</a>
+    </div>
+  </nav>
+
+  <section id="page-hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-inner fade-up">
+        <span class="page-label">Built for Your Trade</span>
+        <h1 class="page-headline">Software built for <em>your specific trade.</em><br>Not generic sales funnels.</h1>
+        <p class="page-sub">Service owners don't want another "all-in-one" platform. They want systems that understand cross-trade reporting for HVAC and plumbing shops. Daisy-chain commissions for larger operations. Dispatch flows that match how techs actually work in the field.</p>
+        <p class="page-sub" style="margin-top:-20px;">We build automation for how your industry actually runs. Pick your trade below.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="/contact" class="btn-primary">Get Your Operations Map</a>
+          <a href="#industries" class="btn-ghost">See Your Industry →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="industries">
+    <div class="container">
+      <div class="industries-header fade-up">
+        <span class="section-label sl-accent">Choose Your Industry</span>
+        <h2 class="section-hl hl-white">Systems built for how you actually work.<br>Not how software companies think you work.</h2>
+        <p class="body-muted">Each trade has its own dispatch patterns, seasonal surges, and customer expectations. We configure everything to match your specific operation.</p>
+      </div>
+
+      <div class="industries-grid">
+        <!-- HVAC Section -->
+        <div class="industry-card fade-up">
+          <div class="industry-icon hvac-icon">
+            <span class="icon-label">HVAC</span>
+          </div>
+          <div class="industry-content">
+            <h3 class="industry-title">HVAC Companies</h3>
+            <p class="industry-desc">Emergency AC failures don't wait for business hours. Neither should your systems.</p>
+            <ul class="industry-features">
+              <li>Heat wave surge management — capture every emergency call</li>
+              <li>Cross-trade reporting for shops running both HVAC and plumbing</li>
+              <li>Maintenance agreement automation and renewal tracking</li>
+              <li>After-hours missed call recovery within 60 seconds</li>
+              <li>Seasonal campaign automation for tune-ups and inspections</li>
+            </ul>
+            <p class="industry-stat">Average HVAC shop loses <strong>$46K/year</strong> from just 2 missed emergency calls per week during summer.</p>
+            <a href="/hvac" class="industry-link">See HVAC Systems →</a>
+          </div>
+        </div>
+
+        <!-- Plumbing Section -->
+        <div class="industry-card fade-up">
+          <div class="industry-icon plumbing-icon">
+            <span class="icon-label">Plumbing</span>
+          </div>
+          <div class="industry-content">
+            <h3 class="industry-title">Plumbing Companies</h3>
+            <p class="industry-desc">Burst pipes at 2 AM. Water heater failures on Sunday. Your phone needs to work 24/7.</p>
+            <ul class="industry-features">
+              <li>Emergency water damage response automation</li>
+              <li>Cross-trade reporting for combined HVAC/plumbing operations</li>
+              <li>Service agreement tracking for water heaters and fixtures</li>
+              <li>Multi-property management for commercial accounts</li>
+              <li>Instant quote follow-up for re-pipe and renovation projects</li>
+            </ul>
+            <p class="industry-stat">Plumbing emergencies have a <strong>15-minute response window</strong> before customers call the next company.</p>
+            <a href="/plumbing" class="industry-link">See Plumbing Systems →</a>
+          </div>
+        </div>
+
+        <!-- Electrical Section -->
+        <div class="industry-card fade-up">
+          <div class="industry-icon electrical-icon">
+            <span class="icon-label">Electrical</span>
+          </div>
+          <div class="industry-content">
+            <h3 class="industry-title">Electrical Contractors</h3>
+            <p class="industry-desc">Power outages, panel upgrades, new construction — each needs different response times.</p>
+            <ul class="industry-features">
+              <li>Permit tracking and inspection scheduling automation</li>
+              <li>Commercial vs. residential pipeline management</li>
+              <li>New construction bid follow-up sequences</li>
+              <li>Emergency service prioritization and dispatch</li>
+              <li>Code compliance documentation and reporting</li>
+            </ul>
+            <p class="industry-stat">Electrical contractors who respond in under <strong>5 minutes</strong> close 3x more emergency calls.</p>
+            <a href="/electrical" class="industry-link">See Electrical Systems →</a>
+          </div>
+        </div>
+
+        <!-- Cleaning Section -->
+        <div class="industry-card fade-up">
+          <div class="industry-icon cleaning-icon">
+            <span class="icon-label">Cleaning</span>
+          </div>
+          <div class="industry-content">
+            <h3 class="industry-title">Cleaning Services</h3>
+            <p class="industry-desc">Recurring revenue lives and dies by retention. Every skipped clean is a cancellation risk.</p>
+            <ul class="industry-features">
+              <li>Recurring schedule management with auto-confirmations</li>
+              <li>Skip and reschedule recovery sequences</li>
+              <li>Team route optimization and assignment automation</li>
+              <li>Quality check follow-ups after every service</li>
+              <li>Instant quote delivery for deep cleans and add-ons</li>
+            </ul>
+            <p class="industry-stat">Cleaning services that confirm 24 hours ahead see <strong>40% fewer</strong> door-not-answered visits.</p>
+            <a href="/cleaning" class="industry-link">See Cleaning Systems →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="larger-shops">
+    <div class="container">
+      <div class="feature-highlight fade-up">
+        <div class="feature-content">
+          <span class="section-label sl-gold">For Larger Operations</span>
+          <h2 class="section-hl hl-navy">Multi-crew shops need more than basic CRM.<br>They need <em>operational intelligence.</em></h2>
+          <p class="feature-body">Running 10+ techs? You're not just tracking leads anymore. You're managing daisy-chain commissions across sales, dispatch, and field teams. Cross-trade reporting when your plumbers handle HVAC calls. Territory management when crews overlap. Performance tracking when some techs close better than others.</p>
+          <p class="feature-body" style="margin-top:-16px;">Generic CRMs treat all businesses the same. We build systems that understand the complexity of larger service operations — because every minute saved in dispatch coordination is money back in your pocket.</p>
+        </div>
+        <div class="feature-list">
+          <h3 class="feature-list-title">What larger shops get:</h3>
+          <ul class="feature-items">
+            <li><strong>Daisy-chain commission tracking</strong> — automated calculations for multi-level sales structures</li>
+            <li><strong>Cross-trade unified reporting</strong> — see HVAC and plumbing performance in one dashboard</li>
+            <li><strong>Territory and crew management</strong> — smart routing based on tech skills and location</li>
+            <li><strong>Multi-location coordination</strong> — centralized dispatch with local execution</li>
+            <li><strong>Tech performance analytics</strong> — close rates, callback rates, revenue per tech</li>
+            <li><strong>Capacity planning tools</strong> — predict and prevent seasonal bottlenecks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-specific">
+    <div class="container">
+      <div class="why-header fade-up">
+        <span class="section-label sl-accent">Why Industry-Specific Matters</span>
+        <h2 class="section-hl hl-white">The difference between software that works<br>and software that <em>actually gets used.</em></h2>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card fade-up">
+          <span class="stat-num">73%</span>
+          <p class="stat-text">of service businesses abandon generic CRMs within 6 months because they don't match their workflow</p>
+        </div>
+        <div class="stat-card fade-up">
+          <span class="stat-num">2.8x</span>
+          <p class="stat-text">higher adoption rate when software uses industry-specific terminology and workflows</p>
+        </div>
+        <div class="stat-card fade-up">
+          <span class="stat-num">$31K</span>
+          <p class="stat-text">average annual revenue recovered through industry-specific automation and lead capture</p>
+        </div>
+        <div class="stat-card fade-up">
+          <span class="stat-num">89%</span>
+          <p class="stat-text">of techs prefer systems built for their specific trade over generic business software</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="fade-up">
+          <h2 class="cta-headline">Stop forcing your business<br>into <em>their software box.</em></h2>
+          <p class="cta-body">You've tried the "all-in-one" platforms. Set up workflows that almost work. Written SOPs to work around what the software can't do. Paid for features you'll never use while missing the one thing you actually need.</p>
+          <p class="cta-body" style="margin-top:-16px;">We build it backwards. Start with how you actually work. Configure the systems to match. No compromises.</p>
+        </div>
+        <div class="cta-box fade-up">
+          <h3 class="cta-box-title">30 minutes. Free operations map. Built for your trade.</h3>
+          <ul class="cta-box-list">
+            <li>We map your current operation and identify the gaps</li>
+            <li>Show you exactly what we'd build for your specific industry</li>
+            <li>Explain the order of implementation for maximum impact</li>
+            <li>Give you transparent pricing with no surprises</li>
+            <li>You get the map whether you hire us or not</li>
+          </ul>
+          <a href="/contact" class="btn-primary" style="width:100%;text-align:center;display:block;">Get Your Industry-Specific Map →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a href="/" class="footer-logo">Framework<span>.</span></a>
+        <div class="footer-meta">
+          <div>Framework Systems · Tuscumbia, Alabama</div>
+          <div>Veteran-Owned · Faith-Driven · frameworksystems.co</div>
+          <div style="margin-top:4px;">© 2025 Framework Systems LLC. All rights reserved.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(e => {
+      e.forEach(el => {
+        if(el.isIntersecting) el.target.classList.add('visible')
+      })
+    }, {threshold: 0.08});
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+  </script>
+
+  <style>
+    #industries{background:var(--navy2);padding:112px 0;position:relative}
+    .industries-header{max-width:720px;margin-bottom:64px}
+    .section-label{font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.18em;text-transform:uppercase;display:block;margin-bottom:16px}
+    .sl-accent{color:var(--accent)}
+    .sl-gold{color:var(--gold)}
+    .section-hl{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;line-height:1.12;margin-bottom:20px}
+    .hl-white{color:var(--white)}
+    .hl-navy{color:var(--navy)}
+    .body-muted{font-size:1.05rem;color:rgba(255,255,255,0.5);line-height:1.8}
+
+    .industries-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;background:rgba(255,255,255,0.06);margin-top:56px}
+    .industry-card{background:rgba(13,27,42,0.5);backdrop-filter:blur(8px);padding:48px 40px;position:relative;transition:background 0.3s,transform 0.2s}
+    .industry-card:hover{background:rgba(13,27,42,0.8);transform:translateY(-4px)}
+    .industry-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:scaleX(0);transition:transform 0.3s}
+    .industry-card:hover::before{transform:scaleX(1)}
+
+    .industry-icon{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;background:rgba(196,82,42,0.1);border:1px solid rgba(196,82,42,0.3);margin-bottom:24px;position:relative}
+    .icon-label{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:500}
+
+    .industry-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:12px}
+    .industry-desc{font-size:1rem;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:20px}
+    .industry-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+    .industry-features li{font-size:0.92rem;color:rgba(255,255,255,0.45);padding-left:20px;position:relative;line-height:1.6}
+    .industry-features li::before{content:'→';position:absolute;left:0;color:var(--gold)}
+    .industry-stat{font-size:0.88rem;color:rgba(201,168,76,0.7);line-height:1.6;padding:12px 16px;background:rgba(201,168,76,0.05);border-left:2px solid var(--gold);margin-bottom:20px}
+    .industry-stat strong{color:var(--gold);font-weight:600}
+    .industry-link{font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;transition:color 0.2s}
+    .industry-link:hover{color:#D6642A}
+
+    #larger-shops{background:var(--cream);padding:100px 0;position:relative}
+    .feature-highlight{display:flex;gap:80px;align-items:center}
+    .feature-content{flex:1}
+    .feature-body{font-size:1.05rem;color:var(--body);line-height:1.8;margin-bottom:24px}
+    .section-hl em{font-style:italic;color:var(--accent)}
+    .feature-list{flex:1;background:var(--white);padding:40px;border-left:3px solid var(--accent)}
+    .feature-list-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:20px}
+    .feature-items{list-style:none;display:flex;flex-direction:column;gap:14px}
+    .feature-items li{font-size:0.95rem;color:var(--body);line-height:1.7;padding-left:24px;position:relative}
+    .feature-items li::before{content:'✓';position:absolute;left:0;color:var(--accent);font-weight:700}
+    .feature-items strong{color:var(--navy);font-weight:600}
+
+    #why-specific{background:linear-gradient(to bottom,var(--navy2),var(--navy));padding:100px 0}
+    .why-header{max-width:680px;margin:0 auto 64px;text-align:center}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,0.06)}
+    .stat-card{background:rgba(13,27,42,0.5);padding:36px 28px;text-align:center;transition:background 0.3s}
+    .stat-card:hover{background:rgba(13,27,42,0.7)}
+    .stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--gold);display:block;margin-bottom:12px}
+    .stat-text{font-size:0.9rem;color:rgba(255,255,255,0.5);line-height:1.6}
+
+    #cta{background:var(--cream);padding:100px 0;position:relative}
+    .cta-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .cta-headline{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;line-height:1.1;color:var(--navy);margin-bottom:20px}
+    .cta-headline em{font-style:italic;color:var(--accent)}
+    .cta-body{font-size:1.05rem;color:var(--body);line-height:1.8;margin-bottom:32px}
+    .cta-box{background:var(--navy);padding:48px 40px;position:relative}
+    .cta-box::before{content:'';position:absolute;top:-1px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold))}
+    .cta-box-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:16px}
+    .cta-box-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+    .cta-box-list li{font-size:0.95rem;color:rgba(255,255,255,0.55);display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+    .cta-box-list li::before{content:'→';color:var(--accent);flex-shrink:0}
+
+    footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.06);padding:48px 0}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between}
+    .footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white);text-decoration:none}
+    .footer-logo span{color:var(--accent)}
+    .footer-meta{font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.1em;color:rgba(255,255,255,0.25);text-align:right;line-height:1.8}
+
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:900px){
+      .industries-grid{grid-template-columns:1fr}
+      .feature-highlight{flex-direction:column}
+      .stats-grid{grid-template-columns:1fr 1fr}
+      .cta-inner{grid-template-columns:1fr}
+    }
+  </style>
+
+  <script src="https://api.singingriverai.com/js/external-tracking.js" data-tracking-id="tk_716727d6577744928400a27b8bd9c0e2"></script>
+</body>
+</html>
