@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, height=630">
+    <title>OG Image Generator (Simple) - Framework Systems</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1200px;
+            height: 630px;
+            margin: 0;
+            padding: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            background: #0D1B2A;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Background grid pattern */
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(201, 168, 76, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 168, 76, 0.08) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.5;
+        }
+
+        /* Gradient glow */
+        .glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(196, 82, 42, 0.25), transparent 60%);
+            top: -200px;
+            right: -200px;
+            pointer-events: none;
+        }
+
+        .glow2 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.15), transparent 60%);
+            bottom: -150px;
+            left: -150px;
+            pointer-events: none;
+        }
+
+        /* Main content container */
+        .content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+        }
+
+        /* Logo */
+        .logo {
+            font-family: Georgia, serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 40px;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: #C4522A;
+        }
+
+        /* Headline */
+        .headline {
+            font-family: Georgia, serif;
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            letter-spacing: -0.03em;
+            max-width: 900px;
+        }
+
+        .headline .accent {
+            color: #C4522A;
+        }
+
+        /* Subheadline */
+        .subheadline {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.4;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        /* Badge/Tag */
+        .badge {
+            position: absolute;
+            top: 80px;
+            right: 80px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge-line {
+            width: 30px;
+            height: 2px;
+            background: #C9A84C;
+        }
+
+        .badge-text {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Bottom bar */
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: rgba(19, 34, 54, 0.8);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+        }
+
+        .bottom-left {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stat-number {
+            font-family: Georgia, serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #C9A84C;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .website {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.05em;
+        }
+
+        /* Decorative elements */
+        .corner-accent {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 40px;
+            left: 40px;
+        }
+
+        .corner-accent::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: #C4522A;
+        }
+
+        .corner-accent::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 60px;
+            background: #C4522A;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background elements -->
+    <div class="bg-grid"></div>
+    <div class="glow"></div>
+    <div class="glow2"></div>
+
+    <!-- Corner accent -->
+    <div class="corner-accent"></div>
+
+    <!-- Badge -->
+    <div class="badge">
+        <div class="badge-line"></div>
+        <span class="badge-text">Veteran-Owned</span>
+    </div>
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="logo">Framework<span>.</span></div>
+        <h1 class="headline">
+            We build the systems<br>
+            <span class="accent">that run your business.</span>
+        </h1>
+        <p class="subheadline">
+            Stop being the bottleneck. CRM, automation, and reporting built for service businesses.
+        </p>
+    </div>
+
+    <!-- Bottom bar with stats -->
+    <div class="bottom-bar">
+        <div class="bottom-left">
+            <div class="stat">
+                <span class="stat-number">200%+</span>
+                <span class="stat-label">Revenue Growth</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">5</span>
+                <span class="stat-label">Markets Active</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Reviews on Autopilot</span>
+            </div>
+        </div>
+        <div class="website">frameworksystems.co</div>
+    </div>
+</body>
+</html>
