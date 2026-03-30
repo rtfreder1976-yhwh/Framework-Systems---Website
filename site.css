@@ -13,7 +13,11 @@
   --border: rgba(13, 27, 42, 0.12);
   --shadow: 0 24px 60px rgba(13, 27, 42, 0.08);
   --radius: 22px;
-  --max: 1160px;
+  --max: 1480px;
+}
+
+:root {
+  --text-max: 760px;
 }
 
 * { box-sizing: border-box; }
@@ -27,7 +31,7 @@ body {
 }
 a { color: inherit; }
 img { max-width: 100%; display: block; }
-.container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+.container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
 
 .skip-link {
   position: absolute;
@@ -150,8 +154,8 @@ img { max-width: 100%; display: block; }
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 42px;
+  grid-template-columns: minmax(0, 1.24fr) minmax(320px, 0.76fr);
+  gap: 56px;
   align-items: start;
 }
 .eyebrow,
@@ -207,7 +211,7 @@ img { max-width: 100%; display: block; }
 .page-lead {
   font-size: 1.08rem;
   color: rgba(255,255,255,0.78);
-  max-width: 720px;
+  max-width: 780px;
   margin: 0 0 28px;
   line-height: 1.8;
 }
@@ -331,13 +335,21 @@ img { max-width: 100%; display: block; }
 .section-dark .pricing-card,
 .section-dark .faq-item,
 .section-dark .process-step,
-.section-dark .metric-card {
+.section-dark .metric-card,
+.section-dark .panel {
   background: rgba(255,255,255,0.04);
   border-color: rgba(255,255,255,0.08);
   box-shadow: none;
 }
+.section-dark .panel h2,
+.section-dark .panel p,
+.section-dark .panel .detail-list li,
+.section-dark .panel .timeline-list li,
+.section-dark .panel .metric-list li {
+  color: rgba(255,255,255,0.84);
+}
 .section-header {
-  max-width: 760px;
+  max-width: 920px;
   margin-bottom: 40px;
 }
 .section-title {
@@ -460,6 +472,10 @@ img { max-width: 100%; display: block; }
   border-radius: 18px;
   background: var(--white);
 }
+#booking,
+#booking-form {
+  scroll-margin-top: 110px;
+}
 .form-fine {
   color: var(--muted);
   font-size: 0.88rem;
@@ -497,6 +513,8 @@ img { max-width: 100%; display: block; }
 }
 .footer-nav a:hover { color: var(--white); }
 @media (max-width: 980px) {
+  .audit-grid-priority .embed-card { order: -1; }
+  .audit-grid-priority .audit-card { order: 2; }
   .hero-inner,
   .grid-2,
   .grid-3,
@@ -531,7 +549,13 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 680px) {
   html { font-size: 17px; }
-  .container { width: min(var(--max), calc(100% - 28px)); }
+  .container { width: min(var(--max), calc(100% - 24px)); }
+  .hero p.lead,
+  .page-lead,
+  .section-intro,
+  .cta-copy {
+    max-width: none;
+  }
   .hero { padding-top: 72px; }
   .section { padding: 72px 0; }
   .cta-band { padding: 28px; }
