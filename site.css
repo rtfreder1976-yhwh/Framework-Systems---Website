@@ -286,6 +286,19 @@ img { max-width: 100%; display: block; }
   color: var(--text);
   border-color: rgba(255,255,255,0.10);
 }
+.booking-hero .hero-inner {
+  grid-template-columns: minmax(0, 1.02fr) minmax(380px, 0.98fr);
+  align-items: stretch;
+}
+.booking-hero .embed-card {
+  min-height: 100%;
+}
+.booking-hero .embed-card h2 {
+  font-size: clamp(1.65rem, 3vw, 2.3rem);
+}
+.booking-hero .quick-points {
+  margin-top: 28px;
+}
 .hero-panel h2,
 .panel h2,
 .section-title,
@@ -471,6 +484,17 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
   border-radius: 18px;
   background: var(--white);
+}
+.embed-frame-hero {
+  min-height: 660px;
+}
+.booking-direct-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cta-row-stack {
+  flex-wrap: wrap;
 }
 #booking,
 #booking-form {
