@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href="/fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <title>Digital Proposal | Framework Systems</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="/site.css" />
+  <style>
+    .proposal-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 3rem;
+    }
+
+    .proposal-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .proposal-header .eyebrow {
+      color: var(--primary);
+    }
+
+    .proposal-header h1 {
+      font-size: 2.5rem;
+      margin-top: 0.5rem;
+      color: var(--text);
+    }
+
+    .proposal-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .proposal-body h3 {
+      color: var(--text);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .proposal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+
+    .proposal-table th, .proposal-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .proposal-table th {
+      color: var(--text-muted);
+      font-weight: normal;
+    }
+
+    .proposal-table td {
+      color: var(--text);
+    }
+
+    .total-row td {
+      font-weight: bold;
+      font-size: 1.25rem;
+      border-bottom: none;
+      padding-top: 1.5rem;
+    }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      padding: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="/" class="brand">Framework<span>.</span></a>
+    </div>
+  </header>
+  
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="proposal-wrapper">
+          
+          <div class="proposal-header">
+            <span class="eyebrow" id="prop-date">Current Date</span>
+            <h1 id="prop-title">Revenue Recovery Proposal</h1>
+            <p>Prepared for <strong id="prop-name">Client Name</strong> at <strong id="prop-company">Company</strong></p>
+          </div>
+
+          <div class="proposal-body">
+            <h3>Scope of Work</h3>
+            <p id="prop-desc">Implementation and optimization of the Framework Systems Revenue Recovery engine designed to eliminate leakages from missed calls, weak intake, and broken booking flow.</p>
+
+            <table class="proposal-table">
+              <thead>
+                <tr>
+                  <th>Deliverables</th>
+                  <th style="text-align: right;">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="prop-package">Framework Systems Build-Out</td>
+                  <td id="prop-price" style="text-align: right;">$0.00</td>
+                </tr>
+                <tr class="total-row">
+                  <td>Total Investment</td>
+                  <td id="prop-total" style="text-align: right; color: var(--primary);">$0.00</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <a href="#" id="accept-link" class="button button-primary checkout-btn">Accept & Pay Securely</a>
+            
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+              By accepting this proposal, you agree to our standard terms of service. You will be redirected to our secure checkout.
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="/" class="brand">Framework<span>.</span></a>
+      <div class="footer-copy">
+        <div>Framework Systems · Tuscumbia, Alabama</div>
+        <div>Veteran-Owned · Faith-Driven · Plumbing Revenue Recovery</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/proposal.js"></script>
+</body>
+</html>

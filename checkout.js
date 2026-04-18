@@ -15,11 +15,32 @@ document
 // Fetches a payment intent and captures the client secret
 async function initialize() {
   try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const customPackage = urlParams.get('package');
+    const customPrice = parseFloat(urlParams.get('price'));
+    
+    // Default to the standard audit if nothing is provided
+    const priceDollars = !isNaN(customPrice) ? customPrice : 500.00;
+    const amountInCents = Math.round(priceDollars * 100);
+    const packageName = customPackage || "Revenue Recovery Audit";
+
+    // Format for display
+    const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+    const formattedPrice = formatter.format(priceDollars);
+
+    // Update DOM
+    const pkgElement = document.getElementById('checkout-package');
+    const priceElement = document.getElementById('checkout-price');
+    const totalElement = document.getElementById('checkout-total');
+    
+    if (pkgElement) pkgElement.textContent = packageName;
+    if (priceElement) priceElement.textContent = formattedPrice;
+    if (totalElement) totalElement.textContent = formattedPrice;
+
     const response = await fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // $500.00 = 50000 in cents
-      body: JSON.stringify({ amount: 50000 }),
+      body: JSON.stringify({ amount: amountInCents }),
     });
 
     if (!response.ok) {
