@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href="/fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <title>Checkout | Framework Systems</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="/site.css" />
+  <style>
+    /* Custom checkout styles to match native look */
+    .checkout-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    
+    @media (max-width: 768px) {
+      .checkout-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .checkout-form-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 8px;
+    }
+
+    .order-summary {
+      position: sticky;
+      top: 6rem;
+      background: var(--surface-dark, #111);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    
+    .order-summary h3 {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      color: var(--text-muted);
+    }
+    
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+
+    /* Stripe elements placeholder styles */
+    #payment-element {
+      margin-bottom: 1.5rem;
+      min-height: 250px;
+    }
+    
+    #payment-message {
+      color: rgb(255, 99, 99);
+      font-size: 16px;
+      line-height: 20px;
+      padding-top: 12px;
+      text-align: center;
+    }
+
+    #submit-btn {
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+
+    .spinner,
+    .spinner:before,
+    .spinner:after {
+      border-radius: 50%;
+    }
+    .spinner {
+      color: #ffffff;
+      font-size: 22px;
+      text-indent: -99999px;
+      margin: 0px auto;
+      position: relative;
+      width: 20px;
+      height: 20px;
+      box-shadow: inset 0 0 0 2px;
+      -webkit-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      transform: translateZ(0);
+      display: none;
+    }
+    .spinner:before,
+    .spinner:after {
+      position: absolute;
+      content: "";
+    }
+    .spinner:before {
+      width: 10.4px;
+      height: 20.4px;
+      background: var(--primary);
+      border-radius: 20.4px 0 0 20.4px;
+      top: -0.2px;
+      left: -0.2px;
+      -webkit-transform-origin: 10.4px 10.2px;
+      transform-origin: 10.4px 10.2px;
+      -webkit-animation: loading 2s infinite ease 1.5s;
+      animation: loading 2s infinite ease 1.5s;
+    }
+    .spinner:after {
+      width: 10.4px;
+      height: 20.4px;
+      background: var(--primary);
+      border-radius: 0 20.4px 20.4px 0;
+      top: -0.2px;
+      left: 10.2px;
+      -webkit-transform-origin: 0px 10.2px;
+      transform-origin: 0px 10.2px;
+      -webkit-animation: loading 2s infinite ease;
+      animation: loading 2s infinite ease;
+    }
+    @-webkit-keyframes loading {
+      0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+    }
+    @keyframes loading {
+      0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- IMPORTANT: Load Stripe.js directly from Stripe -->
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="/" class="brand">Framework<span>.</span></a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" data-nav-toggle>
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" data-nav-menu>
+        <a href="/plumbing">Plumbing</a>
+        <a href="/services">Services</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/about">About</a>
+        <a href="https://api.singingriverai.com/widget/booking/2hbIk4Z0B7cVKMrbKKVV" class="button button-primary">Book Revenue Recovery Audit</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="section-header" style="text-align: left; max-width: 100%;">
+          <span class="section-label">Secure Checkout</span>
+          <h1 class="section-title" style="margin-bottom: 0.5rem;">Complete your order</h1>
+          <p class="section-intro">Buy Now, Pay Later options like Klarna/Afterpay/Affirm are automatically configured below.</p>
+        </div>
+
+        <div class="checkout-wrapper">
+          <!-- Checkout Form -->
+          <div class="checkout-form-container">
+            <form id="payment-form">
+              <div id="payment-element">
+                <!-- Stripe Elements will generate the payment options here -->
+              </div>
+              <button id="submit-btn" class="button button-primary">
+                <div class="spinner" id="spinner"></div>
+                <span id="button-text">Pay now</span>
+              </button>
+              <div id="payment-message" class="hidden"></div>
+            </form>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div class="summary-item">
+              <span>Revenue Recovery Audit</span>
+              <span>$500.00</span>
+            </div>
+            <div class="summary-item">
+              <span>System Setup &amp; Review</span>
+              <span>Included</span>
+            </div>
+            <div class="summary-total">
+              <span>Total</span>
+              <span>$500.00</span>
+            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+              By confirming your payment, you agree to our Terms of Service. Processing is securely handled by Stripe.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="/" class="brand">Framework<span>.</span></a>
+      <div class="footer-copy">
+        <div>Framework Systems · Tuscumbia, Alabama</div>
+        <div>Veteran-Owned · Faith-Driven · Plumbing Revenue Recovery</div>
+        <div>© 2026 Framework Systems LLC. All rights reserved.</div>
+      </div>
+      <div class="footer-nav">
+        <a href="/plumbing">Plumbing</a>
+        <a href="/services">Services</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="https://api.singingriverai.com/widget/booking/2hbIk4Z0B7cVKMrbKKVV">Book Revenue Recovery Audit</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/site.js"></script>
+  <script src="/checkout.js"></script>
+</body>
+</html>
