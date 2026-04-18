@@ -1,3 +1,4 @@
+const { kv } = require('@vercel/kv');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 module.exports = async (req, res) => {
@@ -15,12 +16,22 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { amount = 50000, currency = 'usd' } = req.body || {};
+    const { proposalId, amount, currency = 'usd' } = req.body || {};
+    
+    let verifiedAmount = amount || 50000;
+
+    // Secure Pricing: If checkout is tied to a proposal, pull price from DB so client can't tamper it
+    if (proposalId) {
+      const proposalData = await kv.get(`proposal:${proposalId}`);
+      if (proposalData && proposalData.price) {
+        verifiedAmount = Math.round(proposalData.price * 100);
+      }
+    }
 
     // Create a PaymentIntent with the specific amount and currency.
     // 'automatic_payment_methods' enables Klarna, Afterpay, Affirm, etc., based on Dashboard settings and eligibility.
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount,
+      amount: verifiedAmount,
       currency: currency,
       automatic_payment_methods: {
         enabled: true,

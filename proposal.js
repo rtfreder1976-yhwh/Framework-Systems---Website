@@ -1,49 +1,61 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
-  
-  // Extract parameters or use defaults
-  const clientName = urlParams.get('name') || 'Valued Client';
-  const companyName = urlParams.get('company') || '';
-  const packageTitle = urlParams.get('package') || 'Framework Systems Build-Out';
-  const description = urlParams.get('desc');
-  // price is assumed to be in dollars (e.g., 500 for $500.00). If not provided, fallback to 500
-  const priceDollars = parseFloat(urlParams.get('price')) || 500.00;
+  const proposalId = urlParams.get('id');
 
-  // Format currency
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
-  const formattedPrice = formatter.format(priceDollars);
-
-  // Set today's date
-  const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('prop-date').textContent = new Date().toLocaleDateString('en-US', dateOptions);
-
-  // Populate DOM elements
-  document.getElementById('prop-name').textContent = clientName;
-  if (companyName) {
-    document.getElementById('prop-company').textContent = companyName;
-  } else {
-    // hide the "at Company" part if no company provided
-    document.getElementById('prop-company').parentElement.innerHTML = `Prepared for <strong>${clientName}</strong>`;
+  if (!proposalId) {
+    showError("Invalid Proposal Link. No ID provided.");
+    return;
   }
 
-  document.getElementById('prop-package').textContent = packageTitle;
-  document.getElementById('prop-price').textContent = formattedPrice;
-  document.getElementById('prop-total').textContent = formattedPrice;
+  try {
+    const response = await fetch(`/api/get-proposal?id=${proposalId}`);
+    
+    if (!response.ok) {
+      throw new Error('Proposal not found or has expired.');
+    }
 
-  if (description) {
-    document.getElementById('prop-desc').textContent = description;
+    const data = await response.json();
+
+    // Format currency
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+    const formattedPrice = formatter.format(data.price);
+
+    // Set today's date
+    const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('prop-date').textContent = new Date(data.createdAt).toLocaleDateString('en-US', dateOptions);
+
+    // Populate DOM elements
+    document.getElementById('prop-name').textContent = data.name;
+    if (data.company) {
+      document.getElementById('prop-company').textContent = data.company;
+    } else {
+      document.getElementById('prop-company').parentElement.innerHTML = `Prepared for <strong>${data.name}</strong>`;
+    }
+
+    document.getElementById('prop-package').textContent = data.package;
+    document.getElementById('prop-price').textContent = formattedPrice;
+    document.getElementById('prop-total').textContent = formattedPrice;
+
+    if (data.desc) {
+      document.getElementById('prop-desc').textContent = data.desc;
+    }
+
+    // Set up the Accept link to pass ONLY the proposal ID to the checkout page
+    const acceptLink = document.getElementById('accept-link');
+    const checkoutParams = new URLSearchParams();
+    checkoutParams.set('proposalId', data.id);
+    acceptLink.href = `/checkout?${checkoutParams.toString()}`;
+
+  } catch (error) {
+    showError(error.message);
   }
-
-  // Set up the Accept link to pass price and package to checkout page
-  const acceptLink = document.getElementById('accept-link');
-  
-  // Build checkout URL
-  const checkoutParams = new URLSearchParams();
-  checkoutParams.set('price', priceDollars);
-  checkoutParams.set('package', packageTitle);
-  
-  acceptLink.href = `/checkout?${checkoutParams.toString()}`;
 });
+
+function showError(msg) {
+  document.getElementById('prop-name').textContent = 'Error loading proposal';
+  document.getElementById('prop-desc').textContent = msg;
+  document.getElementById('accept-link').style.display = 'none';
+}

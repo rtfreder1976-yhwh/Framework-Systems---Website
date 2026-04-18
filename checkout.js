@@ -16,13 +16,28 @@ document
 async function initialize() {
   try {
     const urlParams = new URLSearchParams(window.location.search);
+    const proposalId = urlParams.get('proposalId');
     const customPackage = urlParams.get('package');
     const customPrice = parseFloat(urlParams.get('price'));
     
-    // Default to the standard audit if nothing is provided
-    const priceDollars = !isNaN(customPrice) ? customPrice : 500.00;
+    let priceDollars = 500.00;
+    let packageName = "Revenue Recovery Audit";
+    
+    // If we have a secure proposal ID, load it from the database
+    if (proposalId) {
+      const propResponse = await fetch(`/api/get-proposal?id=${proposalId}`);
+      if (propResponse.ok) {
+        const data = await propResponse.json();
+        priceDollars = data.price;
+        packageName = data.package;
+      }
+    } else if (!isNaN(customPrice)) {
+      // Fallback for direct URL testing (Magic Link fallback)
+      priceDollars = customPrice;
+      if (customPackage) packageName = customPackage;
+    }
+
     const amountInCents = Math.round(priceDollars * 100);
-    const packageName = customPackage || "Revenue Recovery Audit";
 
     // Format for display
     const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
@@ -40,7 +55,7 @@ async function initialize() {
     const response = await fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: amountInCents }),
+      body: JSON.stringify({ proposalId: proposalId, amount: amountInCents }),
     });
 
     if (!response.ok) {
