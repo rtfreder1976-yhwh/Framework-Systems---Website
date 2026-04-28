@@ -85,7 +85,92 @@
       font-size: 1.1rem;
       padding: 1.25rem;
     }
+
+    /* Stripe Elements container */
+    #payment-container {
+      margin-top: 2rem;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      background: #0a0a0a;
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    #payment-container.visible {
+      display: block;
+      opacity: 1;
+    }
+    #payment-element {
+      margin-bottom: 1.5rem;
+    }
+    #payment-message {
+      color: rgb(255, 99, 99);
+      font-size: 14px;
+      padding-top: 12px;
+      text-align: center;
+    }
+    #payment-message.hidden {
+      display: none;
+    }
+    
+    .spinner,
+    .spinner:before,
+    .spinner:after {
+      border-radius: 50%;
+    }
+    .spinner {
+      color: #ffffff;
+      font-size: 22px;
+      text-indent: -99999px;
+      margin: 0px auto;
+      position: relative;
+      width: 20px;
+      height: 20px;
+      box-shadow: inset 0 0 0 2px;
+      -webkit-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+    .spinner:before,
+    .spinner:after {
+      position: absolute;
+      content: "";
+    }
+    .spinner:before {
+      width: 10.4px;
+      height: 20.4px;
+      background: var(--primary);
+      border-radius: 20.4px 0 0 20.4px;
+      top: -0.2px;
+      left: -0.2px;
+      -webkit-transform-origin: 10.4px 10.2px;
+      transform-origin: 10.4px 10.2px;
+      -webkit-animation: loading 2s infinite ease 1.5s;
+      animation: loading 2s infinite ease 1.5s;
+    }
+    .spinner:after {
+      width: 10.4px;
+      height: 20.4px;
+      background: var(--primary);
+      border-radius: 0 20.4px 20.4px 0;
+      top: -0.2px;
+      left: 10.2px;
+      -webkit-transform-origin: 0px 10.2px;
+      transform-origin: 0px 10.2px;
+      -webkit-animation: loading 2s infinite ease;
+      animation: loading 2s infinite ease;
+    }
+    @-webkit-keyframes loading {
+      0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+    }
+    @keyframes loading {
+      0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+    }
   </style>
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -99,6 +184,9 @@
     <section class="section">
       <div class="container">
         <div class="proposal-wrapper">
+          <div id="urgency-banner" style="background: rgba(223, 27, 65, 0.1); border: 1px solid #df1b41; color: var(--text); padding: 1rem; border-radius: 6px; text-align: center; margin-bottom: 2rem; font-weight: bold; display: none;">
+            ⏳ This proposal is valid for 7 days. Expires on <span id="prop-expires">...</span>
+          </div>
           
           <div class="proposal-header">
             <span class="eyebrow" id="prop-date">Current Date</span>
@@ -110,11 +198,16 @@
             <h3>Scope of Work</h3>
             <p id="prop-desc">Implementation and optimization of the Framework Systems Revenue Recovery engine designed to eliminate leakages from missed calls, weak intake, and broken booking flow.</p>
 
+            <div class="expected-outcomes" style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid var(--primary); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+              <h4 style="margin-top: 0; color: var(--primary); font-size: 1.1rem; margin-bottom: 0.5rem;">Expected Outcomes</h4>
+              <p style="margin: 0; font-size: 0.95rem; color: var(--text);">Our goal is to plug your leaky sales funnel and generate a minimum of 3-5x ROI within your first 90 days.</p>
+            </div>
+
             <table class="proposal-table">
               <thead>
                 <tr>
                   <th>Deliverables</th>
-                  <th style="text-align: right;">Amount</th>
+                  <th style="text-align: right;">Investment</th>
                 </tr>
               </thead>
               <tbody>
@@ -129,11 +222,81 @@
               </tbody>
             </table>
 
-            <a href="#" id="accept-link" class="button button-primary checkout-btn">Accept & Pay Securely</a>
+            <div class="guarantee-box" style="border: 2px solid var(--primary); border-radius: 8px; padding: 2rem; margin-bottom: 2rem; text-align: center; background: rgba(16, 185, 129, 0.05);">
+              <svg style="width: 48px; height: 48px; color: var(--primary); margin-bottom: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              <h3 style="margin-top: 0; margin-bottom: 1rem; color: var(--text);">The Framework Systems Commitment</h3>
+              <p style="margin: 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">We don't just sell software; we partner with you for growth. If you don't see a measurable increase in lead capture within your first 90 days of full implementation, we will work with you 1-on-1 until you do.</p>
+            </div>
+
+            <div class="trust-signals" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+              <div style="background: rgba(0,0,0,0.02); border: 1px solid var(--border); padding: 1rem; border-radius: 8px; display: flex; align-items: center;">
+                <span style="font-size: 1.5rem; margin-right: 1rem;">🎖️</span>
+                <div>
+                  <div style="font-weight: bold; color: var(--text); font-size: 0.95rem;">Veteran-Owned</div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Disciplined execution</div>
+                </div>
+              </div>
+              <div style="background: rgba(0,0,0,0.02); border: 1px solid var(--border); padding: 1rem; border-radius: 8px; display: flex; align-items: center;">
+                <span style="font-size: 1.5rem; margin-right: 1rem;">🛡️</span>
+                <div>
+                  <div style="font-weight: bold; color: var(--text); font-size: 0.95rem;">Fully Insured</div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Professional peace of mind</div>
+                </div>
+              </div>
+              <div style="background: rgba(0,0,0,0.02); border: 1px solid var(--border); padding: 1rem; border-radius: 8px; display: flex; align-items: center;">
+                <span style="font-size: 1.5rem; margin-right: 1rem;">⭐</span>
+                <div>
+                  <div style="font-weight: bold; color: var(--text); font-size: 0.95rem;">Five-Star Rated</div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Proven local results</div>
+                </div>
+              </div>
+            </div>
+
+            <a href="#" id="accept-link" class="button button-primary checkout-btn">Secure Your Investment</a>
             
+            <div id="payment-container">
+              <h3 style="margin-top: 0; margin-bottom: 1.5rem; text-align: center; font-size: 1.2rem;">Complete Payment</h3>
+              <form id="payment-form">
+                <div id="payment-element">
+                  <!-- Stripe Elements will generate the payment options here -->
+                </div>
+                <button id="submit-btn" class="button button-primary" style="width: 100%;">
+                  <div class="spinner" id="spinner" style="display:none;"></div>
+                  <span id="button-text">Pay <span id="pay-btn-amount"></span></span>
+                </button>
+                <div id="payment-message" class="hidden"></div>
+              </form>
+            </div>
+
+            <div style="text-align: center; margin-top: 1.5rem; margin-bottom: 2rem;">
+              <span style="display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; color: var(--text-muted);">
+                <svg style="width: 16px; height: 16px; margin-right: 8px; color: var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                256-bit Secure Checkout by Stripe
+              </span>
+            </div>
+
             <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
-              By accepting this proposal, you agree to our standard terms of service. You will be redirected to our secure checkout.
+              By securing your investment, you agree to our standard terms of service.
             </p>
+
+            <div class="faq-section" style="margin-top: 4rem; border-top: 1px solid var(--border); padding-top: 3rem;">
+              <h3 style="text-align: center; margin-bottom: 2.5rem;">Frequently Asked Questions</h3>
+              
+              <div class="faq-item" style="margin-bottom: 1.5rem; background: rgba(0,0,0,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;">
+                <h4 style="margin: 0 0 0.75rem 0; color: var(--text); font-size: 1.05rem;">What happens immediately after I invest?</h4>
+                <p style="margin: 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;">You will receive an onboarding email immediately with a link to book our official kickoff call. We'll start setting up your system the same day.</p>
+              </div>
+              
+              <div class="faq-item" style="margin-bottom: 1.5rem; background: rgba(0,0,0,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;">
+                <h4 style="margin: 0 0 0.75rem 0; color: var(--text); font-size: 1.05rem;">How fast will I see results?</h4>
+                <p style="margin: 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;">Most clients see a reduction in lost leads and an increase in bookings within the first 14 days of the system going live.</p>
+              </div>
+              
+              <div class="faq-item" style="margin-bottom: 1.5rem; background: rgba(0,0,0,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;">
+                <h4 style="margin: 0 0 0.75rem 0; color: var(--text); font-size: 1.05rem;">Do I need technical skills?</h4>
+                <p style="margin: 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;">Not at all. We handle all the heavy lifting, technical implementation, and provide direct training for your team.</p>
+              </div>
+            </div>
           </div>
           
         </div>
@@ -151,6 +314,6 @@
     </div>
   </footer>
 
-  <script src="/proposal.js"></script>
+  <script src="/proposal.js?v=3.3"></script>
 </body>
 </html>

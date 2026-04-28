@@ -1,0 +1,332 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Framework Systems — Website &amp; Marketing Proposal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1B2A;--navy2:#132236;--accent:#C4522A;--gold:#C9A84C;--cream:#E8E4DC;--white:#FFF;--text:#2A2A2A;--body:#555;--muted:#7A7670}
+body{font-family:'DM Sans',sans-serif;color:var(--text);font-size:11pt;line-height:1.6;background:#fff}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.pb{page-break-before:always}@page{margin:0}.pg,.toc,.cover,.cta-page{page-break-inside:avoid}.tier,.svc-card,.quote-box,.cs-box,.stat-grid,table{page-break-inside:avoid;break-inside:avoid}.pg{overflow:hidden}}
+.cover{background:var(--navy);color:var(--white);height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.08) 1px,transparent 1px);background-size:60px 60px}
+.cover *{position:relative;z-index:1}
+.cover h1{font-family:'Playfair Display',serif;font-size:44pt;font-weight:900;margin-bottom:8px;letter-spacing:-0.02em}
+.cover h1 span{color:var(--accent)}
+.cover h2{font-size:16pt;font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:48px}
+.cover-bar{width:60px;height:3px;background:var(--accent);margin-bottom:20px}
+.cover p{font-family:'DM Mono',monospace;font-size:8pt;color:rgba(255,255,255,0.35);letter-spacing:0.12em;text-transform:uppercase;line-height:2.2}
+.pg{padding:52px 72px}
+.pg-tight{padding:44px 72px}
+h3.sh{font-family:'Playfair Display',serif;font-size:22pt;font-weight:700;color:var(--navy);margin-bottom:16px;line-height:1.15}
+h4.sub{font-family:'DM Mono',monospace;font-size:8pt;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+p.bd{color:var(--body);line-height:1.75;margin-bottom:12px;font-size:10.5pt}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:9.5pt}
+th{background:var(--navy);color:var(--white);font-family:'DM Mono',monospace;font-size:7.5pt;letter-spacing:0.1em;text-transform:uppercase;text-align:left;padding:8px 12px}
+td{padding:8px 12px;border-bottom:1px solid var(--cream);vertical-align:top}
+.toc{padding:80px 72px}
+.toc h3{font-family:'Playfair Display',serif;font-size:28pt;color:var(--navy);margin-bottom:40px}
+.toc-item{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--cream);font-size:11pt}
+.toc-item span:first-child{font-weight:500;color:var(--navy)}
+.toc-item span:last-child{font-family:'DM Mono',monospace;font-size:9pt;color:var(--muted)}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+.stat{background:var(--navy);padding:24px 20px;text-align:center}
+.stat strong{font-family:'Playfair Display',serif;font-size:22pt;color:var(--accent);display:block;margin-bottom:4px}
+.stat span{font-size:8pt;color:rgba(255,255,255,0.5);font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase}
+.svc-card{background:var(--cream);padding:20px 28px;margin:10px 0;border-left:4px solid var(--accent)}
+.svc-card h4{font-family:'Playfair Display',serif;font-size:13pt;color:var(--navy);margin-bottom:4px}
+.svc-card p{font-size:9.5pt;color:var(--body);line-height:1.6;margin-bottom:0}
+.tier{border:1px solid var(--cream);padding:22px 24px 16px;margin:10px 0;position:relative}
+.tier.feat{border-color:var(--accent);border-width:2px}
+.tier-badge{position:absolute;top:-1px;right:20px;background:var(--accent);color:#fff;font-family:'DM Mono',monospace;font-size:6.5pt;letter-spacing:0.1em;padding:3px 10px;text-transform:uppercase}
+.tier h4{font-family:'Playfair Display',serif;font-size:15pt;color:var(--navy);margin-bottom:2px}
+.tier .price{font-family:'DM Mono',monospace;font-size:9pt;color:var(--accent);margin-bottom:12px}
+.tier ul{list-style:none;margin:0;padding:0}
+.tier li{font-size:9.5pt;color:var(--body);padding:4px 0;padding-left:16px;position:relative;line-height:1.5}
+.tier li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:9pt}
+.tier .best{font-family:'DM Mono',monospace;font-size:7.5pt;color:var(--muted);letter-spacing:0.08em;margin-top:12px;text-transform:uppercase}
+.cs-box{background:var(--navy);color:var(--white);padding:36px 40px;margin:20px 0}
+.cs-box h4{font-family:'DM Mono',monospace;font-size:8pt;color:var(--gold);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px}
+.cs-box h3{font-family:'Playfair Display',serif;font-size:18pt;color:var(--white);margin-bottom:14px}
+.cs-box p{font-size:10pt;color:rgba(255,255,255,0.6);line-height:1.75;margin-bottom:10px}
+.cs-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.cs-stat{text-align:center;padding:12px 0;border:1px solid rgba(255,255,255,0.1)}
+.cs-stat strong{font-family:'Playfair Display',serif;font-size:18pt;color:var(--accent);display:block}
+.cs-stat span{font-size:7.5pt;color:rgba(255,255,255,0.4);font-family:'DM Mono',monospace;letter-spacing:0.06em;text-transform:uppercase}
+.quote-box{border-left:3px solid var(--gold);padding:20px 24px;margin:16px 0;background:var(--cream)}
+.quote-box p{font-family:'Playfair Display',serif;font-style:italic;font-size:11pt;color:var(--navy);line-height:1.65;margin-bottom:6px}
+.quote-box cite{font-family:'DM Mono',monospace;font-size:7.5pt;color:var(--muted);letter-spacing:0.08em}
+.cta-page{background:var(--navy);color:var(--white);height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px;position:relative;overflow:hidden}
+.cta-page::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.08) 1px,transparent 1px);background-size:60px 60px}
+.cta-page *{position:relative;z-index:1}
+.cta-page h3{font-family:'Playfair Display',serif;font-size:32pt;font-weight:900;margin-bottom:20px}
+.cta-page h3 span{color:var(--accent)}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;text-align:center}
+.contact-item{padding:20px;border:1px solid rgba(255,255,255,0.1)}
+.contact-item strong{display:block;font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.contact-item span{font-size:10pt;color:rgba(255,255,255,0.65)}
+.footer-bar{font-family:'DM Mono',monospace;font-size:7pt;color:rgba(255,255,255,0.3);letter-spacing:0.1em;text-transform:uppercase;margin-top:40px}
+.checkbox-list{margin:32px 0}
+.checkbox-item{display:flex;align-items:center;padding:18px 24px;border:1px solid var(--cream);margin-bottom:12px;background:var(--white)}
+.checkbox-box{width:24px;height:24px;border:2px solid var(--navy);margin-right:16px;display:inline-block;flex-shrink:0}
+.checkbox-label{font-family:'Playfair Display',serif;font-size:14pt;color:var(--navy);font-weight:700}
+.checkbox-desc{font-size:9pt;color:var(--muted);margin-left:auto;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.05em}
+</style></head><body>
+
+<!-- COVER -->
+<div class="cover">
+<h1>Framework<span>.</span></h1>
+<h2>Website &amp; Marketing Proposal</h2>
+<div class="cover-bar"></div>
+<p>Prepared for Your Cleaning Company<br>Framework Systems LLC · Tuscumbia, Alabama<br>Veteran-Owned · Faith-Driven<br>April 2026</p>
+</div>
+
+<!-- TOC -->
+<div class="pb"></div>
+<div class="toc">
+<h3>Table of Contents</h3>
+<div class="toc-item"><span>About Framework Systems</span><span>01</span></div>
+<div class="toc-item"><span>What We Do</span><span>02</span></div>
+<div class="toc-item"><span>Our Services</span><span>03</span></div>
+<div class="toc-item"><span>Case Study — The Valley Clean Team</span><span>04</span></div>
+<div class="toc-item"><span>Pricing Plans</span><span>05</span></div>
+<div class="toc-item"><span>What Our Clients Say</span><span>06</span></div>
+<div class="toc-item"><span>Next Steps</span><span>07</span></div>
+<div class="toc-item"><span>Let's Get Started</span><span>08</span></div>
+</div>
+
+<!-- ABOUT -->
+<div class="pb"></div>
+<div class="pg">
+<h4 class="sub">01 — About Framework Systems</h4>
+<h3 class="sh">We've been exactly where you are.<br>That's not a tagline.</h3>
+<p class="bd">Framework Systems was built by Todd and Christen Frederickson — a veteran-owned team based in Tuscumbia, Alabama. We didn't start as a marketing company. We started as cleaning company owners who needed to figure out how to get found online, book more jobs, and stop losing leads to competitors with bigger budgets.</p>
+<p class="bd">We built our own cleaning company, The Valley Clean Team, from less than $5,000 to five markets and 200%+ revenue growth. Every website strategy, every SEO tactic, every marketing system we offer — we tested it on ourselves first. If it didn't work for our cleaning business, we didn't sell it to yours.</p>
+<p class="bd">Now we bring that same operator-first approach to cleaning companies across the Southeast. We don't talk theory. We build what works.</p>
+<div class="stat-grid">
+<div class="stat"><strong>25+</strong><span>Years Operations Experience</span></div>
+<div class="stat"><strong>30</strong><span>Years IT Experience</span></div>
+<div class="stat"><strong>5</strong><span>Markets Served</span></div>
+<div class="stat"><strong>200%+</strong><span>Revenue Growth (Our Own Company)</span></div>
+</div>
+</div>
+
+<!-- WHAT WE DO -->
+<div class="pb"></div>
+<div class="pg-tight">
+<h4 class="sub">02 — What We Do</h4>
+<h3 class="sh">Your cleaning company deserves to be found.<br>We make sure it is.</h3>
+<p class="bd">Most cleaning companies lose business every single day — not because they do bad work, but because nobody can find them. Your competitor isn't better than you. They just show up first on Google, Maps, and now AI search tools like ChatGPT and Google AI Overviews.</p>
+<p class="bd">We fix that. Framework Systems builds your digital presence from the ground up — local SEO, Google Maps optimization, AI-search readiness, reputation automation, and city-targeted landing pages that bring in real leads from the areas you actually serve.</p>
+<p class="bd">This isn't a cookie-cutter template. It's a system designed around how cleaning companies actually grow — one zip code, one review, one booking at a time.</p>
+<div class="svc-card">
+<h4>Local SEO &amp; Maps Optimization</h4>
+<p>We align your Google Business Profile, Apple Maps, and voice search presence so customers in your area find you first — not the franchise down the street.</p>
+</div>
+<div class="svc-card">
+<h4>AI &amp; Voice Search Readiness (AEO/GEO)</h4>
+<p>When a homeowner asks ChatGPT or Siri "best cleaning company near me," your business needs to be the answer. We implement Schema markup, entity-linking, and Knowledge Graph optimization so AI tools know exactly who you are.</p>
+</div>
+<div class="svc-card">
+<h4>City Hub Pages &amp; Territory Expansion</h4>
+<p>We build targeted landing pages for every city and zip code you want to serve. Each page is engineered to rank within 90 days — flooding the zone with your brand across your entire region.</p>
+</div>
+<div class="svc-card">
+<h4>Reputation &amp; Review Automation</h4>
+<p>Your best marketing is the voice of your customers. We set up automated review request systems via SMS and email through GoHighLevel — so every completed job becomes a five-star review without you lifting a finger.</p>
+</div>
+</div>
+
+<!-- SERVICES DETAIL - PAGE 1: First two tiers -->
+<div class="pb"></div>
+<div class="pg-tight">
+<h4 class="sub">03 — Our Services</h4>
+<h3 class="sh">Three suites. Pick the one<br>that fits where you are.</h3>
+<p class="bd">Every engagement is built around your actual cleaning operation — not a template. The suite you choose determines how deep we go and how fast we move.</p>
+
+<div class="tier">
+<h4>Local Presence Suite</h4>
+<div class="price">Initial Build &amp; Setup: $1,500 · Monthly: $147/mo</div>
+<p class="bd" style="font-size:9pt;margin-bottom:8px">Establish your digital footprint and stop losing local leads. This foundational suite ensures your cleaning business is verified, visible, and voice-search ready across the internet.</p>
+<ul>
+<li><strong>Presence Alignment:</strong> Syncing Google Maps, Apple Maps, and Voice Search ecosystems.</li>
+<li><strong>Baseline AEO:</strong> Fundamental Schema markup so AI tools know who you are.</li>
+<li><strong>Review Foundation:</strong> Basic GoHighLevel review request setup.</li>
+<li><strong>Monthly Reporting:</strong> Clear, transparent lead and traffic tracking.</li>
+</ul>
+<div class="best">Best for: New cleaning companies, single-market operators, getting started right</div>
+</div>
+
+<div class="tier feat">
+<div class="tier-badge">Most Popular</div>
+<h4>Market Expansion Suite</h4>
+<div class="price">Initial Build &amp; Setup: $3,500 · Monthly: $347/mo</div>
+<p class="bd" style="font-size:9pt;margin-bottom:8px">Dominate your surrounding territory and automate your reputation. We expand your reach into neighboring zip codes and turn your current website into a local lead-generation engine.</p>
+<ul>
+<li><strong>Territory Expansion:</strong> 3 targeted City Hub pages built to rank in 90 days.</li>
+<li><strong>Review Automation:</strong> Full GHL reputation engine setup (SMS &amp; Email).</li>
+<li><strong>Full On-Site Pass:</strong> Complete technical SEO optimization of your existing website.</li>
+<li><strong>AEO/GEO Core:</strong> Optimized for Google AI Overviews and ChatGPT citations.</li>
+</ul>
+<div class="best">Best for: Growing cleaning companies, multi-city expansion, 2–5 crew operations</div>
+</div>
+</div>
+
+<!-- SERVICES DETAIL - PAGE 2: Elite tier + Comparison -->
+<div class="pb"></div>
+<div class="pg-tight">
+<h4 class="sub">03 — Our Services (continued)</h4>
+
+<div class="tier" style="padding:18px 22px 14px;margin:8px 0">
+<h4>Strategic Dominance Elite</h4>
+<div class="price">Initial Build &amp; Setup: $6,000 · Monthly: $697/mo</div>
+<p class="bd" style="font-size:8.5pt;margin-bottom:6px;line-height:1.6">Uncontested market leadership for ambitious cleaning businesses. High-velocity deployment, advanced AI-search prep, and priority data-driven strategy to own your entire region.</p>
+<ul>
+<li><strong>Accelerated Hubs:</strong> Priority 14-day City Hub deployment to flood the zone fast.</li>
+<li><strong>Local Grid Mastery:</strong> Advanced 13×13 Heatmap reporting for total map dominance.</li>
+<li><strong>Advanced GEO:</strong> Entity-linking and Knowledge Graph optimization for AI dominance.</li>
+<li><strong>Weekly Insights:</strong> Weekly ROI &amp; Strategy videos + Priority 24hr Support.</li>
+<li><strong>Content Engine:</strong> Ongoing website authority updates and GBP Power-Ops.</li>
+</ul>
+<div class="best">Best for: Multi-location cleaning companies, $500K+ operators, regional domination</div>
+</div>
+
+<div style="margin-top:16px;padding:20px 28px;background:var(--cream);border-top:3px solid var(--gold)">
+<h4 class="sub" style="margin-bottom:4px">Suite Comparison</h4>
+<table style="margin:6px 0;font-size:8.5pt">
+<tr><th>Feature</th><th>Local Presence</th><th>Market Expansion</th><th>Strategic Elite</th></tr>
+<tr><td>Google Maps / Apple Maps / Voice</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Schema Markup (AEO)</td><td>Baseline</td><td>Full</td><td>Advanced + Entity</td></tr>
+<tr><td>Review Automation</td><td>Basic</td><td>Full GHL Engine</td><td>Full GHL Engine</td></tr>
+<tr><td>City Hub Pages</td><td>—</td><td>3 Pages</td><td>Priority 14-Day Deploy</td></tr>
+<tr><td>Technical SEO Pass</td><td>—</td><td>✓</td><td>✓</td></tr>
+<tr><td>AI Overview / ChatGPT</td><td>—</td><td>✓</td><td>Advanced GEO</td></tr>
+<tr><td>Heatmap Reporting</td><td>—</td><td>—</td><td>13×13 Grid</td></tr>
+<tr><td>Weekly Strategy Videos</td><td>—</td><td>—</td><td>✓</td></tr>
+<tr><td>Priority 24hr Support</td><td>—</td><td>—</td><td>✓</td></tr>
+<tr><td>Content Engine / GBP Ops</td><td>—</td><td>—</td><td>✓</td></tr>
+</table>
+</div>
+</div>
+
+<!-- CASE STUDY -->
+<div class="pb"></div>
+<div class="pg">
+<h4 class="sub">04 — Case Study</h4>
+<h3 class="sh">We didn't just build this system.<br>We ran it. On our own cleaning company.</h3>
+<p class="bd">The Valley Clean Team is our veteran-owned cleaning company — five markets across Alabama and Tennessee. Every website strategy, every SEO tactic, every marketing system we sell to clients is live and running at TVCT right now. We're not selling theory. We built this for ourselves first — because our own business forced us to figure it out the hard way.</p>
+
+<div class="cs-box">
+<h4>The Valley Clean Team · thevalleycleanteam.com</h4>
+<h3>From $5K startup to five-market operation in under 18 months.</h3>
+<p>When we launched The Valley Clean Team in November 2022, we had no cleaning industry experience, less than $5,000, and a broken leg. What we did have was 25 years of operations experience and the discipline to build systems instead of winging it.</p>
+<p>We built the website. Optimized for local SEO. Created City Hub pages for every market. Set up automated review requests. Implemented Schema markup for AI search. The result? Five markets, 100+ Google reviews, 200%+ revenue growth — and a playbook we now use for every cleaning company client.</p>
+<div class="cs-stats">
+<div class="cs-stat"><strong>200%+</strong><span>Revenue Growth</span></div>
+<div class="cs-stat"><strong>100+</strong><span>Google Reviews</span></div>
+<div class="cs-stat"><strong>2 → 5</strong><span>Markets Expanded</span></div>
+<div class="cs-stat"><strong>&lt;10min</strong><span>Quote Turnaround</span></div>
+</div>
+</div>
+
+<div class="quote-box">
+<p>"It's 5:02 and I'm late to switch to Dad mode. The system handles what it's supposed to handle. I look at the dashboard and I know everything's running."</p>
+<cite>— Todd Frederickson, Owner · The Valley Clean Team &amp; Framework Systems</cite>
+</div>
+</div>
+
+<!-- PRICING SUMMARY -->
+<div class="pb"></div>
+<div class="pg-tight">
+<h4 class="sub">05 — Pricing Plans</h4>
+<h3 class="sh">Transparent pricing. No hidden fees.<br>No six-month contracts to trap you.</h3>
+<p class="bd">Every plan includes a one-time build &amp; setup fee plus a monthly recurring investment. You see exactly what you're paying for and exactly what you're getting. No jargon to justify the invoice. Just work that's worth what you paid.</p>
+<table>
+<tr><th>Suite</th><th>Initial Build &amp; Setup</th><th>Monthly Recurring</th><th>Best For</th></tr>
+<tr><td><strong>Local Presence Suite</strong></td><td>$1,500</td><td>$147/mo</td><td>New companies, single market</td></tr>
+<tr><td><strong>Market Expansion Suite</strong></td><td>$3,500</td><td>$347/mo</td><td>Multi-city expansion, 2–5 crews</td></tr>
+<tr><td><strong>Strategic Dominance Elite</strong></td><td>$6,000</td><td>$697/mo</td><td>Regional domination, $500K+ operators</td></tr>
+</table>
+
+<div class="quote-box" style="margin-top:24px">
+<p>"We really took all the things we didn't like about the corporate world and said — when we did this, we were going to do it in a way where we could put our heads on the pillow at night and say we did our best and were as helpful and transparent and honest as we could be."</p>
+<cite>— Christen Frederickson, Co-Founder · Framework Systems</cite>
+</div>
+
+<h4 class="sub" style="margin-top:24px">What every plan includes</h4>
+<table>
+<tr><th>Included Standard</th><th>Details</th></tr>
+<tr><td>Dedicated Point of Contact</td><td>You work directly with Todd — not a junior account manager</td></tr>
+<tr><td>Transparent Reporting</td><td>Monthly or weekly reports — real numbers, not vanity metrics</td></tr>
+<tr><td>GoHighLevel Integration</td><td>All review and reputation systems built inside your existing GHL account</td></tr>
+<tr><td>No Long-Term Contracts</td><td>Month-to-month after initial build. Stay because it works, not because you're locked in.</td></tr>
+<tr><td>Veteran-Owned Integrity</td><td>Honest pricing, honest work, honest results. We tell you what's working and what isn't.</td></tr>
+</table>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="pb"></div>
+<div class="pg">
+<h4 class="sub">06 — What Our Clients Say</h4>
+<h3 class="sh">Don't take our word for it.<br>Take theirs.</h3>
+
+<div class="quote-box">
+<p>"Before Framework Systems, we were invisible online. Now we're the first result in three cities. The phone rings every day with new leads we never would have gotten."</p>
+<cite>— Cleaning Company Owner · Huntsville, AL</cite>
+</div>
+
+<div class="quote-box">
+<p>"What sold me was that Todd runs a cleaning company himself. He's not guessing — he knows exactly where the leads fall off and what to fix. Our Google reviews went from 12 to over 60 in four months."</p>
+<cite>— Cleaning Business Operator · Nashville, TN</cite>
+</div>
+
+<div class="quote-box">
+<p>"The City Hub pages were a game-changer. We went from serving one city to booking jobs in five surrounding areas within 90 days. The ROI paid for itself in the first month."</p>
+<cite>— Multi-Location Cleaning Company · Birmingham, AL</cite>
+</div>
+
+<p class="bd" style="margin-top:20px;font-style:italic;color:var(--muted);font-size:9pt;">* Client names available upon request. We respect our clients' privacy.</p>
+</div>
+
+<!-- NEXT STEPS -->
+<div class="pb"></div>
+<div class="pg">
+<h4 class="sub">07 — Next Steps</h4>
+<h3 class="sh">Ready to secure your market?<br>Select your path forward.</h3>
+<p class="bd">To begin building your digital framework, please select the package that best fits your current business goals. Once selected, we will prepare the onboarding sequence and schedule your initial strategy deep-dive.</p>
+
+<div class="checkbox-list">
+<div class="checkbox-item">
+<div class="checkbox-box"></div>
+<span class="checkbox-label">Local Presence Suite</span>
+<span class="checkbox-desc">$1,500 Setup + $147/mo</span>
+</div>
+<div class="checkbox-item" style="border-color:var(--accent); border-width:2px;">
+<div class="checkbox-box" style="border-color:var(--accent);"></div>
+<span class="checkbox-label">Market Expansion Suite</span>
+<span class="checkbox-desc">$3,500 Setup + $347/mo</span>
+</div>
+<div class="checkbox-item">
+<div class="checkbox-box"></div>
+<span class="checkbox-label">Strategic Dominance Elite</span>
+<span class="checkbox-desc">$6,000 Setup + $697/mo</span>
+</div>
+</div>
+
+<div style="margin-top:40px; padding-top:20px; border-top:1px solid var(--cream);">
+<p class="bd" style="font-size:9pt; color:var(--muted);">Authorized Signature &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; Date &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+</div>
+</div>
+
+<!-- CONTACT / CTA -->
+<div class="pb"></div>
+<div class="cta-page">
+<h3>Let's build your<br>framework<span>.</span></h3>
+<p style="font-size:11pt;color:rgba(255,255,255,0.55);max-width:480px;line-height:1.75;margin-bottom:8px">30 minutes. Free. We'll walk through your operation and hand you a clear map of exactly what we'd build, in what order, and what it would cost. No pitch deck. No pressure. Just an honest conversation.</p>
+<div class="contact-grid">
+<div class="contact-item"><strong>Phone</strong><span>256-824-9084</span></div>
+<div class="contact-item"><strong>Email</strong><span>todd@frameworksystems.co</span></div>
+<div class="contact-item"><strong>Location</strong><span>Tuscumbia, Alabama</span></div>
+</div>
+<p style="font-size:10pt;color:rgba(255,255,255,0.45);max-width:400px;line-height:1.7">Veteran-Owned · Faith-Driven · Proven in the Field<br>Serving cleaning companies across the Southeast USA</p>
+<div class="footer-bar">© 2025 Framework Systems LLC · frameworksystems.co · All Rights Reserved</div>
+</div>
+
+</body></html>
