@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href="/fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <title>Google Presence Starter Onboarding | Framework Systems</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="/site.css" />
+  <style>
+    .onboarding-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .progress-bar-wrap {
+      margin-bottom: 48px;
+      position: relative;
+    }
+    
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+    
+    .progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 16.66%; /* Default for Step 1 */
+    }
+    
+    .step-indicators {
+      display: flex;
+      justify-content: space-between;
+      margin-top: -12px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .step-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--cream-2);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: all 0.3s ease;
+    }
+    
+    .step-dot.active {
+      background: var(--white);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(196, 82, 42, 0.1);
+    }
+    
+    .step-dot.completed {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+    }
+    
+    .onboarding-step {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .onboarding-step.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .form-group {
+      margin-bottom: 24px;
+    }
+    
+    .form-label {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(196, 82, 42, 0.08);
+    }
+    
+    .step-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    
+    .service-option {
+      cursor: pointer;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    
+    .service-option:hover {
+      border-color: var(--accent);
+      background: rgba(196, 82, 42, 0.02);
+    }
+    
+    .service-option.selected {
+      border-color: var(--accent);
+      background: rgba(196, 82, 42, 0.08);
+      box-shadow: 0 8px 24px rgba(196, 82, 42, 0.12);
+    }
+    
+    .service-option h4 {
+      margin: 0 0 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+    }
+    
+    .access-guide {
+      background: var(--navy);
+      color: var(--white);
+      padding: 32px;
+      border-radius: 18px;
+      margin-top: 24px;
+    }
+    
+    .access-guide ol {
+      padding-left: 20px;
+    }
+    
+    .access-guide li {
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .access-guide strong {
+      color: var(--gold);
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="/" class="brand">Framework<span>.</span></a>
+      <div class="nav-links">
+        <span class="inline-label">Onboarding: Google Presence Starter</span>
+      </div>
+    </div>
+  </header>
+  
+  <main id="main">
+    <div class="onboarding-container">
+      <div class="progress-bar-wrap">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="step-indicators">
+          <div class="step-dot active" data-step="1">1</div>
+          <div class="step-dot" data-step="2">2</div>
+          <div class="step-dot" data-step="3">3</div>
+          <div class="step-dot" data-step="4">4</div>
+          <div class="step-dot" data-step="5">5</div>
+        </div>
+      </div>
+      
+      <form id="onboardingForm">
+        <!-- Step 1: Welcome -->
+        <div class="onboarding-step active" data-step="1">
+          <span class="section-label">Step 1 of 5</span>
+          <h1 class="section-title">Welcome to the <em>Growth Path</em>.</h1>
+          <p class="section-intro">We're here to clean up your Google foundation and ensure your professional presence actually converts demand into deals.</p>
+          <div class="notice" style="margin-top: 32px;">
+            <p><strong>What we'll do:</strong> Audit your profile, optimize your categories, and set up your conversion path.</p>
+          </div>
+          <div class="step-footer">
+            <div></div>
+            <button type="button" class="button button-primary next-step">Start Onboarding</button>
+          </div>
+        </div>
+        
+        <!-- Step 2: Business & Access -->
+        <div class="onboarding-step" data-step="2">
+          <span class="section-label">Step 2 of 5</span>
+          <h2 class="section-title">Business & <em>Access</em>.</h2>
+          <p class="section-intro">To optimize your profile, we need to be under the hood.</p>
+          
+          <div class="form-group" style="margin-top: 32px;">
+            <label class="form-label">Professional Name (on Google)</label>
+            <input type="text" name="businessName" class="form-input" placeholder="e.g. Jane Doe, Realtor" required />
+          </div>
+
+          <div class="access-guide">
+            <h3>Grant Manager Access:</h3>
+            <p style="margin-bottom: 12px; font-size: 0.9rem;">Add <strong>todd@frameworksystems.co</strong> as a Manager to your Google Business Profile.</p>
+            <a href="https://business.google.com" target="_blank" class="button button-secondary" style="font-size: 0.8rem; padding: 10px 18px;">Open Google Business</a>
+          </div>
+          
+          <div class="form-group" style="margin-top: 24px;">
+            <label class="form-label">Access Status</label>
+            <div class="service-option" id="inviteSent">
+              <h4>Invitation Sent</h4>
+              <p>I have invited Framework Systems to manage my profile.</p>
+            </div>
+          </div>
+          
+          <div class="step-footer">
+            <button type="button" class="button button-secondary dark prev-step">Back</button>
+            <button type="button" class="button button-primary next-step">Next Step</button>
+          </div>
+        </div>
+        
+        <!-- Step 3: Conversion Path (CTA) -->
+        <div class="onboarding-step" data-step="3">
+          <span class="section-label">Step 3 of 5</span>
+          <h2 class="section-title">Conversion <em>Path</em>.</h2>
+          <p class="section-intro">Where should we point people who find you on Google?</p>
+          
+          <div class="service-grid">
+            <div class="service-option single-select selected" data-value="website">
+              <h4>My Website</h4>
+              <p>Drive traffic to your home page</p>
+            </div>
+            <div class="service-option single-select" data-value="booking">
+              <h4>Booking Link</h4>
+              <p>Direct to your calendar (Calendly/TimeTap)</p>
+            </div>
+            <div class="service-option single-select" data-value="phone">
+              <h4>Direct Call</h4>
+              <p>Make your phone number the primary action</p>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 24px;" id="ctaLinkGroup">
+            <label class="form-label">Destination URL</label>
+            <input type="url" name="ctaLink" class="form-input" placeholder="https://..." />
+          </div>
+          
+          <div class="step-footer">
+            <button type="button" class="button button-secondary dark prev-step">Back</button>
+            <button type="button" class="button button-primary next-step">Next Step</button>
+          </div>
+        </div>
+        
+        <!-- Step 4: Focus Areas -->
+        <div class="onboarding-step" data-step="4">
+          <span class="section-label">Step 4 of 5</span>
+          <h2 class="section-title">Focus <em>Areas</em>.</h2>
+          <p class="section-intro">Select your top specialties so we can optimize your "Services" list.</p>
+          
+          <div class="service-grid">
+            <div class="service-option multi-select" data-value="residential">
+              <h4>Residential</h4>
+              <p>Standard home sales</p>
+            </div>
+            <div class="service-option multi-select" data-value="luxury">
+              <h4>Luxury</h4>
+              <p>High-end properties</p>
+            </div>
+            <div class="service-option multi-select" data-value="first-time-buyers">
+              <h4>First-Time Buyers</h4>
+              <p>Nurturing new owners</p>
+            </div>
+            <div class="service-option multi-select" data-value="investors">
+              <h4>Investors</h4>
+              <p>ROI-focused sales</p>
+            </div>
+          </div>
+          
+          <div class="step-footer">
+            <button type="button" class="button button-secondary dark prev-step">Back</button>
+            <button type="button" class="button button-primary next-step">Next Step</button>
+          </div>
+        </div>
+        
+        <!-- Step 5: Review Strategy -->
+        <div class="onboarding-step" data-step="5">
+          <span class="section-label">Step 5 of 5</span>
+          <h2 class="section-title">Review <em>Strategy</em>.</h2>
+          <p class="section-intro">How should we ask your clients for reviews?</p>
+          
+          <div class="service-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="service-option single-select selected" data-value="sms">
+              <h4>Text Message</h4>
+              <p>High response, fast wins</p>
+            </div>
+            <div class="service-option single-select" data-value="email">
+              <h4>Email</h4>
+              <p>Consistent, automated flow</p>
+            </div>
+          </div>
+          
+          <div class="step-footer">
+            <button type="button" class="button button-secondary dark prev-step">Back</button>
+            <button type="submit" class="button button-primary">Complete Onboarding</button>
+          </div>
+        </div>
+        
+        <!-- Success Step -->
+        <div class="onboarding-step" id="successStep">
+          <div style="text-align: center; padding: 48px 0;">
+            <div class="success-icon">✓</div>
+            <h2 class="section-title">You're <em>all set</em>!</h2>
+            <p class="section-intro">We've received your information and are starting the audit. Todd will be in touch within 24-48 hours with your first monthly visibility check-in.</p>
+            <div style="margin-top: 40px;">
+              <a href="/" class="button button-primary">Return to Homepage</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+  
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="/" class="brand">Framework<span>.</span></a>
+      <div class="footer-copy">
+        <div>Veteran-Owned · Faith-Driven · Realtor Growth Path</div>
+        <div>© 2026 Framework Systems LLC.</div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="/onboarding.js"></script>
+</body>
+</html>
