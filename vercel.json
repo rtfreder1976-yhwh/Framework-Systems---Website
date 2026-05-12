@@ -11,6 +11,36 @@
       "source": "/index",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/hvac",
+      "destination": "/plumbing",
+      "permanent": true
+    },
+    {
+      "source": "/cleaning",
+      "destination": "/plumbing",
+      "permanent": true
+    },
+    {
+      "source": "/roofing",
+      "destination": "/plumbing",
+      "permanent": true
+    },
+    {
+      "source": "/electrical",
+      "destination": "/plumbing",
+      "permanent": true
+    },
+    {
+      "source": "/industries",
+      "destination": "/plumbing",
+      "permanent": true
+    },
+    {
+      "source": "/case-study",
+      "destination": "/plumbing",
+      "permanent": true
     }
   ],
   "headers": [
