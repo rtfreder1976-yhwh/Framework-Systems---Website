@@ -1,0 +1,55 @@
+<!-- @dsCard group="Components" name="Cards" subtitle="Light card + dark-section card + eyebrow" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cards — Framework Systems</title>
+<link rel="stylesheet" href="../_tokens.css">
+<style>
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); padding: 28px; }
+  .card-title { font-family: 'Playfair Display', serif; color: var(--navy); font-size: 1.35rem; line-height: 1.2; margin: 0 0 12px; }
+  .card p { color: var(--body); font-size: 1rem; line-height: 1.8; margin: 0; }
+  .card-tag {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 44px; height: 44px; border-radius: 999px; padding: 0 14px;
+    background: rgba(196,82,42,0.12); color: var(--accent);
+    font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem;
+    margin-bottom: 18px;
+  }
+  /* dark-section variant */
+  .section-dark { background: var(--navy); }
+  .section-dark .card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .section-dark .card-title { color: var(--white); }
+  .section-dark .card p { color: rgba(255,255,255,0.72); }
+</style>
+</head>
+<body>
+<div class="ds-stage ds-stage--cream">
+  <p class="ds-note">Light card (on cream)</p>
+  <div class="grid">
+    <div class="card">
+      <span class="card-tag">01</span>
+      <h3 class="card-title">The Blueprint</h3>
+      <p>Core automation package. The systems every service business needs to stop leaking leads.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">02</span>
+      <h3 class="card-title">The Build</h3>
+      <p>Expanded automation plus reporting, so you can see what's working without digging.</p>
+    </div>
+  </div>
+</div>
+<div class="ds-stage section-dark">
+  <p class="ds-note" style="color:rgba(255,255,255,0.5)">Card on dark section</p>
+  <div class="grid">
+    <div class="card">
+      <span class="card-tag">03</span>
+      <h3 class="card-title">The Architect</h3>
+      <p>AI receptionist, lead scoring, and strategy. The premium tier for businesses ready to scale.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

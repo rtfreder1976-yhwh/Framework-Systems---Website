@@ -1,0 +1,52 @@
+<!-- @dsCard group="Foundations" name="Typography" subtitle="Playfair Display, DM Sans, DM Mono" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typography — Framework Systems</title>
+<link rel="stylesheet" href="../_tokens.css">
+<style>
+  .type-row { padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .type-row:last-child { border-bottom: 0; }
+  .specimen { margin: 0 0 6px; color: var(--navy); }
+  .meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+  .display { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(2.35rem, 5vw, 4.3rem); line-height: 1.03; letter-spacing: -0.03em; }
+  .display em { color: var(--gold); font-style: italic; }
+  .section-h { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.7rem); line-height: 1.08; }
+  .card-h { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.35rem; line-height: 1.2; }
+  .lead { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.08rem; line-height: 1.8; color: var(--body); max-width: var(--text-max); }
+  .body-c { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1rem; line-height: 1.8; color: var(--body); max-width: var(--text-max); }
+  .label { font-family: 'DM Mono', monospace; font-weight: 400; font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="ds-stage ds-stage--cream">
+  <div class="type-row">
+    <div class="specimen display">We build the <em>systems</em> that run your business.</div>
+    <div class="meta">Display · Playfair Display 900 · clamp(2.35rem, 5vw, 4.3rem) · -0.03em</div>
+  </div>
+  <div class="type-row">
+    <div class="specimen section-h">You don't have a marketing problem.</div>
+    <div class="meta">Section title · Playfair Display 700 · clamp(1.8rem, 3.5vw, 2.7rem)</div>
+  </div>
+  <div class="type-row">
+    <div class="specimen card-h">The Blueprint</div>
+    <div class="meta">Card title · Playfair Display 700 · 1.35rem</div>
+  </div>
+  <div class="type-row">
+    <p class="specimen lead">Phone rings. You're on a job. Voicemail picks up. They hang up and call the next company.</p>
+    <div class="meta">Lead · DM Sans 400 · 1.08rem · line-height 1.8</div>
+  </div>
+  <div class="type-row">
+    <p class="specimen body-c">Framework Systems speaks like a competent operator who's been where you are — not a consultant, not an agency, not a salesperson.</p>
+    <div class="meta">Body · DM Sans 400 · 1rem · line-height 1.8</div>
+  </div>
+  <div class="type-row">
+    <div class="specimen label">— What we build</div>
+    <div class="meta">Label / eyebrow · DM Mono 400 · 0.74rem · 0.14em · uppercase</div>
+  </div>
+</div>
+</body>
+</html>

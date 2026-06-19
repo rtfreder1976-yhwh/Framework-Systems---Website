@@ -1,0 +1,61 @@
+/* Framework Systems — Design Tokens
+   Source of truth: site.css (live production values, June 2026)
+   Fonts loaded from Google CDN here for portable previews;
+   production self-hosts the same families as .woff2. */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Dark backgrounds */
+  --navy: #0d1b2a;
+  --navy-2: #132236;
+
+  /* Light backgrounds */
+  --cream: #f4f1eb;
+  --cream-2: #ebe6dc;
+  --white: #ffffff;
+
+  /* Text */
+  --text: #1f2732;
+  --body: #4f5a67;
+  --muted: #758091;
+
+  /* Accents */
+  --accent: #c4522a;
+  --accent-dark: #9d3b1a;
+  --gold: #c9a84c;
+
+  /* System */
+  --border: rgba(13, 27, 42, 0.12);
+  --shadow: 0 24px 60px rgba(13, 27, 42, 0.08);
+  --radius: 22px;
+  --max: 1480px;
+  --text-max: 760px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--cream);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Preview scaffold (not shipped to the site) ---- */
+.ds-stage { padding: 40px; }
+.ds-stage--dark { background: var(--navy); }
+.ds-stage--cream { background: var(--cream); }
+.ds-stage--white { background: var(--white); }
+.ds-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+.ds-stack { display: flex; flex-direction: column; gap: 24px; }
+.ds-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 14px;
+}

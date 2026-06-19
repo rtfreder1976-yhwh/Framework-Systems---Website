@@ -1,0 +1,28 @@
+<!-- @dsCard group="Components" name="Section Labels" subtitle="Eyebrows, tags, values marquee" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section Labels — Framework Systems</title>
+<link rel="stylesheet" href="../_tokens.css">
+<style>
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.74rem; color: var(--accent); }
+  .eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
+  .pill { display: inline-flex; align-items: center; height: 44px; padding: 0 16px; border-radius: 999px; background: rgba(196,82,42,0.12); color: var(--accent); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; }
+  .marquee { margin-top: 28px; background: linear-gradient(90deg, var(--accent-dark), var(--accent)); color: rgba(255,255,255,0.92); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.75rem; padding: 14px 0; white-space: nowrap; overflow: hidden; }
+  .marquee span { display: inline-block; padding: 0 14px; }
+</style>
+</head>
+<body>
+<div class="ds-stage ds-stage--cream">
+  <p class="ds-note">Eyebrow (with rule)</p>
+  <div class="ds-row"><span class="eyebrow">What we build</span></div>
+  <p class="ds-note" style="margin-top:28px">Tag pills</p>
+  <div class="ds-row"><span class="pill">01</span><span class="pill">Veteran-Owned</span><span class="pill">Proven in the Field</span></div>
+  <div class="marquee">
+    <span>Faith-Driven ✦</span><span>Veteran-Owned ✦</span><span>Built for Service Businesses ✦</span><span>No Jargon ✦</span><span>Proven in the Field ✦</span><span>Honest Work ✦</span><span>Systems That Run Without You ✦</span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!-- @dsCard group="Foundations" name="Color Palette" subtitle="Navy, accent, gold, neutrals" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colors — Framework Systems</title>
+<link rel="stylesheet" href="../_tokens.css">
+<style>
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .swatch {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--white);
+    box-shadow: var(--shadow);
+  }
+  .swatch .chip { height: 92px; }
+  .swatch .meta { padding: 12px 14px; }
+  .swatch .name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .swatch .hex {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .swatch .role { font-size: 0.8rem; color: var(--body); margin-top: 4px; }
+  h2 { font-family: 'Playfair Display', serif; color: var(--navy); margin: 0 0 6px; }
+</style>
+</head>
+<body>
+<div class="ds-stage ds-stage--cream">
+  <h2>Color Palette</h2>
+  <p class="ds-note">Source: site.css :root</p>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="chip" style="background:#0d1b2a"></div><div class="meta"><div class="name">Navy</div><div class="hex">#0d1b2a · --navy</div><div class="role">Primary dark / authority</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#132236"></div><div class="meta"><div class="name">Navy 2</div><div class="hex">#132236 · --navy-2</div><div class="role">Alt dark background</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#c4522a"></div><div class="meta"><div class="name">Accent</div><div class="hex">#c4522a · --accent</div><div class="role">Actions, CTAs, emphasis</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#9d3b1a"></div><div class="meta"><div class="name">Accent Dark</div><div class="hex">#9d3b1a · --accent-dark</div><div class="role">Hover state for accent</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#c9a84c"></div><div class="meta"><div class="name">Gold</div><div class="hex">#c9a84c · --gold</div><div class="role">Premium / faith accents</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#f4f1eb"></div><div class="meta"><div class="name">Cream</div><div class="hex">#f4f1eb · --cream</div><div class="role">Default page background</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#ebe6dc"></div><div class="meta"><div class="name">Cream 2</div><div class="hex">#ebe6dc · --cream-2</div><div class="role">Alt light background</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#ffffff;border-bottom:1px solid var(--border)"></div><div class="meta"><div class="name">White</div><div class="hex">#ffffff · --white</div><div class="role">Cards, text on dark</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#1f2732"></div><div class="meta"><div class="name">Text</div><div class="hex">#1f2732 · --text</div><div class="role">Primary body text</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#4f5a67"></div><div class="meta"><div class="name">Body</div><div class="hex">#4f5a67 · --body</div><div class="role">Secondary text</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#758091"></div><div class="meta"><div class="name">Muted</div><div class="hex">#758091 · --muted</div><div class="role">Captions, labels</div></div></div>
+  </div>
+</div>
+</body>
+</html>

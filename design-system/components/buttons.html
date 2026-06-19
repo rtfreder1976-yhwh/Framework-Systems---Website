@@ -1,0 +1,41 @@
+<!-- @dsCard group="Components" name="Buttons" subtitle="Primary, secondary (light/dark)" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buttons — Framework Systems</title>
+<link rel="stylesheet" href="../_tokens.css">
+<style>
+  .button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 15px 24px; border-radius: 999px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.02em;
+    text-decoration: none; cursor: pointer; border: 0;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+  }
+  .button:hover { transform: translateY(-1px); }
+  .button-primary { background: var(--accent); color: var(--white); box-shadow: 0 14px 30px rgba(196,82,42,0.24); }
+  .button-primary:hover { background: var(--accent-dark); }
+  .button-secondary { border: 1px solid rgba(255,255,255,0.22); color: var(--white); background: transparent; }
+  .button-secondary.dark { border-color: rgba(13,27,42,0.14); color: var(--navy); background: var(--white); }
+  .button-secondary.dark:hover { border-color: rgba(196,82,42,0.4); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="ds-stage ds-stage--dark">
+  <p class="ds-note" style="color:rgba(255,255,255,0.5)">On dark</p>
+  <div class="ds-row">
+    <a class="button button-primary">Get Your Free Operations Map</a>
+    <a class="button button-secondary">See the Proof →</a>
+  </div>
+</div>
+<div class="ds-stage ds-stage--cream">
+  <p class="ds-note">On light</p>
+  <div class="ds-row">
+    <a class="button button-primary">Get Your Framework</a>
+    <a class="button button-secondary dark">Read the full case study →</a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- @dsCard group="Components" name="CTA Band" subtitle="Navy gradient call-to-action block" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CTA Band — Framework Systems</title>
+<link rel="stylesheet" href="../_tokens.css">
+<style>
+  .cta-band { background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: var(--white); border-radius: calc(var(--radius) + 8px); padding: 42px; position: relative; overflow: hidden; }
+  .cta-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(196,82,42,0.20), transparent 36%); pointer-events: none; }
+  .cta-band > * { position: relative; }
+  .cta-title { font-family: 'Playfair Display', serif; color: var(--white); font-size: clamp(1.8rem, 3.5vw, 2.7rem); line-height: 1.08; margin: 0 0 14px; }
+  .cta-title em { color: var(--gold); font-style: italic; }
+  .cta-copy { color: rgba(255,255,255,0.76); font-size: 1.02rem; line-height: 1.8; margin: 0 0 24px; max-width: 620px; }
+  .button { display: inline-flex; align-items: center; gap: 10px; padding: 15px 24px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700; text-decoration: none; background: var(--accent); color: var(--white); box-shadow: 0 14px 30px rgba(196,82,42,0.24); }
+  .cta-fine { color: rgba(255,255,255,0.54); font-size: 0.88rem; margin-top: 14px; }
+</style>
+</head>
+<body>
+<div class="ds-stage ds-stage--cream">
+  <div class="cta-band">
+    <h2 class="cta-title">We didn't just build this framework. <em>We ran it.</em></h2>
+    <p class="cta-copy">On our own company. Five markets, 200%+ revenue growth, every system proven in the field before we offered it to anyone else.</p>
+    <a class="button">Get Your Free Operations Map</a>
+    <p class="cta-fine">No proposals. No six-week timelines. No pressure.</p>
+  </div>
+</div>
+</body>
+</html>

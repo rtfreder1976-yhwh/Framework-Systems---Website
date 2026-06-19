@@ -1,0 +1,47 @@
+<!-- @dsCard group="Foundations" name="Spacing & Layout" subtitle="Containers, radius, shadow, sections" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spacing & Layout — Framework Systems</title>
+<link rel="stylesheet" href="../_tokens.css">
+<style>
+  h2 { font-family: 'Playfair Display', serif; color: var(--navy); margin: 0 0 6px; }
+  table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid rgba(13,27,42,0.08); font-size: 0.95rem; }
+  th { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; color: var(--muted); background: var(--cream-2); }
+  td.token { font-family: 'DM Mono', monospace; color: var(--accent); font-size: 0.85rem; }
+  td.val { font-family: 'DM Mono', monospace; color: var(--text); }
+  .demos { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 24px; }
+  .demo { background: var(--white); border: 1px solid var(--border); padding: 18px; }
+  .demo.radius { border-radius: var(--radius); }
+  .demo.shadow { box-shadow: var(--shadow); border-radius: var(--radius); }
+  .demo span { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="ds-stage ds-stage--cream">
+  <h2>Spacing & Layout</h2>
+  <p class="ds-note">Source: site.css :root + layout rules</p>
+  <table>
+    <thead><tr><th>Token</th><th>Value</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td class="token">--max</td><td class="val">1480px</td><td>Max content width (container)</td></tr>
+      <tr><td class="token">--text-max</td><td class="val">760px</td><td>Max measure for body copy</td></tr>
+      <tr><td class="token">--radius</td><td class="val">22px</td><td>Card / panel corner radius</td></tr>
+      <tr><td class="token">--shadow</td><td class="val">0 24px 60px rgba(13,27,42,.08)</td><td>Elevation for cards</td></tr>
+      <tr><td class="token">.section</td><td class="val">88px 0</td><td>Vertical section padding</td></tr>
+      <tr><td class="token">.container</td><td class="val">min(--max, 100% - 32px)</td><td>Centered content wrap</td></tr>
+      <tr><td class="token">grid gap</td><td class="val">24px</td><td>Card grids</td></tr>
+      <tr><td class="token">breakpoint</td><td class="val">980px / 680px</td><td>Tablet / mobile collapse</td></tr>
+      <tr><td class="token">html root</td><td class="val">18px (17px ≤680px)</td><td>Base font size</td></tr>
+    </tbody>
+  </table>
+  <div class="demos">
+    <div class="demo radius"><span>--radius 22px</span></div>
+    <div class="demo shadow"><span>--shadow</span></div>
+  </div>
+</div>
+</body>
+</html>

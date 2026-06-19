@@ -1,0 +1,37 @@
+<!-- @dsCard group="Components" name="Nav Header" subtitle="Sticky navy header + wordmark" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nav Header — Framework Systems</title>
+<link rel="stylesheet" href="../_tokens.css">
+<style>
+  .site-header { background: rgba(13,27,42,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .nav-wrap { display: flex; align-items: center; justify-content: space-between; min-height: 78px; gap: 24px; padding: 0 32px; }
+  .brand { text-decoration: none; color: var(--white); font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; letter-spacing: 0.02em; }
+  .brand span { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { text-decoration: none; color: rgba(255,255,255,0.78); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; }
+  .nav-links a:hover { color: var(--white); }
+  .button { display: inline-flex; align-items: center; padding: 12px 20px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 700; text-decoration: none; background: var(--accent); color: var(--white); }
+</style>
+</head>
+<body>
+<div class="ds-stage ds-stage--dark" style="padding:0">
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand">Framework<span>.</span></a>
+      <nav class="nav-links">
+        <a>Services</a>
+        <a>Industries</a>
+        <a>Case Study</a>
+        <a>How It Works</a>
+        <a>About</a>
+        <a class="button">Contact</a>
+      </nav>
+    </div>
+  </header>
+</div>
+</body>
+</html>
