@@ -1,7 +1,8 @@
 # Framework Systems — Brand Guidelines
 
-> **Version 1.0** · April 2026
+> **Version 1.1** · June 2026
 > *Internal reference for all marketing, design, and communications.*
+> *Reconciled against the live `site.css` — production values are authoritative.*
 
 ---
 
@@ -43,7 +44,7 @@ Use these identifiers consistently across all materials:
 | Name | Hex | CSS Variable | Role |
 |---|---|---|---|
 | **Navy** | `#0D1B2A` | `--navy` | Primary background, authority, trust |
-| **Navy 2** | `#132236` | `--navy2` | Secondary/alternate dark background |
+| **Navy 2** | `#132236` | `--navy-2` | Secondary/alternate dark background |
 | **Accent (Burnt Sienna)** | `#C4522A` | `--accent` | Primary action color, CTAs, emphasis |
 | **Gold** | `#C9A84C` | `--gold` | Secondary accent, premium feel, labels |
 
@@ -51,20 +52,22 @@ Use these identifiers consistently across all materials:
 
 | Name | Hex | CSS Variable | Role |
 |---|---|---|---|
-| **Cream** | `#E8E4DC` | `--cream` | Light section backgrounds |
-| **Light** | `#E2DDD5` | `--light` | Alternate light backgrounds |
+| **Cream** | `#F4F1EB` | `--cream` | Default page / light section background |
+| **Cream 2** | `#EBE6DC` | `--cream-2` | Alternate light background |
 | **White** | `#FFFFFF` | `--white` | Text on dark, card backgrounds |
-| **Text** | `#2A2A2A` | `--text` | Primary body text on light |
-| **Body** | `#555555` | `--body` | Secondary body text on light |
-| **Muted** | `#7A7670` | `--muted` | Tertiary text, captions |
+| **Text** | `#1F2732` | `--text` | Primary body text on light |
+| **Body** | `#4F5A67` | `--body` | Secondary body text on light |
+| **Muted** | `#758091` | `--muted` | Tertiary text, captions, table labels |
 
 ### Functional Colors
 
-| Name | Value | Role |
-|---|---|---|
-| **Accent Hover** | `#A8421A` | Darkened accent for hover states |
-| **Border (dark)** | `rgba(255,255,255,0.08)` | Subtle separators on dark backgrounds |
-| **Subdued Text (dark)** | `rgba(255,255,255,0.55–0.75)` | Secondary text on dark backgrounds |
+| Name | Value | CSS Variable | Role |
+|---|---|---|---|
+| **Accent Dark** | `#9D3B1A` | `--accent-dark` | Darkened accent for hover states |
+| **Border (light)** | `rgba(13,27,42,0.12)` | `--border` | Card / table separators on light |
+| **Shadow** | `0 24px 60px rgba(13,27,42,0.08)` | `--shadow` | Card elevation |
+| **Border (dark)** | `rgba(255,255,255,0.08)` | — | Subtle separators on dark backgrounds |
+| **Subdued Text (dark)** | `rgba(255,255,255,0.55–0.75)` | — | Secondary text on dark backgrounds |
 
 ### Color Usage Rules
 
@@ -79,7 +82,7 @@ Use these identifiers consistently across all materials:
 
 ```
 Dark Backgrounds:   Navy (#0D1B2A)  ←→  Navy 2 (#132236)
-Light Backgrounds:  Cream (#E8E4DC) ←→  Light (#E2DDD5)
+Light Backgrounds:  Cream (#F4F1EB) ←→  Cream 2 (#EBE6DC)
 Accent Pair:        Burnt Sienna (#C4522A)  +  Gold (#C9A84C)
 ```
 
@@ -119,7 +122,7 @@ All fonts are self-hosted as `.woff2` in the `/fonts/` directory:
 | **Section Headline** | Playfair Display | `clamp(1.9rem, 3.5vw, 2.6rem)` | 700 | — | Line height: 1.15 |
 | **Card Title** | Playfair Display | `1.3–1.5rem` | 700 | — | Line height: 1.2–1.25 |
 | **Body Text** | DM Sans | `1–1.15rem` | 300–400 | — | Line height: 1.75–1.85 |
-| **Button Text** | DM Sans | `1.05rem` | 600 | 0.04em | — |
+| **Button Text** | DM Sans | `0.95rem` | 700 | 0.02em | — |
 | **Section Label** | DM Mono | `0.72rem` | 400 | 0.18em | Uppercase |
 | **Tag / Caption** | DM Mono | `0.65–0.68rem` | 400 | 0.1–0.14em | Uppercase |
 
@@ -144,7 +147,8 @@ Framework.
 - **Typeface:** Playfair Display, 700 weight
 - **Period color:** `#C4522A` (accent)
 - **Text color:** `#FFFFFF` on dark backgrounds
-- **Font size:** `1.25rem` (nav), `1.1rem` (footer)
+- **Font size:** `1.35rem` (nav), `1.1rem` (footer)
+- **Letter-spacing:** `0.02em`
 
 ### Clear Space
 Maintain a minimum clear space equal to the height of the period on all sides.
@@ -226,24 +230,42 @@ Framework Systems speaks like **a competent operator who's been where you are** 
 
 **Primary Button (CTA)**
 ```css
-background: #C4522A;
-color: #FFFFFF;
+background: var(--accent);          /* #C4522A */
+color: var(--white);
 font-family: 'DM Sans', sans-serif;
-font-weight: 600;
-font-size: 1.05rem;
-letter-spacing: 0.04em;
-padding: 16px 36px;
-clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+font-weight: 700;
+font-size: 0.95rem;
+letter-spacing: 0.02em;
+padding: 15px 24px;
+border-radius: 999px;               /* pill */
+box-shadow: 0 14px 30px rgba(196,82,42,0.24);
+transition: transform 0.18s ease, background 0.18s ease;
+/* hover: background → var(--accent-dark) #9D3B1A; transform: translateY(-1px) */
 ```
 
 > [!TIP]
-> The clipped-corner shape on buttons is a signature Framework Systems detail. It creates a subtle angular, structural feel — like a blueprint or schematic. Always use this clip-path on primary CTAs.
+> Primary CTAs are full pill buttons (`border-radius: 999px`) with a soft accent-colored
+> drop shadow. They lift `-1px` on hover and darken to `--accent-dark`. This is the live
+> production style.
+
+> [!NOTE]
+> Historical: v1.0 of these guidelines specified a clipped-corner polygon button
+> (`clip-path: polygon(...)`) for a blueprint/schematic feel. That was never shipped — the
+> live site uses pill buttons. Documented here only to explain the change.
 
 **Ghost Button (Secondary)**
 ```css
-color: #FFFFFF;
-border: 1px solid rgba(255, 255, 255, 0.3);
-padding: 14px 28px;
+/* On dark backgrounds */
+color: var(--white);
+border: 1px solid rgba(255, 255, 255, 0.22);
+padding: 15px 24px;
+border-radius: 999px;
+
+/* On light backgrounds (.dark modifier) */
+background: var(--white);
+color: var(--navy);
+border: 1px solid rgba(13,27,42,0.14);
+/* hover: border-color rgba(196,82,42,0.4); color: var(--accent) */
 ```
 
 ### Card Patterns
@@ -286,14 +308,17 @@ background: radial-gradient(circle, rgba(224,92,42,0.12), transparent 70%);
 
 ### Layout Principles
 
-| Principle | Value |
-|---|---|
-| **Max content width** | `1160px` |
-| **Container padding** | `40px` (desktop), `24px` (mobile) |
-| **Section padding** | `112px 0` vertical |
-| **Grid gaps** | `80–100px` for major layouts, `24px` for card grids |
-| **Breakpoint** | `900px` (single column mobile) |
-| **Base font size** | `18px` (html root) |
+| Principle | Value | Token |
+|---|---|---|
+| **Max content width** | `1480px` | `--max` |
+| **Body measure (max)** | `760px` | `--text-max` |
+| **Container** | `min(--max, 100% − 32px)`, centered | — |
+| **Section padding** | `88px 0` vertical (`72px` ≤680px) | `.section` |
+| **Card radius** | `22px` | `--radius` |
+| **Card shadow** | `0 24px 60px rgba(13,27,42,0.08)` | `--shadow` |
+| **Grid gaps** | `24px` for card grids | — |
+| **Breakpoints** | `980px` (collapse grids/nav), `680px` (mobile) | — |
+| **Base font size** | `18px` html root (`17px` ≤680px) | — |
 
 ---
 
@@ -420,7 +445,7 @@ The scrolling values strip appears between hero and content sections. Canonical 
 Faith-Driven · Veteran-Owned · Built for Service Businesses · No Jargon · Proven in the Field · Honest Work · Systems That Run Without You
 ```
 
-- **Background:** Linear gradient from `#A8421A` to `#C4522A`
+- **Background:** Linear gradient from `--accent-dark` (`#9D3B1A`) to `--accent` (`#C4522A`)
 - **Text:** DM Mono, `0.75rem`, `0.18em` letter-spacing, uppercase
 - **Divider glyph:** ✦ between items
 - **Animation:** Continuous horizontal scroll, `20s linear infinite`
@@ -434,11 +459,11 @@ BRAND:      Framework Systems
 WORDMARK:   Framework. (period in #C4522A)
 TYPEFACES:  Playfair Display (headlines), DM Sans (body), DM Mono (labels)
 NAVY:       #0D1B2A
-ACCENT:     #C4522A
+ACCENT:     #C4522A  (hover #9D3B1A)
 GOLD:       #C9A84C
-CREAM:      #E8E4DC
+CREAM:      #F4F1EB
 VOICE:      Direct, earned, warm, plain-spoken, honest
-CTA STYLE:  Clipped-corner polygon buttons
+CTA STYLE:  Accent pill buttons (border-radius 999px) with soft shadow
 FOUNDERS:   Todd & Christen Frederickson
 LOCATION:   Tuscumbia, Alabama
 MARKET:     Local service businesses · Southeast USA
