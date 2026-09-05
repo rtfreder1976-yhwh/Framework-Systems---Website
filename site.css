@@ -286,6 +286,12 @@ img { max-width: 100%; display: block; }
   color: var(--text);
   border-color: rgba(255,255,255,0.10);
 }
+.hero-single {
+  position: relative;
+  z-index: 1;
+}
+.hero-single > * { max-width: 920px; }
+.hero-single .cta-row { margin-bottom: 0; }
 .booking-hero .hero-inner {
   grid-template-columns: minmax(0, 1.02fr) minmax(380px, 0.98fr);
   align-items: stretch;
@@ -497,7 +503,8 @@ img { max-width: 100%; display: block; }
   flex-wrap: wrap;
 }
 #booking,
-#booking-form {
+#booking-form,
+#how {
   scroll-margin-top: 110px;
 }
 .form-fine {

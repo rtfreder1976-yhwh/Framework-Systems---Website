@@ -1,6 +1,6 @@
 # Framework Systems — Brand Guidelines
 
-> **Version 1.1** · June 2026
+> **Version 1.2** · September 2026
 > *Internal reference for all marketing, design, and communications.*
 > *Reconciled against the live `site.css` — production values are authoritative.*
 
@@ -347,7 +347,7 @@ background: radial-gradient(circle, rgba(224,92,42,0.12), transparent 70%);
 ## 8. Brand Architecture
 
 ### Parent Brand
-**Framework Systems** — business automation for local service companies
+**Framework Systems** — operator tools: a product (InvoiceFlag) and a managed service (plumbing revenue recovery). Not "plumbing only."
 
 ### Sister Company
 **The Valley Clean Team** — veteran-owned cleaning company (proof of concept)
@@ -362,9 +362,13 @@ background: radial-gradient(circle, rgba(224,92,42,0.12), transparent 70%);
 | **Framework CRM** | The CRM platform (GoHighLevel-based) | All tiers |
 | **Framework Engine** | Self-hosted workflow automation (n8n-based) | Tier 02+ |
 | **Framework Clarity** | Weekly operational dashboard/report | Tier 02+ |
+| **InvoiceFlag** | Standalone 3PL / parcel invoice auditor. Upload PDF/CSV. First audit free, then $19 or $49/mo. Exception to the "Framework [Noun]" naming pattern; do not rename. Charges appear as FRAMEWORK SYSTEMS. | Standalone product |
 
 ### Product Naming Convention
 All product names use the **"Framework [Noun]"** pattern to maintain brand unity.
+
+> [!NOTE]
+> **InvoiceFlag is the one exception.** It is a standalone product with its own name and its own page (`/invoiceflag`). Always write it as one word, capital I and capital F. Never "Framework Invoice."
 
 ---
 
@@ -387,13 +391,12 @@ Every page includes:
 
 ### Navigation Structure
 ```
-Home → Services → Industries (dropdown) → Case Study → How It Works → About → Contact (CTA)
-                  ├── Plumbing
-                  ├── HVAC
-                  ├── Cleaning
-                  ├── Roofing
-                  └── Electrical
+Home → InvoiceFlag → Plumbing → Services → How it works → About → [primary button]
 ```
+
+- **Primary nav button on `/` and `/invoiceflag`:** "First audit free" → `/invoiceflag` (or the InvoiceFlag mailto when no app URL exists)
+- **Primary nav button on plumbing / services / how-it-works / about:** "Book Revenue Recovery Audit" → the Singing River booking URL
+- Legacy industry pages (`/hvac`, `/cleaning`, `/roofing`, `/electrical`, `/industries`, `/case-study`) 301 to `/plumbing` via `vercel.json`
 
 ---
 
