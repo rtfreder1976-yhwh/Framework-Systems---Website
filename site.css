@@ -504,7 +504,8 @@ img { max-width: 100%; display: block; }
 }
 #booking,
 #booking-form,
-#how {
+#how,
+#pricing {
   scroll-margin-top: 110px;
 }
 .form-fine {
