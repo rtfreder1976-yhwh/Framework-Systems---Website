@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200, height=630">
+  <title>OG Image Generator - InvoiceFlag</title>
+  <style>
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('/fonts/playfair-display-latin.woff2') format('woff2');
+      font-weight: 400 900;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('/fonts/playfair-display-italic-latin.woff2') format('woff2');
+      font-weight: 400 900;
+      font-style: italic;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'DM Sans';
+      src: url('/fonts/dm-sans-latin.woff2') format('woff2');
+      font-weight: 300 700;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'DM Mono';
+      src: url('/fonts/dm-mono-400.woff2') format('woff2');
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'DM Mono';
+      src: url('/fonts/dm-mono-500.woff2') format('woff2');
+      font-weight: 500;
+      font-display: block;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      position: relative;
+      background: radial-gradient(circle at top right, rgba(196,82,42,0.22), transparent 34%),
+                  linear-gradient(180deg, #0D1B2A, #132236);
+      color: #FFFFFF;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.09) 1px, transparent 1px);
+      background-size: 72px 72px;
+      -webkit-mask-image: radial-gradient(circle at 25% 35%, black, transparent 78%);
+      mask-image: radial-gradient(circle at 25% 35%, black, transparent 78%);
+    }
+
+    .top {
+      position: absolute;
+      top: 56px;
+      left: 72px;
+      right: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #FFFFFF;
+    }
+    .brand span { color: #C4522A; }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #C9A84C;
+    }
+    .badge::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .content {
+      position: absolute;
+      top: 150px;
+      left: 72px;
+      right: 72px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #C4522A;
+      margin-bottom: 22px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .product {
+      font-family: 'Playfair Display', serif;
+      font-size: 96px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 22px;
+    }
+    .product em {
+      font-style: italic;
+      color: #C9A84C;
+    }
+
+    .headline {
+      font-size: 27px;
+      font-weight: 400;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.80);
+      max-width: 960px;
+    }
+
+    .bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 118px;
+      background: rgba(13,27,42,0.72);
+      border-top: 1px solid rgba(255,255,255,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 72px;
+    }
+
+    .stats { display: flex; gap: 56px; }
+
+    .stat { display: flex; flex-direction: column; gap: 6px; }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+      color: #FFFFFF;
+    }
+    .stat-value.accent { color: #C4522A; }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .url {
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.62);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <div class="top">
+    <div class="brand">Framework<span>.</span></div>
+    <div class="badge">3PL invoice auditor</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">InvoiceFlag · a Framework Systems product</div>
+    <div class="product">Invoice<em>Flag</em></div>
+    <p class="headline">Find the fees your 3PL didn’t expect you to check. Upload last month’s invoice. Get line-by-line flags and a dispute email you can send as-is.</p>
+  </div>
+
+  <div class="bottom">
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-value accent">Free</span>
+        <span class="stat-label">First audit</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">$19</span>
+        <span class="stat-label">Single audit</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">$49/mo</span>
+        <span class="stat-label">Monthly</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">None</span>
+        <span class="stat-label">Integrations</span>
+      </div>
+    </div>
+    <div class="url">frameworksystems.co/invoiceflag</div>
+  </div>
+</body>
+</html>
