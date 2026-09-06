@@ -1,3 +1,37 @@
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/playfair-display-latin.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/playfair-display-italic-latin.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/dm-sans-latin.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('/fonts/dm-mono-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('/fonts/dm-mono-500.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+
 :root {
   --navy: #0d1b2a;
   --navy-2: #132236;
