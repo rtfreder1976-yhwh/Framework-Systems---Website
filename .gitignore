@@ -4,6 +4,8 @@ Thumbs.db
 .env.local
 node_modules/
 .vercel/
-.claude/
+.claude/*
+!.claude/skills/
+!.claude/skills/**
 .vercel
 .env.development.local
