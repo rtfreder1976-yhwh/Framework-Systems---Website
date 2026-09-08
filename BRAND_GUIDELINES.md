@@ -347,7 +347,7 @@ background: radial-gradient(circle, rgba(224,92,42,0.12), transparent 70%);
 ## 8. Brand Architecture
 
 ### Parent Brand
-**Framework Systems** — operator tools: a product (InvoiceFlag) and a managed service (plumbing revenue recovery). Not "plumbing only."
+**Framework Systems** — operator tools: two products (InvoiceFlag, CrewFlag) and a managed service (plumbing revenue recovery). Not "plumbing only."
 
 ### Sister Company
 **The Valley Clean Team** — veteran-owned cleaning company (proof of concept)
@@ -363,12 +363,13 @@ background: radial-gradient(circle, rgba(224,92,42,0.12), transparent 70%);
 | **Framework Engine** | Self-hosted workflow automation (n8n-based) | Tier 02+ |
 | **Framework Clarity** | Weekly operational dashboard/report | Tier 02+ |
 | **InvoiceFlag** | Standalone 3PL / parcel invoice auditor. Upload PDF/CSV. First audit free, then $19 or $49/mo. Exception to the "Framework [Noun]" naming pattern; do not rename. Charges appear as FRAMEWORK SYSTEMS. | Standalone product |
+| **CrewFlag** | Standalone crew tools: post-job photo QC, quality-drift watcher, access-failure recovery. Use one tool or all three. Sits next to Jobber / Housecall Pro / ServiceTitan. No FSM login. Same naming exception as InvoiceFlag; do not rename. | Standalone product |
 
 ### Product Naming Convention
 All product names use the **"Framework [Noun]"** pattern to maintain brand unity.
 
 > [!NOTE]
-> **InvoiceFlag is the one exception.** It is a standalone product with its own name and its own page (`/invoiceflag`). Always write it as one word, capital I and capital F. Never "Framework Invoice."
+> **InvoiceFlag and CrewFlag are the exceptions.** Each is a standalone product with its own name and page (`/invoiceflag`, `/crewflag`). Always write them as one word: InvoiceFlag, CrewFlag. Never "Framework Invoice" or "Framework Crew."
 
 ---
 
@@ -391,7 +392,7 @@ Every page includes:
 
 ### Navigation Structure
 ```
-Home → InvoiceFlag → Plumbing → Services → How it works → About → [primary button]
+Home → InvoiceFlag → CrewFlag → Plumbing → Services → How it works → About → [primary button]
 ```
 
 - **Primary nav button on `/` and `/invoiceflag`:** "First audit free" → `/invoiceflag` (or the InvoiceFlag mailto when no app URL exists)
